@@ -23,3 +23,9 @@ callouts:
   warning:
     title: Warning
     color: red
+
+# By default, consuming the theme as a gem leaves mermaid disabled; it is opt-in
+mermaid:
+  # Version of mermaid library
+  # Pick an available version from https://cdn.jsdelivr.net/npm/mermaid/
+  version: "9.1.6"
