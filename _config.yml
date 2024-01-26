@@ -1,8 +1,25 @@
-title: SVUIT
+title: SVUIT-MMTT
 description: A study vault of UIT
 theme: just-the-docs
 
 url: https://svuit.github.io/testing
 
-aux_links:
-  Template Repository: https://svuit.github.io/testing
+#aux_links:
+  #Template Repository: https://svuit.github.io/testing
+
+callouts_level: quiet # or loud
+callouts:
+  highlight:
+    color: yellow
+  important:
+    title: Important
+    color: blue
+  new:
+    title: New
+    color: green
+  note:
+    title: Note
+    color: purple
+  warning:
+    title: Warning
+    color: red
