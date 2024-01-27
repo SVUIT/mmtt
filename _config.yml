@@ -5,7 +5,7 @@ theme: just-the-docs
 url: https://svuit.github.io/mmtt
 
 aux_links:
-  Đóng góp cho website: https://github.com/SVUIT/mmtt/docs/contribute.html
+  Đóng góp cho website: https://svuit.github.io/mmtt/docs/contribute
 
 callouts_level: quiet # or loud
 callouts:
