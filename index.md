@@ -10,7 +10,7 @@ nav_order: 0
 Kho tài liệu học tập UIT, phiên bản Mạng máy tính và Truyền thông.
 {: .fs-6 .fw-300 }
 
-[Đóng góp cho website](/docs/contribute.html){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
+[Đóng góp cho website](https://github.com/SVUIT/mmtt/docs/contribute.html){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
 [Xem trên GitHub](https://github.com/SVUIT/mmtt){: .btn .fs-5 .mb-4 .mb-md-0 }
 
 ---
