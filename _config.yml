@@ -2,10 +2,10 @@ title: SVUIT-MMTT
 description: A study vault of UIT
 theme: just-the-docs
 
-url: https://svuit.github.io/testing
+url: https://svuit.github.io/mmtt
 
-#aux_links:
-  #Template Repository: https://svuit.github.io/testing
+aux_links:
+  Đóng góp cho website: /docs/contribute.html
 
 callouts_level: quiet # or loud
 callouts:
