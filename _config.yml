@@ -29,3 +29,5 @@ mermaid:
   # Version of mermaid library
   # Pick an available version from https://cdn.jsdelivr.net/npm/mermaid/
   version: "9.1.6"
+
+favicon_ico: "/assets/images/favicon.ico"
