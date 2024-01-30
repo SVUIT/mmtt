@@ -3,9 +3,16 @@
 ## Giới thiệu
 
 SVUIT là kho tài liệu trực tuyến, giúp các bạn sinh viên có thể tiếp cận trước tài liệu học tập.
+
 Repo này dành cho:
-    - Ban quản trị dự án
-    - Contributors 
+
+- Ban quản trị dự án
+- Contributors 
+
+## Thành viên
+<a href="https://github.com/SVUIT/mmtt/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=SVUIT/mmtt" />
+</a>
 
 ## Bắt đầu
 
