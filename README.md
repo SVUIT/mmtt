@@ -9,7 +9,12 @@ Repository này dành cho:
 - Ban quản trị dự án(Administrator)
 - Thành viên đóng góp(Contributor)
 
-Mọi thắc mắc cũng như đóng góp xin vui lòng gửi về cho [chúng mình](mailto:uitlearningarchive@gmail.com). Rất hoang nghênh sự đóng góp xây dựng của các bạn. :relaxed:
+Nếu bạn muốn chia sẻ tài liệu học tập với chúng mình, bạn có thể:
+
+- Liên hệ chúng mình thông qua địa chỉ email **uitlearningarchive@gmail.com** và đính kèm tệp tài liệu của bạn.
+- Tạo một **Issue** trên [repo GitHub](https://github.com/SVUIT/mmtt) và đính kèm đường dẫn của bạn.
+
+Rất hoang nghênh sự đóng góp xây dựng của các bạn. :relaxed:
 
 ## :clap: Thành viên
 <a href="https://github.com/SVUIT/mmtt/graphs/contributors">
@@ -37,7 +42,7 @@ git branch <branch-name>
 git checkout <branch-name>
 ```
 
-## <i class="fab fa-markdown"></i> Cấu trúc file Markdown
+## :clipboard: Cấu trúc file Markdown
 
 ```markdown
 ---
@@ -81,7 +86,7 @@ Mô tả hình thức thi giữa kỳ, cuối kỳ: thời gian, cấu trúc đ�
 Những thông tin hữu ích khác
 ```
 
-## <i class="fa-brands fa-google-drive"></i> Cấu trúc Database
+## :floppy_disk: Cấu trúc Database
 
 ```
 .
