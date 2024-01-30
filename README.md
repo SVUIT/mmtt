@@ -1,6 +1,6 @@
 # Study Vault UIT
 
-## Giới thiệu
+## :memo: Giới thiệu
 
 SVUIT là kho tài liệu trực tuyến, giúp các bạn sinh viên có thể tiếp cận trước tài liệu học tập cũng như tham khảo đồ án từ sinh viên khoá trước.
 
@@ -9,12 +9,14 @@ Repository này dành cho:
 - Ban quản trị dự án(Administrator)
 - Thành viên đóng góp(Contributor)
 
-## Thành viên
+Mọi thắc mắc cũng như đóng góp xin vui lòng gửi về cho [chúng mình](mailto:uitlearningarchive@gmail.com). Rất hoang nghênh sự đóng góp xây dựng của các bạn. :relaxed:
+
+## :clap: Thành viên
 <a href="https://github.com/SVUIT/mmtt/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=SVUIT/mmtt" />
 </a>
 
-## Bắt đầu làm việc
+## :anchor: Bắt đầu làm việc
 
 1. Clone repository
 
@@ -35,7 +37,7 @@ git branch <branch-name>
 git checkout <branch-name>
 ```
 
-## Cấu trúc file Markdown
+## <i class="fab fa-markdown"></i> Cấu trúc file Markdown
 
 ```markdown
 ---
@@ -79,7 +81,7 @@ Mô tả hình thức thi giữa kỳ, cuối kỳ: thời gian, cấu trúc đ�
 Những thông tin hữu ích khác
 ```
 
-## Cấu trúc Database
+## <i class="fa-brands fa-google-drive"></i> Cấu trúc Database
 
 ```
 .
@@ -93,6 +95,6 @@ Những thông tin hữu ích khác
             └── 5. Tài liệu tham khảo
 ```
 
-## Chạy web ở Local
+## :computer: Chạy web ở Local
 
 Từ từ sẽ có
