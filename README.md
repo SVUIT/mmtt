@@ -2,6 +2,11 @@
 
 ## Giới thiệu
 
+SVUIT là kho tài liệu trực tuyến, giúp các bạn sinh viên có thể tiếp cận trước tài liệu học tập.
+Repo này dành cho:
+    - Ban quản trị dự án
+    - Contributors 
+
 ## Bắt đầu
 
 1. Clone repository
@@ -23,9 +28,8 @@ git branch <branch-name>
 git checkout <branch-name>
 ```
 
-## Mô tả tài liệu
+## Cấu trúc file Markdown
 
-Format file markdown
 ```markdown
 ---
 layout: default
@@ -70,4 +74,5 @@ Những thông tin hữu ích khác
 
 ## Thêm tài liệu
 
-Format 
+
+## Chạy web ở Local
