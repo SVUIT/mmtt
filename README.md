@@ -2,7 +2,7 @@
 
 ## Giới thiệu
 
-SVUIT là kho tài liệu trực tuyến, giúp các bạn sinh viên có thể tiếp cận trước tài liệu học tập.
+SVUIT là kho tài liệu trực tuyến, giúp các bạn sinh viên có thể tiếp cận trước tài liệu học tập cũng như tham khảo đồ án từ sinh viên khoá trước.
 
 Repository này dành cho:
 
