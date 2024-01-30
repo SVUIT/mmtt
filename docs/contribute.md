@@ -22,11 +22,11 @@ Nếu có nội dung nào đó trên web chưa được đề cập về môn h�
 
 - Liên hệ qua email hoặc tạo **Issue** như đã nêu ở mục [Tài liệu học tập](#tài-liệu-học-tập).
 - Fork repo GitHub của chúng mình về và trực tiếp thêm chỉnh sửa của bạn vào, sau đó tạo một **Pull request** trên repo chính này.
-- Kéo xuống tới cuối ở các page Môn học, sau đó bấm nút **Edit this page** ở phần footer.
 
 ## Danh sách contributors
 
 - Tống Võ Anh Thuận, MMCL2021
 - Lê Huỳnh Quang Vũ, MMCL2021
 - Trần Công Hải, MMCL2021
-- Lê Huy Hùng, ATCL2021
+
+Và những bạn ẩn danh.
