@@ -4,17 +4,17 @@
 
 SVUIT là kho tài liệu trực tuyến, giúp các bạn sinh viên có thể tiếp cận trước tài liệu học tập.
 
-Repo này dành cho:
+Repository này dành cho:
 
-- Ban quản trị dự án
-- Contributors 
+- Ban quản trị dự án(Administrator)
+- Thành viên đóng góp(Contributor)
 
 ## Thành viên
 <a href="https://github.com/SVUIT/mmtt/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=SVUIT/mmtt" />
 </a>
 
-## Bắt đầu
+## Bắt đầu làm việc
 
 1. Clone repository
 
@@ -79,7 +79,20 @@ Mô tả hình thức thi giữa kỳ, cuối kỳ: thời gian, cấu trúc đ�
 Những thông tin hữu ích khác
 ```
 
-## Thêm tài liệu
+## Cấu trúc Database
 
+```
+.
+└── Docs/
+    └── Mã môn - Tên môn/
+        └── Khoá/
+            ├── 1. Lý thuyết
+            ├── 2. Thực hành
+            ├── 3. Đồ án
+            ├── 4. Ôn thi
+            └── 5. Tài liệu tham khảo
+```
 
 ## Chạy web ở Local
+
+Từ từ sẽ có
