@@ -28,16 +28,15 @@
   border-radius: 50px;
   position: relative;
   padding: 5px;
-  margin-top: 8px;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.dm-container .fa-moon {color: #fff200}
+.dm-container .fa-moon {color: #fff200;font-size: 15px;}
 
-.dm-container .fa-sun {color: #f39c12}
+.dm-container .fa-sun {color: #f39c12;font-size: 15px;}
 
 .dm-container .checkbox-label .ball {
   background-color: #fff;
@@ -52,4 +51,9 @@
 
 .dm-container .checkbox:checked + .checkbox-label .ball {
   transform: translateX(24px);
+}
+
+.aux-nav .aux-nav-list {
+    margin-right: 20px;
+    justify-content: space-between;
 }
