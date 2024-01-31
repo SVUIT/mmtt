@@ -16,8 +16,8 @@ Kho tài liệu học tập UIT, phiên bản Mạng máy tính và Truyền th�
 
 ---
 
-> Hiện tại còn thiếu tài liệu ở các môn cơ sở nhóm ngành và đại cương, rất cần sự đóng góp của các bạn K17, K18 đã học qua ở các học kỳ gần đây. Ngoài ra, team chúng mình đang tuyển thêm thành viên thuộc các khóa này để hỗ trợ quản lý website và kho tài liệu. Mọi chi tiết vui lòng liên hệ qua email **uitlearningarchive@gmail.com**.
-> {: .note }
+> Hiện tại còn thiếu tài liệu ở các môn cơ sở nhóm ngành và đại cương, rất cần sự đóng góp của các bạn K17, K18 đã học qua ở các học kỳ gần đây. Ngoài ra, team chúng mình đang tuyển thêm thành viên thuộc các khóa này để hỗ trợ quản lý website và kho tài liệu. Mọi chi tiết vui lòng liên hệ qua email **studyvault.uit@gmail.com**.
+{: .note }
 
 ## Mục tiêu
 
