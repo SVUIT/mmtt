@@ -11,7 +11,7 @@ search_exclude: true
 
 Nếu bạn muốn chia sẻ tài liệu học tập với chúng mình, bạn có thể:
 
-- Liên hệ chúng mình thông qua địa chỉ email **uitlearningarchive@gmail.com** và đính kèm tệp tài liệu của bạn.
+- Liên hệ chúng mình thông qua địa chỉ email **studyvault.uit@gmail.com** và đính kèm tệp tài liệu của bạn.
 - Tạo một **Issue** trên [repo GitHub](https://github.com/SVUIT/mmtt) và đính kèm đường dẫn của bạn.
 
 ## Nội dung trên web
@@ -26,7 +26,7 @@ Nếu có nội dung nào đó trên web chưa được đề cập về môn h�
 - Tống Võ Anh Thuận, MMCL2021
 - Lê Huỳnh Quang Vũ, MMCL2021
 - Trần Công Hải, MMCL2021
+- Lê Đình Trí, MMTT2021
+- Trần Mai Hân, MMTT2021
 
-Và những bạn ẩn danh.
-
-<button name="button">Click me</button>
+Và những bạn đóng góp ẩn danh.
