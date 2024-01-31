@@ -1,0 +1,21 @@
+<div class="dm-container">
+    <input type="checkbox" class="checkbox js-toggle-dark-mode" id="checkbox">
+    <label for="checkbox" class="checkbox-label">
+        <i class="fa-solid fa-sun"></i>
+        <i class="fa-solid fa-moon"></i>
+      <span class="ball"></span>
+    </label>
+  </div>
+  <script>
+    const toggleDarkMode = document.querySelector('.js-toggle-dark-mode');
+    const cbLabel = document.querySelector('.checkbox-label');
+    jtd.addEvent(toggleDarkMode, 'click', function(){
+      if (jtd.getTheme() === 'dark') {
+        jtd.setTheme('light');
+        cbLabel.style.backgroundColor = '#44434d';
+      } else {
+        cbLabel.style.backgroundColor = '#000000';
+        jtd.setTheme('dark');
+      }
+    });
+    </script>
