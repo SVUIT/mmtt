@@ -5,6 +5,7 @@ nav_order: 0
 ---
 
 # **Study Vault of UIT - MMTT Edition**
+
 {: .fs-9 }
 
 Kho tài liệu học tập UIT, phiên bản Mạng máy tính và Truyền thông.
@@ -15,10 +16,8 @@ Kho tài liệu học tập UIT, phiên bản Mạng máy tính và Truyền th�
 
 ---
 
-
 > Hiện tại còn thiếu tài liệu ở các môn cơ sở nhóm ngành và đại cương, rất cần sự đóng góp của các bạn K17, K18 đã học qua ở các học kỳ gần đây. Ngoài ra, team chúng mình đang tuyển thêm thành viên thuộc các khóa này để hỗ trợ quản lý website và kho tài liệu. Mọi chi tiết vui lòng liên hệ qua email **uitlearningarchive@gmail.com**.
-{: .note }
-
+> {: .note }
 
 ## Mục tiêu
 
@@ -30,6 +29,3 @@ Do nhân lực có hạn nên hiện tại chúng mình chỉ tập trung vào t
 
 - Website này là một dự án phi lợi nhuận được thực hiện bởi một nhóm sinh viên và không phải là website chính thức của UIT.
 - Các nội dung được đăng tải trên đây chỉ mang tính chất **tham khảo** và không hoàn toàn chính xác. Chúng mình luôn khuyến khích các bạn tự đánh giá và chọn lọc thông tin.
-
-
-
