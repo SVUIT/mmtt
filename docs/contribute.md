@@ -26,6 +26,7 @@ Nếu có nội dung nào đó trên web chưa được đề cập về môn h�
 - Tống Võ Anh Thuận, MMCL2021
 - Lê Huỳnh Quang Vũ, MMCL2021
 - Trần Công Hải, MMCL2021
+- Nguyễn Đăng Tố, MMCL2021
 - Lê Đình Trí, MMTT2021
 - Trần Mai Hân, MMTT2021
 
