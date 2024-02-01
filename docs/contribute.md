@@ -29,5 +29,6 @@ Nếu có nội dung nào đó trên web chưa được đề cập về môn h�
 - Nguyễn Đăng Tố, MMCL2021
 - Lê Đình Trí, MMTT2021
 - Trần Mai Hân, MMTT2021
+- [quocanuit, GitHub](https://github.com/SVUIT/mmtt/issues/30)
 
 Và những bạn đóng góp ẩn danh.
