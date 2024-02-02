@@ -2,12 +2,12 @@
 
 ## :memo: Giới thiệu
 
-SVUIT là kho tài liệu trực tuyến, giúp các bạn sinh viên có thể tiếp cận trước tài liệu học tập cũng như tham khảo đồ án từ sinh viên khoá trước.
+SVUIT - Study Vault of UIT là kho tài liệu trực tuyến, giúp các bạn sinh viên có thể tiếp cận trước tài liệu học tập cũng như tham khảo đồ án từ sinh viên khoá trước.
 
 Repository này dành cho:
 
-- Ban quản trị dự án(Administrator)
-- Thành viên đóng góp(Contributor)
+- Ban quản trị dự án (Administrator)
+- Thành viên đóng góp (Contributor)
 
 Nếu bạn muốn chia sẻ tài liệu học tập với chúng mình, bạn có thể:
 
