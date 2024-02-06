@@ -1,0 +1,26 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "commitType": "docs",
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "r1anl3",
+      "name": "Vu Le",
+      "avatar_url": "https://avatars.githubusercontent.com/u/94292536?v=4",
+      "profile": "https://github.com/r1anl3",
+      "contributions": [
+        "blog"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "skipCi": true,
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "projectName": "mmtt",
+  "projectOwner": "SVUIT"
+}
