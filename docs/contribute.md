@@ -31,5 +31,6 @@ Nếu có nội dung nào đó trên web chưa được đề cập về môn h�
 - Trần Mai Hân, MMTT2021
 - [quocanuit, GitHub](https://github.com/SVUIT/mmtt/issues/30)
 - [NGODAT0103, GitHub](https://github.com/SVUIT/mmtt/issues/31)
+- Đặng Chí Thành, MMTT2022.3
 
 Và những bạn đóng góp ẩn danh.
