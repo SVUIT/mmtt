@@ -62,7 +62,7 @@ parent: Folder chứa môn học
 
 ### Hệ số điểm
 
-| QT   | TH  | GK  | CK  |
+| QT   | GK  | TH  | CK  |
 |------|-----|-----|-----|
 | <center>-</center>| <center>-</center>| <center>-</center> | <center>-</center> |
 
