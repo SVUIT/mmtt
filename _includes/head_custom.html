@@ -3,13 +3,11 @@
     if (localStorage.getItem('theme') === 'dark') {
         if (jtd.getTheme() !== 'dark') {
             jtd.setTheme('dark');
-            window.localStorage.setItem('theme', 'dark');
         }
     }
     else {
         if (jtd.getTheme() !== 'light') {
             jtd.setTheme('light');
-            window.localStorage.setItem('theme', 'light');
         }
     }
 </script>
