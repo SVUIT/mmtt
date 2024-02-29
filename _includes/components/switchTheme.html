@@ -9,13 +9,16 @@
   <script>
     const toggleDarkMode = document.querySelector('.js-toggle-dark-mode');
     const cbLabel = document.querySelector('.checkbox-label');
+    localStorage.getItem('theme') === 'dark'
+      ? (toggleDarkMode.checked = true, cbLabel.classList.add('dark'))
+      : (toggleDarkMode.checked = false, cbLabel.classList.remove('dark'));
     jtd.addEvent(toggleDarkMode, 'click', function(){
       if (jtd.getTheme() === 'dark') {
         jtd.setTheme('light');
-        cbLabel.style.backgroundColor = '#44434d';
+        window.localStorage.setItem('theme', 'light');
       } else {
-        cbLabel.style.backgroundColor = '#000000';
         jtd.setTheme('dark');
+        window.localStorage.setItem('theme', 'dark');
       }
     });
     </script>

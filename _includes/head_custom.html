@@ -1,1 +1,13 @@
 <script src="https://kit.fontawesome.com/cdf299865b.js" crossorigin="anonymous"></script>
+<script>
+    if (localStorage.getItem('theme') === 'dark') {
+        if (jtd.getTheme() !== 'dark') {
+            jtd.setTheme('dark');
+        }
+    }
+    else {
+        if (jtd.getTheme() !== 'light') {
+            jtd.setTheme('light');
+        }
+    }
+</script>
