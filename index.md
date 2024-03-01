@@ -8,7 +8,8 @@ nav_order: 0
 
 {: .fs-9 }
 
-Kho tài liệu học tập UIT, phiên bản Mạng máy tính và Truyền thông.
+Kho tài liệu học tập UIT, phiên bản Mạng máy tính và Truyền thông
+
 {: .fs-6 .fw-300 }
 
 [Đóng góp cho website](https://svuit.github.io/mmtt/docs/contribute){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }

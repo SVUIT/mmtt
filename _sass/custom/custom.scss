@@ -34,7 +34,7 @@
   align-items: center;
 }
 
-.dm-container .fa-moon {color: #fff200;font-size: 15px;}
+.dm-container .fa-moon {color: #fff200; font-size: 15px;}
 
 .dm-container .fa-sun {color: #f39c12;font-size: 15px;}
 
@@ -56,4 +56,14 @@
 .aux-nav .aux-nav-list {
     margin-right: 20px;
     justify-content: space-between;
+}
+
+.fs-9 {
+  font-weight: 500;
+	text-transform: uppercase;
+  background: linear-gradient(to right, #7C39F2, #117FFD
+  , #3FC0EE, #43E7BF);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text; 
+  font-size: 2.5rem !important;
 }
