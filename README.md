@@ -87,7 +87,7 @@ Mô tả hình thức thi giữa kỳ, cuối kỳ: thời gian, cấu trúc đ�
 Những thông tin hữu ích khác
 ```
 
-## :floppy_disk: Cấu trúc Database
+## :floppy_disk: Cấu trúc folder Google Drive
 
 ```
 .
@@ -103,4 +103,8 @@ Những thông tin hữu ích khác
 
 ## :computer: Chạy web ở Local
 
-Từ từ sẽ có
+1. Tải [Ruby](https://www.ruby-lang.org/en/downloads/), [Jekyll](https://jekyllrb.com/) và [Bundler](https://bundler.io/) về máy.
+2. Chuyển đến thư mục root (`mmtt/`) của website này.
+3. Chạy lệnh `bundle install`.
+4. Chạy lệnh `bundle exec jekyll serve` để build website và xem nó ở `localhost:4000`.
+5. Website build xong sẽ được lưu trong thư mục `_site`.
