@@ -82,12 +82,15 @@
   color: inherit;
   cursor: pointer;
   font-size: small !important;
-  display: flex;
-  flex-direction: column;
-  text-decoration: none;
 
 }
 
 .d-flex{
   margin-top: 0 !important;
+}
+
+.text-small{
+  margin-top: 0!important;
+  font-size: small !important;
+  cursor: pointer;
 }
