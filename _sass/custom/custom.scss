@@ -67,3 +67,30 @@
   -webkit-background-clip: text; 
   font-size: 2.5rem !important;
 }
+
+.icon_footer {
+  color: inherit;
+  cursor: pointer;
+  font-size: 	20px !important;
+  display: flex;
+  align-items: center;
+  gap : 12px ;
+
+}
+
+.link_footer {
+  color: inherit;
+  cursor: pointer;
+  font-size: small !important;
+
+}
+
+.d-flex{
+  margin-top: 0 !important;
+}
+
+.text-small{
+  margin-top: 0!important;
+  font-size: small !important;
+  cursor: pointer;
+}
