@@ -60,6 +60,12 @@ parent: Folder chứa môn học
 
 ## Mô tả môn học
 
+### Điều kiện đăng ký
+
+| Môn học trước| Môn học tiên quyết  |
+|------|-----|
+| <center>-</center>| <center>Mã môn - Tên môn</center>|
+
 ### Hệ số điểm
 
 | QT   | GK  | TH  | CK  |
