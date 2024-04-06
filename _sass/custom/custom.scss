@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
 
+
 .dm-container {
   font-family: "Montserrat", sans-serif;
   display: flex;
@@ -68,6 +69,12 @@
   font-size: 2.5rem !important;
 }
 
+.btn-download::after {
+  font-family: fontAwesome;
+  font-size: 1.225rem;
+  margin-left: 5px ;
+  content: "\f019";
+}
 .icon_footer {
   color: inherit;
   cursor: pointer;
