@@ -12,8 +12,8 @@ nav_order: 10
 
 ### File Word bản tiếng Việt.
 
-*Nút download file*
+[Download](Template_Do_An_Mon_Hoc_VN.docx){: .btn .btn-info .fs-5 .mb-4 .mb-md-0 }
 
 ### File Word bản tiếng Anh.
 
-*Nút download file*
+[Download](Template_Do_An_Mon_Hoc_EN.docx){: .btn .btn-info .fs-5 .mb-4 .mb-md-0 }
