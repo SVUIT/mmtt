@@ -4,7 +4,6 @@ title: Đồ án môn học
 parent: Templates
 ---
 
-
 ## Các mẫu Template
 
 ### File Word bản tiếng Việt
