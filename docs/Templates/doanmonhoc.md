@@ -1,10 +1,20 @@
 ---
 layout: default
-title: Hướng dẫn sử dụng Template đồ án môn học
+title: Đồ án môn học
 parent: Templates
 ---
-# Hướng dẫn sử dụng Template đồ án môn học
 
+
+## Các mẫu Template
+### File Word bản tiếng Việt.
+
+[Download](Template_Do_An_Mon_Hoc_VN.docx){: .btn .btn-primary .btn-download .fs-5 .mb-4 .mb-md-0 }
+
+### File Word bản tiếng Anh.
+
+[Download](Template_Do_An_Mon_Hoc_EN.docx){: .btn .btn-primary .btn-download .fs-5 .mb-4 .mb-md-0 }
+
+## Hướng dẫn sử dụng Template đồ án môn học
 
 ## Format heading:
 - Bôi đen dòng text muốn sử dụng.
