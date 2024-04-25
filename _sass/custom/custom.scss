@@ -74,7 +74,23 @@
   font-size: 1.225rem;
   margin-left: 5px ;
   content: "\f019";
+  //f33a
 }
+
+.btn-gg-drive::after {
+  font-family: fontAwesome;
+  font-size: 1.225rem;
+  margin-left: 6px ;
+  content: "\f3aa";
+}
+
+.btn-form::after {
+  font-family: fontAwesome;
+  font-size: 1.225rem;
+  margin-left: 6px ;
+  content: "\f298";
+}
+
 .icon_footer {
   color: inherit;
   cursor: pointer;
