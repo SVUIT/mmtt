@@ -119,16 +119,16 @@
 }
 
 .btn-youtube{
-  display: flex;
+  display: inline -flex;
   align-items: center;
   justify-content: center;
-  width: min-content;
+  width:max-content;
   background-color: #F0F0FFFF;
 }
 
 .btn-youtube::after{
   font-family: fontAwesome;
-  font-size: 1.625rem;
+  font-size: 1.225rem;
   margin-left: 6px ;
   content: "\f167";
   color:#FF0000
