@@ -117,3 +117,18 @@
   font-size: small !important;
   cursor: pointer;
 }
+
+.btn-youtube{
+  display: inline -flex;
+  align-items: center;
+  justify-content: center;
+  width:max-content;
+  background-color: #F0F0FFFF;
+}
+
+.btn-youtube::after{
+  font-family: fontAwesome;
+  font-size: 1.225rem;
+  margin-left: 6px ;
+  content: "\f167";
+}
