@@ -16,7 +16,7 @@ Kho tài liệu học tập UIT, phiên bản Mạng máy tính và Truyền th�
 [Xem trên GitHub](https://github.com/SVUIT/mmtt){: .btn .fs-5 .mb-4 .mb-md-0 }
 
 {: .important}
->Các K18, K17 đang tìm tài liệu ôn thi cuối kỳ thì nhấn vào đây nhé! [Ôn Thi](../docs/MonThi)
+>Các K18, K17 đang tìm tài liệu ôn thi cuối kỳ thì nhấn vào đây nhé! [Ôn Thi](./docs/MonThi)
 
 
 ## Mục tiêu
