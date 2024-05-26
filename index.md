@@ -15,7 +15,9 @@ Kho tài liệu học tập UIT, phiên bản Mạng máy tính và Truyền th�
 [Đóng góp cho website](./docs/contribute){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
 [Xem trên GitHub](https://github.com/SVUIT/mmtt){: .btn .fs-5 .mb-4 .mb-md-0 }
 
----
+{: .important}
+>Các K18, K17 đang tìm tài liệu ôn thi cuối kỳ thì nhấn vào đây nhé! [Ôn Thi](../docs/MonThi)
+
 
 ## Mục tiêu
 
