@@ -11,7 +11,7 @@ search_exclude: true
 
 Nếu bạn muốn chia sẻ tài liệu học tập với chúng mình, bạn nhấn button này:
 
-[Form](./Submit/index.html){:target="_blank" : .btn .btn-primary .btn-form .fs-5 .mb-4 .mb-md-0 .mr-2 }
+[Form](https://link.svuit.org/submit){:target="_blank" : .btn .btn-primary .btn-form .fs-5 .mb-4 .mb-md-0 .mr-2 }
 
 Nếu các bạn có thắc mắc gì khác liên hệ chúng mình thông qua địa chỉ email **studyvault.uit@gmail.com**.
 
