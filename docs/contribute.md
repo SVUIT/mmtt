@@ -13,7 +13,7 @@ Nếu bạn muốn chia sẻ tài liệu học tập với chúng mình, hãy tr
 
 [Form](https://link.svuit.org/submit){:target="_blank" : .btn .btn-primary .btn-form .fs-5 .mb-4 .mb-md-0 .mr-2 }
 
-Nếu các bạn có thắc mắc gì khác liên hệ chúng mình thông qua địa chỉ email **studyvault.uit@gmail.com**.
+Nếu các bạn có thắc mắc gì khác liên hệ chúng mình thông qua địa chỉ email **contact@svuit.org**
 
 ## Nội dung trên web
 
