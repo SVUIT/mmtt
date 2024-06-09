@@ -16,7 +16,7 @@ Mẫu template được dựng dựa trên [sonnh-uit/HCMUIT_thesistemplate](htt
 
 [Truy cập](https://github.com/SVUIT/report-templates/tree/main/specialized-project){: .btn .btn-primary }
 
-## Hướng dẫn sử dụng Template đồ án môn học
+## Hướng dẫn sử dụng Template đồ án chuyên ngành
 
 ### Cú pháp cơ bản
 
