@@ -8,7 +8,7 @@ parent: Templates
 
 ### File Word bản tiếng Việt
 
-[Download](https://github.com/SVUIT/report-templates/blob/main/Templates/Template_Do_An_Mon_Hoc_VN.docx){:target="_blank" : .btn .btn-primary .btn-download .fs-5 .mb-4 .mb-md-0 }
+[Download](https://github.com/SVUIT/report-templates/blob/main/Templates/Template_Do_An_Mon_Hoc_VN.docx){:target="_blank": .btn .btn-primary .btn-download .fs-5 .mb-4 .mb-md-0 }
 
 ### File Word bản tiếng Anh
 
