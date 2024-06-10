@@ -1,5 +1,7 @@
 # Study Vault UIT
 
+![Alt](https://repobeats.axiom.co/api/embed/e73603f1010868482e65699b60fc62c7b99d2109.svg "Repobeats analytics image")
+
 ## :memo: Giới thiệu
 
 SVUIT - Study Vault of UIT là kho tài liệu trực tuyến, giúp các bạn sinh viên có thể tiếp cận trước tài liệu học tập cũng như tham khảo đồ án từ sinh viên khoá trước.
