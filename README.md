@@ -1,5 +1,7 @@
 # Study Vault UIT
 
+![Alt](https://repobeats.axiom.co/api/embed/e73603f1010868482e65699b60fc62c7b99d2109.svg "Repobeats analytics image")
+
 ## :memo: Giới thiệu
 
 SVUIT - Study Vault of UIT là kho tài liệu trực tuyến, giúp các bạn sinh viên có thể tiếp cận trước tài liệu học tập cũng như tham khảo đồ án từ sinh viên khoá trước.
@@ -11,7 +13,7 @@ Repository này dành cho:
 
 Nếu bạn muốn chia sẻ tài liệu học tập với chúng mình, bạn có thể:
 
-- Liên hệ chúng mình thông qua địa chỉ email **studyvault.uit@gmail.com** và đính kèm tệp tài liệu của bạn.
+- Liên hệ chúng mình thông qua địa chỉ email **contact@svuit.org** và đính kèm tệp tài liệu của bạn.
 - Tạo một **Issue** trên [repo GitHub](https://github.com/SVUIT/mmtt) và đính kèm đường dẫn của bạn.
 
 Rất hoan nghênh sự đóng góp xây dựng của các bạn. :relaxed:

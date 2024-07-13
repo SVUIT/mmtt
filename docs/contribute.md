@@ -9,10 +9,11 @@ search_exclude: true
 
 ## Tài liệu học tập
 
-Nếu bạn muốn chia sẻ tài liệu học tập với chúng mình, bạn có thể:
+Nếu bạn muốn chia sẻ tài liệu học tập với chúng mình, hãy truy cập vào Form bên dưới:
 
-- Liên hệ chúng mình thông qua địa chỉ email **studyvault.uit@gmail.com** và đính kèm tệp tài liệu của bạn.
-- Tạo một **Issue** trên [repo GitHub](https://github.com/SVUIT/mmtt) và đính kèm đường dẫn của bạn.
+[Form](https://link.svuit.org/submit){:target="_blank" : .btn .btn-primary .btn-form .fs-5 .mb-4 .mb-md-0 .mr-2 }
+
+Nếu các bạn có thắc mắc gì khác liên hệ chúng mình thông qua địa chỉ email **contact@svuit.org**
 
 ## Nội dung trên web
 

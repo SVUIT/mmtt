@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
 
+
 .dm-container {
   font-family: "Montserrat", sans-serif;
   display: flex;
@@ -68,6 +69,28 @@
   font-size: 2.5rem !important;
 }
 
+.btn-download::after {
+  font-family: fontAwesome;
+  font-size: 1.225rem;
+  margin-left: 5px ;
+  content: "\f019";
+  //f33a
+}
+
+.btn-gg-drive::after {
+  font-family: fontAwesome;
+  font-size: 1.225rem;
+  margin-left: 6px ;
+  content: "\f3aa";
+}
+
+.btn-form::after {
+  font-family: fontAwesome;
+  font-size: 1.225rem;
+  margin-left: 6px ;
+  content: "\f298";
+}
+
 .icon_footer {
   color: inherit;
   cursor: pointer;
@@ -94,3 +117,24 @@
   font-size: small !important;
   cursor: pointer;
 }
+
+.btn-youtube{
+  display: inline -flex;
+  align-items: center;
+  justify-content: center;
+  width:max-content;
+  background-color: #F0F0FFFF;
+}
+
+.btn-youtube::after{
+  font-family: fontAwesome;
+  font-size: 1.225rem;
+  margin-left: 6px ;
+  content: "\f167";
+}
+
+
+
+
+
+
