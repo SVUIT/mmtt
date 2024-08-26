@@ -34,5 +34,6 @@ Nếu có nội dung nào đó trên web chưa được đề cập về môn h�
 - [NGODAT0103, GitHub](https://github.com/SVUIT/mmtt/issues/31)
 - Đặng Chí Thành, MMTT2022.3
 - Nguyễn Hoàng Lộc, MMTT2023.2
-
-Và những bạn đóng góp ẩn danh.
+- Đoàn Nguyễn Lâm, CNTT.1
+- Phạm Gia Tuệ, ULAW 
+- Và những bạn đóng góp ẩn danh.
