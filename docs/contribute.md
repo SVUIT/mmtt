@@ -35,6 +35,7 @@ Nếu có nội dung nào đó trên web chưa được đề cập về môn h�
 - Đặng Chí Thành, MMTT2022.3
 - Nguyễn Hoàng Lộc, MMTT2023.2
 - Đoàn Nguyễn Lâm, CNTT.1
-- Phạm Gia Tuệ, ULAW 
+- Phạm Gia Tuệ, Waseda University 
 - Đoàn Quốc An, MMTT2023.1
-- Và những bạn đóng góp ẩn danh.
+
+Và những bạn đóng góp ẩn danh.
