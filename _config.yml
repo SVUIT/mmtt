@@ -2,10 +2,10 @@ title: SVUIT-MMTT
 description: A study vault of UIT
 theme: just-the-docs
 
-url: https://svuit.github.io/mmtt
+url: https://svuit.org/mmtt
 
 aux_links:
-  Đóng góp cho website: https://svuit.github.io/mmtt/docs/contribute
+  Đóng góp cho website: https://svuit.org/mmtt/docs/contribute
 
 callouts_level: quiet # or loud
 callouts:
@@ -35,7 +35,7 @@ favicon_ico: "/assets/images/favicon.ico"
 
 
 gh_edit_link: true
-gh_edit_link_text: "Edit this page on GitHub."
+gh_edit_link_text: "Sửa trang này trên GitHub."
 gh_edit_repository: "https://github.com/SVUIT/mmtt" # the github URL for your repo
 gh_edit_branch: "main" # the branch that your docs is served from
 gh_edit_view_mode: "tree" # "tree" or "edit" if you want the user to jump into the editor immediately
