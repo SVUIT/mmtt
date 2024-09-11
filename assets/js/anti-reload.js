@@ -96,7 +96,6 @@ function restoreSidebarState() {
   expanders.forEach(function(expander) {
     expander.addEventListener('click', function() {
       var targetList = this.nextElementSibling;
-
       if (targetList) {
         targetList.classList.toggle('open');
         this.classList.toggle('expanded');
