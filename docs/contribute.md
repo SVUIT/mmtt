@@ -37,5 +37,6 @@ Nếu có nội dung nào đó trên web chưa được đề cập về môn h�
 - Đoàn Nguyễn Lâm, CNTT.1
 - Phạm Gia Tuệ, Waseda University 
 - Đoàn Quốc An, MMTT2023.1
+- [dinhkarate, GitHub](https://github.com/SVUIT/mmtt/pull/142)
 
 Và những bạn đóng góp ẩn danh.
