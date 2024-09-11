@@ -36,7 +36,7 @@ function updateSidebar(url) {
 
 function loadContent(url) {
   if (!url || url.endsWith('/null')) {
-    url = '/index.html'; // Chuyển đến trang chủ
+    url = '/index.html';
   }
 
   fetch(url)
