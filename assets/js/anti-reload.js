@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Kiểm tra xem mục nhấp có phải là liên kết hay không
     if (event.target.tagName === 'A') {
       event.preventDefault();
+      event.stopPropagation();
 
       var url = event.target.getAttribute('href');
       loadContent(url); // Load cả sidebar và main content
@@ -13,11 +14,6 @@ document.addEventListener('DOMContentLoaded', function() {
   // Khôi phục trạng thái của sidebar
   restoreSidebarState();
 
-  // Xử lý khi người dùng sử dụng nút quay lại
-  window.addEventListener('popstate', function(event) {
-    var url = window.location.pathname;
-    loadContent(url); // Load cả sidebar và main content
-  });
 });
 
 function updateSidebar(url) {
@@ -36,8 +32,8 @@ function updateSidebar(url) {
 
 function loadContent(url) {
   if (!url || url.endsWith('/null')) {
-    url = '/index.html';
-  }
+      url = '/mmtt/';
+    }
 
   fetch(url)
     .then(response => {
@@ -57,7 +53,6 @@ function loadContent(url) {
       if (newSidebarSection) {
         document.querySelector('.sidebar-section-to-update').innerHTML = newSidebarSection.innerHTML;
       }
-
       window.history.pushState({}, '', url);
 
       updateSidebar(url);
