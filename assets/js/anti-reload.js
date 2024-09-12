@@ -1,66 +1,106 @@
 document.addEventListener('DOMContentLoaded', function() {
-  // Đường dẫn cơ sở của trang web
-  //Sẽ thay đổi đối dựa trên baseUrl của mỗi web
-  var baseUrl = '/mmtt'; 
+  // Gắn sự kiện cho container chứa các liên kết thay vì từng liên kết
+  document.querySelector('#site-nav').addEventListener('click', function(event) {
+    // Kiểm tra xem mục nhấp có phải là liên kết hay không
+    if (event.target.tagName === 'A') {
+      event.preventDefault();
 
-  // Xử lý các liên kết trong menu điều hướng
+      var url = event.target.getAttribute('href');
+      loadContent(url); // Load cả sidebar và main content
+    }
+  });
+
+  // Khôi phục trạng thái của sidebar
+  restoreSidebarState();
+
+  // Xử lý khi người dùng sử dụng nút quay lại
+  window.addEventListener('popstate', function(event) {
+    var url = window.location.pathname;
+    loadContent(url); // Load cả sidebar và main content
+  });
+});
+
+function updateSidebar(url) {
   var navLinks = document.querySelectorAll('#site-nav a');
 
   navLinks.forEach(function(link) {
-    link.addEventListener('click', function(event) {
-      event.preventDefault();
+    var linkUrl = new URL(link.href, window.location.origin).pathname;
 
-      var url = this.getAttribute('href');
+    if (linkUrl === url) {
+      link.classList.add('active');
+    } else {
+      link.classList.remove('active');
+    }
+  });
+}
 
-      if (!url || url === 'null') {
-        url = baseUrl + '/index.html';
-      } else if (!url.startsWith(baseUrl)) {
-        url = baseUrl + url;
+function loadContent(url) {
+  if (!url || url.endsWith('/null')) {
+    url = '/index.html';
+  }
+
+  fetch(url)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.text();
+    })
+    .then(html => {
+      var tempDiv = document.createElement('div');
+      tempDiv.innerHTML = html;
+
+      var newContent = tempDiv.querySelector('.main-content').innerHTML;
+      document.querySelector('.main-content').innerHTML = newContent;
+
+      var newSidebarSection = tempDiv.querySelector('.sidebar-section-to-update');
+      if (newSidebarSection) {
+        document.querySelector('.sidebar-section-to-update').innerHTML = newSidebarSection.innerHTML;
       }
 
-      // Chuyển đến URL mà không reload trang
-      fetch(url, { method: 'GET' })
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return response.text();
-        })
-        .then(html => {
-          // Tạo một div tạm thời để chứa nội dung mới
-          var tempDiv = document.createElement('div');
-          tempDiv.innerHTML = html;
+      window.history.pushState({}, '', url);
 
-          // Lấy nội dung của phần tử chính trong HTML mới
-          var newContent = tempDiv.querySelector('.main-content').innerHTML;
+      updateSidebar(url);
+    })
+    .catch(error => console.error('Error:', error));
+}
 
-          // Cập nhật nội dung trang
-          document.querySelector('.main-content').innerHTML = newContent;
+function saveSidebarState() {
+  var expanders = document.querySelectorAll('.nav-list-expander');
+  var state = {};
 
-          // Cập nhật URL trên thanh địa chỉ
-          window.history.pushState({}, '', url);
-        })
-        .catch(error => console.error('Error:', error));
+  expanders.forEach(function(expander) {
+    var isExpanded = expander.classList.contains('expanded');
+    var id = expander.getAttribute('data-id');
+    state[id] = isExpanded;
+  });
+
+  localStorage.setItem('sidebarState', JSON.stringify(state));
+}
+
+function restoreSidebarState() {
+  var state = JSON.parse(localStorage.getItem('sidebarState')) || {};
+  var expanders = document.querySelectorAll('.nav-list-expander');
+
+  expanders.forEach(function(expander) {
+    var id = expander.getAttribute('data-id');
+    if (state[id]) {
+      expander.classList.add('expanded');
+      var targetList = expander.nextElementSibling;
+      if (targetList) {
+        targetList.classList.add('open');
+      }
+    }
+  });
+
+  expanders.forEach(function(expander) {
+    expander.addEventListener('click', function() {
+      var targetList = this.nextElementSibling;
+      if (targetList) {
+        targetList.classList.toggle('open');
+        this.classList.toggle('expanded');
+        saveSidebarState();
+      }
     });
   });
-
-  // Xử lý sự kiện khi người dùng nhấn nút Back hoặc Forward trên trình duyệt
-  window.addEventListener('popstate', function(event) {
-    var url = window.location.pathname;
-
-    fetch(url)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.text();
-      })
-      .then(html => {
-        var tempDiv = document.createElement('div');
-        tempDiv.innerHTML = html;
-        var newContent = tempDiv.querySelector('.main-content').innerHTML;
-        document.querySelector('.main-content').innerHTML = newContent;
-      })
-      .catch(error => console.error('Error:', error));
-  });
-});
+}
