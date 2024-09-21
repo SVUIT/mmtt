@@ -4,7 +4,7 @@ layout: default
 nav_order: 0
 ---
 
-# **Study Vault of UIT - MMTT Edition**
+# **Study Vault of UIT - NC Edition**
 
 {: .fs-9 }
 
