@@ -13,7 +13,8 @@ Kho tài liệu học tập UIT, phiên bản Mạng máy tính và Truyền th�
 {: .fs-6 .fw-300 }
 
 [Đóng góp cho website](./docs/contribute){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
-[Xem trên GitHub](https://github.com/SVUIT/mmtt){: .btn .fs-5 .mb-4 .mb-md-0 }
+[Xem trên GitHub](https://github.com/SVUIT/mmtt){: .btn .fs-5 .mb-4 .mb-md-0 .mr-2 }
+[Ôn thi giữa kỳ](./docs/giuaky){: .btn .btn-info .fs-5 .mb-4 .mb-md-0 }
 
 
 
