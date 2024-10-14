@@ -16,7 +16,7 @@ Kho tài liệu học tập UIT, phiên bản Mạng máy tính và Truyền th�
 [Xem trên GitHub](https://github.com/SVUIT/mmtt){: .btn .fs-5 .mb-4 .mb-md-0 .mr-2 }
 
 {: .important}
-> [Ôn thi giữa kỳ](./docs/giuaky)
+> Cùng ôn tập/ rèn luyện/ ôn thi cùng (kho tài liệu) SVUIT [Ôn thi giữa kỳ](./docs/giuaky)
 
 
 
