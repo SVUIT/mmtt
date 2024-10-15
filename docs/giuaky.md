@@ -13,3 +13,11 @@ search_exclude: true
 
 - [Hệ điều hành](./MonHocCoSoNganh/IT007)
 
+## Tham khảo thêm
+- [Nhập môn mạch số](https://link.uit.edu.vn/PH002_MIDTERM)
+
+- [Kiến trúc máy tính](https://link.uit.edu.vn/IT006_MIDTERM)
+
+- [Tổ chức và cấu trúc máy tính](https://link.uit.edu.vn/IT010_MIDTERM)
+
+- [Tổ chức và cấu trúc máy tính II](https://link.uit.edu.vn/IT012_MIDTERM)
