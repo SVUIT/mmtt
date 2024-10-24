@@ -2,7 +2,8 @@ title: SVUIT-MMTT
 description: A study vault of UIT
 theme: just-the-docs
 
-# url: https://svuit.org/mmtt
+url: "https://svuit.github.io"
+baseurl: "/dsc2024" # Đường dẫn của dự án nếu không ở gốc
 
 aux_links:
   Đóng góp cho website: https://svuit.org/mmtt/docs/contribute
