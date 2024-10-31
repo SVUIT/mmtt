@@ -15,11 +15,6 @@ Kho tài liệu học tập UIT, phiên bản Mạng máy tính và Truyền th�
 [Đóng góp cho website](./docs/contribute){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
 [Xem trên GitHub](https://github.com/SVUIT/mmtt){: .btn .fs-5 .mb-4 .mb-md-0 .mr-2 }
 
-{: .important}
-> Cùng ôn tập/ rèn luyện/ ôn thi cùng (kho tài liệu) SVUIT [Ôn thi giữa kỳ](./docs/giuaky)
-
-
-
 ## Mục tiêu
 
 Mục tiêu chính của dự án là giúp các bạn sinh viên dễ dàng tìm kiếm các thông tin và tài liệu về môn học, đặc biệt là có thể tham khảo đồ án thực hiện bởi các sinh viên khóa trước. Chúng mình hướng tới việc sinh viên các khóa có thể truyền tải, chia sẻ kiến thức cho nhau thông qua nền tảng này.
