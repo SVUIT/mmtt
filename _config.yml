@@ -5,7 +5,7 @@ theme: just-the-docs
 url: https://svuit.org/mmtt
 
 aux_links:
-  Đóng góp cho website: https://svuit.org/mmtt/docs/contribute
+  Đóng góp: https://svuit.org/mmtt/docs/contribute
 
 callouts_level: quiet # or loud
 callouts:
@@ -31,8 +31,6 @@ mermaid:
   version: "9.1.6"
 
 favicon_ico: "/assets/images/favicon.ico"
-
-
 
 gh_edit_link: true
 gh_edit_link_text: "Sửa trang này trên GitHub."
