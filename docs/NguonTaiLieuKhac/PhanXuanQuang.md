@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Phan Xuan Quang
-parent: Khoa Công nghệ phần mềm
+parent: Nguồn tài liệu khác
 ---
 
 - **Đây là tài liệu đóng góp của bạn Phan Xuân Quang.**
