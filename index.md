@@ -29,4 +29,4 @@ Do nhân lực có hạn nên hiện tại chúng mình chỉ tập trung vào t
 ## Lưu ý
 
 - Website này là một dự án phi lợi nhuận được thực hiện bởi một nhóm sinh viên và không phải là website chính thức của UIT.
-- Các nội dung được đăng tải trên đây chỉ mang tính chất **tham khảo** và không hoàn toàn chính xác. Chúng mình luôn khuyến khích các bạn tự đánh giá và chọn lọc thông tin.
+- Trang web cung cấp tài liệu do các sinh viên đóng góp nhằm hỗ trợ mục đích **tham khảo** học tập. Chúng mình sẽ không chịu trách nhiệm về tính chính xác, toàn diện, hoặc tính phù hợp của nội dung cho bất kỳ mục đích cụ thể nào. Khuyến khích các bạn tự đánh giá, chọn lọc thông tin và **tự chịu trách nhiệm** trong việc sử dụng các tài liệu. Trong trường hợp có vấn đề về quyền sở hữu trí tuệ, vui lòng liên hệ qua email của chúng tôi: contact@svuit.org
