@@ -40,5 +40,11 @@ Nếu có nội dung nào đó trên web chưa được đề cập về môn h�
 - [dinhkarate, GitHub](https://github.com/SVUIT/mmtt/pull/142)
 - 23521047
 - Hunn
+- Nguyễn Thành An, MTIC2024
+- Nguyễn Trần Trung Nguyên, ATCL2021
+- Nguyễn Thị Hồng Nhung
+- Lê Công Anh Tuấn
+- Hà Phụng Hảo
+- Thái Công Anh Quốc
 
 Và những bạn đóng góp ẩn danh.
