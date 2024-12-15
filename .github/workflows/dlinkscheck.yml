@@ -1,0 +1,20 @@
+name: Dead Links Check
+
+on:  
+    schedule:
+     # - cron: 7 7 * * 4   # 12AM GMT+7 every Thursday
+    repository_dispatch:
+      types: [check-link]  
+    workflow_dispatch:
+jobs:
+    check: 
+      runs-on: ubuntu-latest
+      #timeout-minutes: 10
+      steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Check dead links
+        #uses: /broken-link-checker-action@gh-actions
+      - name: Creat Issue in Repo
+        uses: 
+      #logic for checking dead links
