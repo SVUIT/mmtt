@@ -2,7 +2,7 @@ name: Dead Links Check
 
 on:  
     schedule:
-     # - cron: 7 7 * * 4   # 12AM GMT+7 every Thursday
+     # - cron: 0 17 * * 3   # 12AM GMT+7 every Thursday
     repository_dispatch:
       types: [check-link]  
     workflow_dispatch:
