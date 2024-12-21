@@ -1,1 +1,19 @@
+name: Rclone Sync
+
+on:
+  schedule:
+    - cron: '0 19 * * 2'
+  workflow_dispatch:
+
+jobs:
+  rclone_sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup Rclone
+        uses: AnimMouse/setup-rclone@v1
+        with:
+          rclone_config: ${{ secrets.RCLONE_CONFIG }}
+        
+      - run: 'rclone sync main:Docs backup:Docs'
 
