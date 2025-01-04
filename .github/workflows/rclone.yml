@@ -1,0 +1,48 @@
+name: Rclone sync
+on:
+  schedule: 
+    - cron: '0 12 * * 1'
+  workflow_dispatch:
+jobs:
+  rclone_sync:
+    runs-on: ubuntu-latest 
+    steps:
+      - name: Setup Rclone
+        uses: AnimMouse/setup-rclone@v1
+        with:
+          rclone_config: ${{ secrets.RCLONE_CONFIG }}          
+      - run: |
+          rclone sync main:Docs backup:Docs \
+            --log-file=rclone-log.txt \
+            --log-level INFO
+      - name: File update status
+        id: analyze_log
+        run: |
+          echo "Rclone Backup Report" > report.txt
+          echo " " >> report.txt
+          echo "Files successfully synced:" >> report.txt
+          grep "INFO  :" rclone-log.txt | grep "Copied" >> report.txt || echo "No files synced." >> report.txt
+          echo "" >> report.txt
+          echo "Errors during sync:" >> report.txt
+          grep "ERROR :" rclone-log.txt >> report.txt || echo "No errors found." >> report.txt
+      
+  send_email:
+    runs-on: ubuntu-latest
+    needs: rclone_sync
+    steps:
+      - name: Checkout 
+        uses: actions/checkout@v4
+      - name: Send mail
+        uses: dawidd6/action-send-mail@v4
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          ignore_cert: true
+          secure: true
+          username: ${{ secrets.GMAIL_USER }}
+          password: ${{ secrets.GMAIL_APPWRD }}
+          subject: Backup results
+          to: ${{ secrets.EMAIL_RECIPIENT }}
+          from: SVUIT Github Actions
+          body: |
+            $(cat report.txt)
