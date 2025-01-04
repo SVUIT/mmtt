@@ -1,11 +1,14 @@
-name: Rclone sync
+
+name: Rclone Sync
+
 on:
-  schedule: 
-    - cron: '0 12 * * 1'
+  schedule:
+    - cron: '0 19 * * 2'
   workflow_dispatch:
+
 jobs:
   rclone_sync:
-    runs-on: ubuntu-latest 
+    runs-on: ubuntu-latest
     steps:
       - name: Setup Rclone
         uses: AnimMouse/setup-rclone@v1
