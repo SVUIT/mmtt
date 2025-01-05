@@ -16,7 +16,7 @@ jobs:
       - name: Sync with Rclone
         run: |
           set -e  # Bật chế độ kiểm tra lỗi
-          rclone sync main_viethoangprobie: backup_sinhvien: --verbose --stats=1s --log-file=rclone_log.txt
+          rclone sync main:Docs backup:Docs --verbose --stats=1s --log-file=rclone_log.txt
           if [ ! -s rclone_log.txt ]; then
             echo "No changes detected" > rclone_log.txt
           fi
