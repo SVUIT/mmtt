@@ -1,4 +1,3 @@
-
 name: Rclone Sync
 
 on:
@@ -13,29 +12,40 @@ jobs:
       - name: Setup Rclone
         uses: AnimMouse/setup-rclone@v1
         with:
-          rclone_config: ${{ secrets.RCLONE_CONFIG }}          
-      - run: |
-          rclone sync main:Docs backup:Docs \
-            --log-file=rclone-log.txt \
-            --log-level INFO
-      - name: File update status
-        id: analyze_log
+          rclone_config: ${{ secrets.RCLONE_CONFIG }}
+      - name: Sync with Rclone
         run: |
-          echo "Rclone Backup Report" > report.txt
-          echo " " >> report.txt
-          echo "Files successfully synced:" >> report.txt
-          grep "INFO  :" rclone-log.txt | grep "Copied" >> report.txt || echo "No files synced." >> report.txt
-          echo "" >> report.txt
-          echo "Errors during sync:" >> report.txt
-          grep "ERROR :" rclone-log.txt >> report.txt || echo "No errors found." >> report.txt
-      
+          set -e  # Bật chế độ kiểm tra lỗi
+          rclone sync main_viethoangprobie: backup_sinhvien: --verbose --stats=1s --log-file=rclone_log.txt
+          if [ ! -s rclone_log.txt ]; then
+            echo "No changes detected" > rclone_log.txt
+          fi
+          cat rclone_log.txt
+
+      - name: Upload log artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: rclone-log
+          path: rclone_log.txt
+        
   send_email:
     runs-on: ubuntu-latest
     needs: rclone_sync
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        
+      - name: Download log artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: rclone-log
+          path: .
+
+      - name: Read log into variable
+        id: read_log
+        run: |
+          LOG_CONTENT=$(cat rclone_log.txt)
+          echo "LOG_CONTENT<<EOF" >> $GITHUB_ENV
+          echo "$LOG_CONTENT" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
       - name: Send mail
         uses: dawidd6/action-send-mail@v4
         with:
@@ -49,4 +59,6 @@ jobs:
           to: ${{ secrets.EMAIL_RECIPIENT }}
           from: UIT-Learning-Archive
           body: |
-            $(cat report.txt)
+            Backup process completed.
+            See attached log for details.
+          attachments: rclone_log.txt
