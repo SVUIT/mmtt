@@ -23,7 +23,7 @@ jobs:
           cat rclone_log.txt
 
       - name: Upload log artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: rclone-log
           path: rclone_log.txt
@@ -33,7 +33,7 @@ jobs:
     needs: rclone_sync
     steps:
       - name: Download log artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: rclone-log
           path: .
