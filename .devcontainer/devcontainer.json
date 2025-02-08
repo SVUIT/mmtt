@@ -6,12 +6,11 @@
     },
     "postCreateCommand": "gh extension install https://github.com/nektos/gh-act",
     "customizations": {
-        "customizations": {
-            "vscode": {
-                "extensions": [
-                    "SanjulaGanepola.github-local-actions"
-                ]
-            }
+        "vscode": {
+            "extensions": [
+                "SanjulaGanepola.github-local-actions",
+                "github.vscode-github-actions"
+            ]
         }
     }
 }
