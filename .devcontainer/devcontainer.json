@@ -1,0 +1,16 @@
+{
+    "image": "mcr.microsoft.com/devcontainers/universal:2",
+    "features": {
+        "ghcr.io/devcontainers/features/github-cli:1": {},
+        "ghcr.io/devcontainers/features/docker-in-docker:2.12.0": {}
+    },
+    "postCreateCommand": "gh extension install https://github.com/nektos/gh-act",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "SanjulaGanepola.github-local-actions",
+                "github.vscode-github-actions"
+            ]
+        }
+    }
+}
