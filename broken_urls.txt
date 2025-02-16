@@ -1,0 +1,9 @@
+URL,Trạng thái/Lỗi
+https://svuit.org/mmtt/facebook.com/groups/EmAnhDuong,404
+https://svuit.org/mmtt/docs#tài-liệu-môn-học,404
+https://www.facebook.com/bhtcnpm,400
+https://svuit.org/mmtt/sites.google.com/view/duongcomputing,404
+https://svuit.org/mmtt/docs#tài-liệu-học-tập,404
+https://forum.uit.edu.vn/node/564837,403
+https://drive.google.com/drive/folders/1-mfu13rfY6yxQt4naGlwGUJHwAY5fN4i?usp=sharing,HTTPSConnectionPool(host='drive.google.com', port=443): Read timed out. (read timeout=10)
+https://svuit.org/mmtt/docs#nội-dung-báo-cáo-tham-khảo,404
