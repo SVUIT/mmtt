@@ -2,16 +2,15 @@ import os
 import re
 import requests
 from urllib.parse import urljoin
-
-# Thư mục chứa file markdown
+# Folder containing markdown files
 folder_path = "./docs"
-# URL gốc của website
+# Original URL of the website
 base_url = "https://svuit.org/mmtt/docs"
 # GitHub repo details
-GITHUB_REPO = os.getenv("GITHUB_REPOSITORY")  # Lấy repo từ GitHub Actions
-GITHUB_TOKEN = os.getenv("ISSUE_API")  # Token để tạo issue
+GITHUB_REPO = os.getenv("GITHUB_REPOSITORY") 
+GITHUB_TOKEN = os.getenv("ISSUE_API")  
 
-# Header giả lập trình duyệt để tránh bị chặn
+# Browser emulation header to avoid blocking
 HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
 }
@@ -33,7 +32,7 @@ def extract_urls_from_markdown(file_path, base_url):
     links = []
     link_pattern = r"\[.*?\]\((.*?)\)"
     
-    # Lấy URL gốc của file markdown hiện tại
+# Get the original URL of the current markdown file
     relative_path = os.path.relpath(file_path, folder_path).replace("\\", "/")
     base_file_url = f"{base_url}/{relative_path}".replace(".md", ".html")
     
@@ -43,13 +42,13 @@ def extract_urls_from_markdown(file_path, base_url):
             matches = re.findall(link_pattern, content)
             for match in matches:
                 if match.startswith(("http://", "https://")):
-                    full_url = match  # URL tuyệt đối
+                    full_url = match 
                 elif match.startswith("#"):
-                    full_url = base_file_url + match  # Link anchor trong file
+                    full_url = base_file_url + match  # Link anchor 
                 elif match.startswith("/"):
-                    full_url = urljoin(base_url, match)  # Link tuyệt đối theo trang gốc
+                    full_url = urljoin(base_url, match) 
                 else:
-                    full_url = urljoin(base_file_url, match)  # Link tương đối
+                    full_url = urljoin(base_file_url, match) 
 
                 links.append(full_url)
     except Exception as e:
@@ -67,16 +66,16 @@ def check_url(url):
         return False, str(e)
 
 def create_github_issue(broken_urls):
-    """Tạo issue trên GitHub với danh sách broken links."""
+    """Create an issue on GitHub with a list of broken links."""
     print(f"GITHUB_REPOSITORY: {os.getenv('GITHUB_REPOSITORY')}")
-    print(f"ISSUE_API: {'Đã tìm thấy' if os.getenv('ISSUE_API') else 'Không tìm thấy'}")
+    print(f"ISSUE_API: {'Found' if os.getenv('ISSUE_API') else 'Not found'}")
 
     if not GITHUB_TOKEN or not GITHUB_REPO:
-        print("⚠️ Không tìm thấy GITHUB_TOKEN hoặc GITHUB_REPOSITORY. Bỏ qua việc tạo issue.")
+        print("⚠️GITHUB_TOKEN or GITHUB_REPOSITORY not found. Abandoning issue creation.")
         return
 
     issue_title = "🚨 Broken Links Detected!"
-    issue_body = "Danh sách các liên kết bị lỗi được phát hiện:\n\n"
+    issue_body = "List of broken links detected:\n\n"
     for error in broken_urls:
         issue_body += f"- {error}\n"
 
@@ -93,12 +92,12 @@ def create_github_issue(broken_urls):
 
     response = requests.post(url, json=data, headers=headers)
     if response.status_code == 201:
-        print("✅ Issue đã được tạo thành công!")
+        print("✅Issue created successfully!")
     else:
-        print(f"❌ Lỗi khi tạo issue: {response.status_code} - {response.text}")
+        print(f"❌Error creating issue: {response.status_code} - {response.text}")
 
 if __name__ == '__main__':
-    print("🔍 Đang thu thập danh sách URL từ thư mục...")
+    print("Collecting list of URLs from directories...")
 
     folder_urls = get_urls_from_folder(folder_path, base_url)
     markdown_links = []
@@ -115,19 +114,19 @@ if __name__ == '__main__':
     total_count = len(all_urls)
     checked_count = 0
 
-    print(f"🔗 Tổng số URL cần kiểm tra: {total_count}")
+    print(f"🔗Total number of URLs to check: {total_count}")
 
     for url in all_urls:
         checked_count += 1
-        print(f"({checked_count}/{total_count}) Kiểm tra: {url} ...", end=" ")
+        print(f"({checked_count}/{total_count}) Check: {url} ...", end=" ")
         is_available, status = check_url(url)
         if not is_available:
-            print(f"❌ LỖI ({status})")
-            broken_urls.append(f"{url} ➝ Lỗi: {status}")
+            print(f"❌ERROR ({status})")
+            broken_urls.append(f"{url} ➝ Error: {status}")
         else:
-            print(f"✅ Hoạt động ({status})")
+            print(f"✅Work ({status})")
 
     if broken_urls:
         create_github_issue(broken_urls)
     else:
-        print("\n🎉 Tất cả URL đều hợp lệ!")
+        print("\n🎉All URLs are valid!")
