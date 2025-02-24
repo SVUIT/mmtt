@@ -16,7 +16,7 @@ HEADERS = {
 }
 
 def get_urls_from_folder(folder_path, base_url):
-    """Lấy danh sách URL từ các file markdown trong thư mục."""
+    """Get a list of URLs from markdown files in a directory."""
     urls = []
     for root, _, files in os.walk(folder_path):
         for file in files:
@@ -28,7 +28,7 @@ def get_urls_from_folder(folder_path, base_url):
     return urls
 
 def extract_urls_from_markdown(file_path, base_url):
-    """Trích xuất tất cả các URL từ file Markdown, giữ đúng phần anchor (#)."""
+    """Extract all URLs from Markdown file, keeping anchor (#) intact."""
     links = []
     link_pattern = r"\[.*?\]\((.*?)\)"
     
@@ -52,11 +52,11 @@ def extract_urls_from_markdown(file_path, base_url):
 
                 links.append(full_url)
     except Exception as e:
-        print(f"⚠️ Lỗi khi đọc {file_path}: {e}")
+        print(f"⚠️Error reading {file_path}: {e}")
     return links
 
 def check_url(url):
-    """Kiểm tra xem URL có hoạt động không."""
+    """Check if the URL works."""
     try:
         response = requests.head(url, timeout=10, headers=HEADERS, allow_redirects=True)
         if 404 <= response.status_code <= 500:
