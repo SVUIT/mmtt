@@ -1,0 +1,32 @@
+name: Check Broken Links
+
+on:
+  schedule:
+    - cron: "0 0 * * 1"  # Chạy mỗi tuần một lần vào thứ Hai lúc 00:00 UTC
+  workflow_dispatch:  # Cho phép chạy thủ công
+
+jobs:
+  check_links:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v3
+
+      - name: 🛠 Debug - List files (Kiểm tra file có tồn tại không)
+        run: ls -lah
+
+      - name: 🛠 Cấp quyền truy cập cho script
+        run: chmod +x check_links.py
+
+      - name: 🔧 Cài đặt Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.x'
+
+      - name: 📦 Install lib
+        run: pip install requests
+        
+      - name: 🔍 Run script
+        env:
+          ISSUE_API: ${{ secrets.ISSUE_API }}
+        run: python check_links.py
