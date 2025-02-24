@@ -2,8 +2,8 @@ name: Check Broken Links
 
 on:
   schedule:
-    - cron: "0 0 * * 1"  # Chạy mỗi tuần một lần vào thứ Hai lúc 00:00 UTC
-  workflow_dispatch:  # Cho phép chạy thủ công
+    - cron: "0 19 * * 2"  # Runs every Tuesday at 19:00 UTC
+  workflow_dispatch:  
 
 jobs:
   check_links:
@@ -12,13 +12,13 @@ jobs:
       - name: 📥 Checkout repository
         uses: actions/checkout@v3
 
-      - name: 🛠 Debug - List files (Kiểm tra file có tồn tại không)
+      - name: 🛠 Debug - List files (Check if file exists)
         run: ls -lah
 
-      - name: 🛠 Cấp quyền truy cập cho script
+      - name: 🛠 Grant access to the script
         run: chmod +x check_links.py
 
-      - name: 🔧 Cài đặt Python
+      - name: 🔧 Setting Python
         uses: actions/setup-python@v3
         with:
           python-version: '3.x'
