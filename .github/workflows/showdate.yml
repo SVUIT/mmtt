@@ -37,3 +37,4 @@ jobs:
           git config --global user.email 'github-actions@github.com'
           git add folders.yml docs/*.md
           git diff --cached --quiet || (git commit -m '🔄 Auto-update markdown files' && git push)
+#nothing
