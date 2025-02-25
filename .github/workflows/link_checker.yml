@@ -1,0 +1,32 @@
+name: Check Broken Links
+
+on:
+  schedule:
+    - cron: "0 19 * * 2"  # Runs every Tuesday at 19:00 UTC
+  workflow_dispatch:  
+
+jobs:
+  check_links:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v3
+
+      - name: 🛠 Debug - List files (Check if file exists)
+        run: ls -lah
+
+      - name: 🛠 Grant access to the script
+        run: chmod +x check_links.py
+
+      - name: 🔧 Setting Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.x'
+
+      - name: 📦 Install lib
+        run: pip install requests
+        
+      - name: 🔍 Run script
+        env:
+          ISSUE_API: ${{ secrets.ISSUE_API }}
+        run: python check_links.py
