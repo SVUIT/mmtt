@@ -1,3 +1,5 @@
+**Ngày cập nhật**: Không có thông tin
+
 ---
 title: Thông báo
 layout: default

@@ -1,3 +1,5 @@
+**Ngày cập nhật**: Không có thông tin
+
 ---
 layout: default
 title: BHT Công nghệ Phần mềm
