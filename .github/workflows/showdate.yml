@@ -1,0 +1,39 @@
+name: Update Markdown Files
+
+on:
+  push:
+    branches:
+      - main  # Thay đổi nếu cần chạy trên nhánh khác
+  schedule:
+    - cron: '0 0 * * *'  # Chạy mỗi ngày lúc 00:00 UTC
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt || true  # Nếu có file requirements.txt
+          pip install pyyaml google-auth google-auth-oauthlib google-auth-httplib2 googleapiclient
+
+      - name: Run get_drive_last_modified.py
+        run: python get_drive_last_modified.py
+
+      - name: Run update_markdown_files.py
+        run: python update_markdown_files.py
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+          git add folders.yml docs/*.md
+          git diff --cached --quiet || (git commit -m '🔄 Auto-update markdown files' && git push)
