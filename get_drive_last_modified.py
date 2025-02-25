@@ -2,14 +2,18 @@ from googleapiclient.discovery import build
 from google.oauth2 import service_account
 import yaml
 import os
+import json
 import re  # 🟢 Thêm import này để xử lý chuẩn hóa tên
 
 # Load thông tin credentials từ service-account.json
 SCOPES = ['https://www.googleapis.com/auth/drive.metadata.readonly']
-SERVICE_ACCOUNT_FILE = 'service_account.json'
+SERVICE_ACCOUNT_JSON = os.getenv("GDRIVE_CREDENTIALS", "{}")  # Lấy từ GitHub Secrets
+SERVICE_ACCOUNT_INFO = json.loads(SERVICE_ACCOUNT_JSON)  # Chuyển chuỗi JSON thành dict
 
-creds = service_account.Credentials.from_service_account_file(
-    SERVICE_ACCOUNT_FILE, scopes=SCOPES)
+creds = service_account.Credentials.from_service_account_info(
+    SERVICE_ACCOUNT_INFO, scopes=SCOPES
+)
+
 service = build('drive', 'v3', credentials=creds)
 
 # 🟢 Thư mục chứa các file môn học (có thể có thư mục con)
