@@ -3,10 +3,9 @@ name: Update Markdown Files
 on:
   push:
     branches:
-      - main  # Thay đổi nếu cần chạy trên nhánh khác
+      - main  # Change if needed
   schedule:
-    - cron: '0 0 * * *'  # Chạy mỗi ngày lúc 00:00 UTC
-
+    - cron: '0 17 * * 1'  
 jobs:
   update:
     runs-on: ubuntu-latest
@@ -22,19 +21,35 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt || true  # Nếu có file requirements.txt
+          pip install -r requirements.txt || true  # If requirements.txt exists
           pip install pyyaml google-auth google-auth-oauthlib google-auth-httplib2 googleapiclient
 
       - name: Run get_drive_last_modified.py
         run: python get_drive_last_modified.py
 
-      - name: Run update_markdown_files.py
-        run: python update_markdown_files.py
+  update_last_modified_date:
+    runs-on: ubuntu-latest
+    needs: update  # Ensures this runs after 'update'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Update last_modified_date in Markdown files
+        run: |
+          for file in $(git ls-files '*.md'); do
+            if git diff --name-only HEAD~1 | grep -q "$file"; then
+              if grep -q "^last_modified_date:" "$file"; then
+                sed -i "s/^last_modified_date:.*/last_modified_date: $(date '+%Y-%m-%d %H:%M:%S')/" "$file"
+              else
+                echo -e "\nlast_modified_date: $(date '+%Y-%m-%d %H:%M:%S')" >> "$file"
+              fi
+            fi
+          done
 
       - name: Commit and push changes
         run: |
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
-          git add folders.yml docs/*.md
-          git diff --cached --quiet || (git commit -m '🔄 Auto-update markdown files' && git push)
-#nothing
+          git add docs/*.md
+          git diff --cached --quiet || (git commit -m '🔄 Auto-update last_modified_date' && git push)
