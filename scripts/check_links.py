@@ -2,6 +2,7 @@ import os
 import re
 import requests
 from urllib.parse import urljoin
+import time
 # Folder containing markdown files
 folder_path = "./docs"
 # Original URL of the website
@@ -57,13 +58,17 @@ def extract_urls_from_markdown(file_path, base_url):
 
 def check_url(url):
     """Check if the URL works."""
-    try:
-        response = requests.head(url, timeout=10, headers=HEADERS, allow_redirects=True)
-        if 404 <= response.status_code <= 500:
-            return False, response.status_code
-        return True, response.status_code
-    except requests.RequestException as e:
-        return False, str(e)
+    for i in range(3): 
+        try:
+            response = requests.head(url, timeout=30, headers=HEADERS, allow_redirects=True)
+            if 404 <= response.status_code <= 500:
+                return False, response.status_code
+            return True, response.status_code
+        except requests.RequestException as e:
+            if i < 2:
+                time.sleep(5)
+            else:
+                return False, str(e)
 
 def create_github_issue(broken_urls):
     """Create an issue on GitHub with a list of broken links."""
@@ -87,7 +92,8 @@ def create_github_issue(broken_urls):
     data = {
         "title": issue_title,
         "body": issue_body,
-        "labels": ["broken-links"]
+        "labels": ["broken-links"],
+        "assignees": ["hlocuwu", "dynsnsky", "VietHoang-206"]
     }
 
     response = requests.post(url, json=data, headers=headers)

@@ -29,4 +29,4 @@ jobs:
       - name: 🔍 Run script
         env:
           ISSUE_API: ${{ secrets.ISSUE_API }}
-        run: python check_links.py
+        run: python scripts/check_links.py
