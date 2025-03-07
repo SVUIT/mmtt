@@ -1,0 +1,35 @@
+name: Update Folders YAML
+
+on:
+  schedule:
+    - cron: "0 0 * * 0"  # Chạy vào 00:00 Chủ Nhật hàng tuần
+  workflow_dispatch:  # Cho phép chạy thủ công từ GitHub Actions
+
+jobs:
+  update-folders:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: |
+          pip install google-auth-oauthlib google-auth-httplib2 google-api-python-client pyyaml
+
+      - name: Run update script
+        env:
+          GDRIVE_CREDENTIALS: ${{ secrets.GDRIVE_CREDENTIALS }}
+        run: python update_folders.py
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add folders.yml
+          git diff --cached --quiet || (git commit -m "🔄 Auto-update folders.yml" && git push)
