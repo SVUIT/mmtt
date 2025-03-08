@@ -25,7 +25,7 @@ jobs:
       - name: Run update script
         env:
           GDRIVE_CREDENTIALS: ${{ secrets.GDRIVE_CREDENTIALS }}
-        run: python update_folders.py
+        run: python get_drive_last_modified.py
 
       - name: Commit and push changes
         run: |
