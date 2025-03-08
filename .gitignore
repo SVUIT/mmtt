@@ -19,6 +19,3 @@ vendor/
 # VScode setting
 
 .vscode
-
-# Json file
-service_account.json
