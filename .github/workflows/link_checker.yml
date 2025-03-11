@@ -16,7 +16,7 @@ jobs:
         run: ls -lah
 
       - name: 🛠 Grant access to the script
-        run: chmod +x check_links.py
+        run: chmod +x scripts/check_links.py
 
       - name: 🔧 Setting Python
         uses: actions/setup-python@v3
@@ -29,4 +29,4 @@ jobs:
       - name: 🔍 Run script
         env:
           ISSUE_API: ${{ secrets.ISSUE_API }}
-        run: python check_links.py
+        run: python scripts/check_links.py
