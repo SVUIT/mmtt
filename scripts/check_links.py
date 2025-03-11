@@ -1,7 +1,10 @@
 import os
 import re
 import requests
+import time
 from urllib.parse import urljoin
+from fake_useragent import UserAgent
+
 # Folder containing markdown files
 folder_path = "./docs"
 # Original URL of the website
@@ -10,10 +13,11 @@ base_url = "https://svuit.org/mmtt/docs"
 GITHUB_REPO = os.getenv("GITHUB_REPOSITORY") 
 GITHUB_TOKEN = os.getenv("ISSUE_API")  
 
-# Browser emulation header to avoid blocking
-HEADERS = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-}
+ua = UserAgent()
+def get_random_headers():
+    return {
+        'User-Agent': ua.random
+    }
 
 def get_urls_from_folder(folder_path, base_url):
     """Get a list of URLs from markdown files in a directory."""
@@ -57,13 +61,18 @@ def extract_urls_from_markdown(file_path, base_url):
 
 def check_url(url):
     """Check if the URL works."""
-    try:
-        response = requests.head(url, timeout=10, headers=HEADERS, allow_redirects=True)
-        if 404 <= response.status_code <= 500:
-            return False, response.status_code
-        return True, response.status_code
-    except requests.RequestException as e:
-        return False, str(e)
+    for i in range(3): 
+        try:
+            headers = get_random_headers()
+            response = requests.head(url, timeout=30, headers=headers, allow_redirects=True)
+            if 404 <= response.status_code <= 500:
+                return False, response.status_code
+            return True, response.status_code
+        except requests.RequestException as e:
+            if i < 2:
+                time.sleep(5)
+            else:
+                return False, str(e)
 
 def create_github_issue(broken_urls):
     """Create an issue on GitHub with a list of broken links."""
@@ -87,7 +96,8 @@ def create_github_issue(broken_urls):
     data = {
         "title": issue_title,
         "body": issue_body,
-        "labels": ["broken-links"]
+        "labels": ["broken-links"],
+        "assignees": ["hlocuwu", "dynsnsky", "VietHoang-206"]
     }
 
     response = requests.post(url, json=data, headers=headers)
