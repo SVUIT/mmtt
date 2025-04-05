@@ -1,0 +1,40 @@
+name: Update Markdown Dates
+
+on:
+  schedule:
+    - cron: '0 2 * * 1' 
+  workflow_dispatch:     
+jobs:
+  update-dates:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install google-api-python-client google-auth google-auth-httplib2 google-auth-oauthlib python-dateutil
+
+      - name: Decode service account key
+        env:
+          SERVICE_ACCOUNT_JSON: ${{ secrets.GDRIVE_JSON }}
+        run: |
+          echo "$SERVICE_ACCOUNT_JSON" > drive-api-project-452000-10d4b5dc6bcc.json
+
+      - name: Run update script
+        run: python update_script.py
+
+      - name: Commit changes
+        run: |
+          git config user.name "GitHub Action"
+          git config user.email "action@github.com"
+          git add docs/
+          git commit -m "🤖 Tự động cập nhật ngày từ Google Drive" || echo "No changes to commit"
+          git push
