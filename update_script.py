@@ -42,7 +42,7 @@ def update_date_in_md(md_content, latest_date):
         if line.strip().startswith("*Ngày cập nhật:"):
             continue  # Xoá dòng ngày cập nhật cũ
         if not inserted and line.strip() == "## Tài liệu môn học":
-            new_content.append(f"*Ngày cập nhật: {latest_date}*\n")
+            new_content.append(f"*Ngày cập nhật của Google Drive: {latest_date}*\n")
             inserted = True
         new_content.append(line)
     return new_content
