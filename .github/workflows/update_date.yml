@@ -36,5 +36,5 @@ jobs:
           git config user.name "GitHub Action"
           git config user.email "action@github.com"
           git add docs/
-          git commit -m "🤖 Tự động cập nhật ngày từ Google Drive" || echo "No changes to commit"
+          git commit -m "Update last modified from Google Drive" || echo "No changes to commit"
           git push
