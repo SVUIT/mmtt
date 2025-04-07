@@ -37,4 +37,4 @@ jobs:
           git config user.email "action@github.com"
           git add docs/
           git commit -m "Update last modified from Google Drive" || echo "No changes to commit"
-          git push
+          git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/SVUIT/mmtt.git
