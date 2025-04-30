@@ -2,10 +2,13 @@ name: Update Markdown Dates
 
 on:
   schedule:
-    - cron: '0 2 * * 1' 
+    - cron: '0 2 * * 1'  
   workflow_dispatch:     
+
 permissions:
   contents: write
+  pull-requests: write
+
 jobs:
   update-dates:
     runs-on: ubuntu-latest
@@ -28,12 +31,13 @@ jobs:
         env:
           SERVICE_ACCOUNT_JSON: ${{ secrets.GDRIVE_JSON }}
         run: |
-          echo "$SERVICE_ACCOUNT_JSON" > drive-api-project-452000-10d4b5dc6bcc.json
+          echo "$SERVICE_ACCOUNT_JSON" > service-account.json
 
       - name: Run update script
         run: python update_script.py
-        
+
       - name: Create Pull Request
+        id: cpr
         uses: peter-evans/create-pull-request@v5
         with:
           commit-message: "Update last modified dates in Markdown from Google Drive"
@@ -43,3 +47,27 @@ jobs:
           branch: auto/md-update
           base: main
           delete-branch: true
+
+  assign-reviewer:
+    needs: update-dates
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: "open",
+              head: context.repo.owner + ":auto/md-update"
+            });
+
+            if (pr.data.length > 0) {
+              await github.rest.pulls.requestReviewers({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: pr.data[0].number,
+                reviewers: ["thu4n"]  
+              });
+            }
