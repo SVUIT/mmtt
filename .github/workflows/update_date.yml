@@ -2,8 +2,8 @@ name: Update Markdown Dates
 
 on:
   schedule:
-    - cron: '0 2 * * 1'  
-  workflow_dispatch:     
+    - cron: '0 2 * * 1'  # Chạy mỗi thứ Hai lúc 02:00 UTC
+  workflow_dispatch:       # Cho phép chạy thủ công
 
 permissions:
   contents: write
@@ -36,38 +36,31 @@ jobs:
       - name: Run update script
         run: python update_script.py
 
+      - name: Check if there are any changes
+        id: git-check
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          if git diff --quiet; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Generate timestamp for branch name
+        id: time
+        run: echo "ts=auto/md-update-$(date +'%Y%m%d-%H%M%S')" >> $GITHUB_OUTPUT
+
       - name: Create Pull Request
-        id: cpr
+        if: steps.git-check.outputs.changed == 'true'
         uses: peter-evans/create-pull-request@v5
         with:
           commit-message: "Update last modified dates in Markdown from Google Drive"
           title: "PR: Update Markdown with latest Google Drive dates"
           body: |
             A pull request automatically created by GitHub Actions to update the last modified date from Google Drive into the Markdown file.
-          branch: auto/md-update
+          branch: ${{ steps.time.outputs.ts }}
           base: main
           delete-branch: true
-
-  assign-reviewer:
-    needs: update-dates
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/github-script@v7
-        with:
-          script: |
-            const pr = await github.rest.pulls.list({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              state: "open",
-              head: context.repo.owner + ":auto/md-update"
-            });
-
-            if (pr.data.length > 0) {
-              await github.rest.pulls.requestReviewers({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                pull_number: pr.data[0].number,
-                reviewers: ["thu4n"]  
-              });
-            }
+          reviewers: thu4n
+          assignees: thu4n
