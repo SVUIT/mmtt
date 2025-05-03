@@ -2,8 +2,8 @@ name: Update Markdown Dates
 
 on:
   schedule:
-    - cron: '0 2 * * 1'  # Chạy mỗi thứ Hai lúc 02:00 UTC
-  workflow_dispatch:       # Cho phép chạy thủ công
+    - cron: '0 2 * * 1'  
+  workflow_dispatch:       
 
 permissions:
   contents: write
