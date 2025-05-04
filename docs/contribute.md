@@ -12,6 +12,7 @@ search_exclude: true
 Nếu bạn muốn chia sẻ tài liệu học tập với chúng mình, hãy truy cập vào Form bên dưới:
 
 [Form](https://link.svuit.org/submit){:target="_blank" : .btn .btn-primary .btn-form .fs-5 .mb-4 .mb-md-0 .mr-2 }
+<!-- [Danh sách tài liệu đóng góp](https://docs.google.com/spreadsheets/d/1arPrQDmujnKIvUaC648NmCt7dFkma7LitG9WyGt7t9M/edit?usp=sharing){:target="_blank" : .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 } -->
 
 Nếu các bạn có thắc mắc gì khác liên hệ chúng mình thông qua địa chỉ email **contact@svuit.org**
 
@@ -38,6 +39,14 @@ Nếu có nội dung nào đó trên web chưa được đề cập về môn h�
 - Phạm Gia Tuệ, Waseda University 
 - Đoàn Quốc An, MMTT2023.1
 - [dinhkarate, GitHub](https://github.com/SVUIT/mmtt/pull/142)
+- 23521047
+- Hunn
+- Nguyễn Thành An, MTIC2024
+- Nguyễn Trần Trung Nguyên, ATCL2021
+- Nguyễn Thị Hồng Nhung
+- Lê Công Anh Tuấn
+- Hà Phụng Hảo
+- Thái Công Anh Quốc
 - Lê Anh Kiệt
 - Vinh
 - Nguyễn Đoàn Khắc Huy

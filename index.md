@@ -16,9 +16,7 @@ Kho tài liệu học tập UIT, phiên bản Mạng máy tính và Truyền th�
 [Xem trên GitHub](https://github.com/SVUIT/mmtt){: .btn .fs-5 .mb-4 .mb-md-0 .mr-2 }
 
 {: .important}
-> Cùng ôn tập/ rèn luyện/ ôn thi cùng (kho tài liệu) SVUIT [Ôn thi giữa kỳ](./docs/giuaky)
-
-
+> Khảo sát trải nghiệm người dùng website SVUIT-MMTT, đóng góp của bạn sẽ giúp chúng mình ngày càng cải thiện website này. [Điền form tại đây📝](https://forms.gle/uNyGpC3KCBcWXtCL6)
 
 ## Mục tiêu
 
