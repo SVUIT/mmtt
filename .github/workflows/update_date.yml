@@ -60,5 +60,5 @@ jobs:
           branch: ${{ steps.time.outputs.ts }}
           base: main
           delete-branch: true
-          reviewers: thu4n
-          assignees: thu4n
+          reviewers: VietHoang-206
+          assignees: VietHoang-206
