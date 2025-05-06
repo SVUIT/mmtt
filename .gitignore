@@ -19,3 +19,6 @@ vendor/
 # VScode setting
 
 .vscode
+
+# Ignore api
+drive-api-project-452000-10d4b5dc6bcc.json

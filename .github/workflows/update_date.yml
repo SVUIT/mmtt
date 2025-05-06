@@ -2,10 +2,13 @@ name: Update Markdown Dates
 
 on:
   schedule:
-    - cron: '0 2 * * 1' 
-  workflow_dispatch:     
+    - cron: '0 2 * * 1'  
+  workflow_dispatch:       
+
 permissions:
   contents: write
+  pull-requests: write
+
 jobs:
   update-dates:
     runs-on: ubuntu-latest
@@ -33,10 +36,29 @@ jobs:
       - name: Run update script
         run: python update_script.py
 
-      - name: Commit changes
+      - name: Check if there are any changes
+        id: git-check
         run: |
-          git config user.name "GitHub Action"
-          git config user.email "action@github.com"
-          git add docs/
-          git commit -m "Update last modified from Google Drive" || echo "No changes to commit"
-          git push
+          if git diff --quiet; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Generate timestamp for branch name
+        id: time
+        run: echo "ts=auto/md-update-$(date +'%Y%m%d')" >> $GITHUB_OUTPUT
+
+      - name: Create Pull Request
+        if: steps.git-check.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v5
+        with:
+          commit-message: "Update last modified dates in Markdown from Google Drive"
+          title: "PR: Update Markdown with latest Google Drive dates"
+          body: |
+            A pull request automatically created by GitHub Actions to update the last modified date from Google Drive into the Markdown file.
+          branch: ${{ steps.time.outputs.ts }}
+          base: main
+          delete-branch: true
+          reviewers: thu4n
+          assignees: thu4n
