@@ -39,6 +39,9 @@ jobs:
       - name: Run update script
         run: python update_script.py
 
+      - name: add git add
+        run: git add .
+
       - name: Check if there are any changes
         id: git-check
         run: |
