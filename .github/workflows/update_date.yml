@@ -28,11 +28,14 @@ jobs:
           pip install google-api-python-client google-auth google-auth-httplib2 google-auth-oauthlib python-dateutil
 
       - name: Decode service account key
-        env:
-          SERVICE_ACCOUNT_JSON: ${{ secrets.GDRIVE_JSON }}
         run: |
-          echo "$SERVICE_ACCOUNT_JSON" > drive-api-project-452000-10d4b5dc6bcc.json
+          printf '%s' "${{ secrets.GDRIVE_JSON }}" > drive-api-project-452000-10d4b5dc6bcc.json
 
+      - name: Debug check JSON
+        run: |
+          ls -la
+          cat drive-api-project-452000-10d4b5dc6bcc.json
+          
       - name: Run update script
         run: python update_script.py
 
