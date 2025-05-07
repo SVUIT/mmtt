@@ -66,6 +66,14 @@ def process_folder(service, folder, md_file_path):
     # Cập nhật ngày
     md_content = update_date_in_md(md_content, latest_date)
 
+    # So sánh trước khi ghi
+    if old_content != new_content:
+        with open(md_file_path, "w", encoding="utf-8", newline="\n") as f:
+            f.writelines(new_content)
+        print(f"✓ Cập nhật {md_file_path} với ngày cập nhật: {latest_date}")
+    else:
+        print(f"✓ Không thay đổi gì ở {md_file_path}, bỏ qua ghi file.")
+
     # Ghi lại file
     with open(md_file_path, "w", encoding="utf-8") as f:
         f.writelines(md_content)
