@@ -60,19 +60,20 @@ def process_folder(service, folder, md_file_path):
         latest_date = max(parser.isoparse(f["modifiedTime"]) for f in files).strftime("%d-%m-%Y")
 
     # Đọc nội dung Markdown
-    with open(md_file_path, "r", encoding="utf-8") as f:
-        md_content = f.readlines()
+    with open(md_file_path, "r", encoding="utf-8", newline="\n") as f:
+        old_content = f.readlines()
 
     # Cập nhật ngày
-    md_content = update_date_in_md(md_content, latest_date)
+    new_content = update_date_in_md(old_content, latest_date)
 
     # So sánh trước khi ghi
-    if old_content != md_content:
+    if old_content != new_content:
         with open(md_file_path, "w", encoding="utf-8", newline="\n") as f:
             f.writelines(new_content)
         print(f"✓ Cập nhật {md_file_path} với ngày cập nhật: {latest_date}")
     else:
         print(f"✓ Không thay đổi gì ở {md_file_path}, bỏ qua ghi file.")
+
 
     # Ghi lại file
     with open(md_file_path, "w", encoding="utf-8") as f:
