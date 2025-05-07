@@ -58,7 +58,7 @@ jobs:
           body: |
             A pull request automatically created by GitHub Actions to update the last modified date from Google Drive into the Markdown file.
           branch: ${{ steps.time.outputs.ts }}
-          base: main
+          base: VietHoang-206-patch-3
           delete-branch: true
           reviewers: VietHoang-206
           assignees: VietHoang-206
