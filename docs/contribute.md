@@ -47,5 +47,15 @@ Nếu có nội dung nào đó trên web chưa được đề cập về môn h�
 - Lê Công Anh Tuấn
 - Hà Phụng Hảo
 - Thái Công Anh Quốc
+- Lê Anh Kiệt
+- Vinh
+- Nguyễn Đoàn Khắc Huy
+- Phạm Việt Hoàng, MTIC2024
+- Sơn Nguyễn Kỳ Duyên, HTTT2024.1
+- Trương Đỗ Như Quỳnh, CNVN2024.2
+- Nguyễn Thế Lập, KHBC2024
+- Phước
+- Nguyễn Dương Hoàng Phúc
+- Đinh Huỳnh Gia Bảo
 
 Và những bạn đóng góp ẩn danh.
