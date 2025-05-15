@@ -41,7 +41,7 @@ jobs:
         run: |
           git status
           git add .
-          if git diff --quiet; then
+          if git diff --cached --quiet; then
             echo "changed=false" >> $GITHUB_OUTPUT
           else
             echo "changed=true" >> $GITHUB_OUTPUT
