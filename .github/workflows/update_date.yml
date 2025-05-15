@@ -64,3 +64,4 @@ jobs:
           delete-branch: true
           reviewers: VietHoang-206
           assignees: VietHoang-206
+          draft: true
