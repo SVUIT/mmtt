@@ -31,7 +31,7 @@ jobs:
         env:
           SERVICE_ACCOUNT_JSON: ${{ secrets.GDRIVE_JSON }}
         run: |
-          echo "$SERVICE_ACCOUNT_JSON" > drive-api-project-452000-10d4b5dc6bcc.json
+          echo "$SERVICE_ACCOUNT_JSON" > drive_api_key.json
 
       - name: Run update script
         run: python update_script.py
