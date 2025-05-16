@@ -6,7 +6,7 @@ from google.oauth2 import service_account
 
 # Cấu hình
 SCOPES = ["https://www.googleapis.com/auth/drive.metadata.readonly"]
-SERVICE_ACCOUNT_FILE = "drive-api-project-452000-10d4b5dc6bcc.json"
+SERVICE_ACCOUNT_FILE = "drive_api_key.json"
 FOLDER_ID = "1TjIygC_EermjfPRFDxsyw3qa3sOqMA3L"
 BASE_MD_FOLDER = "docs"
 
