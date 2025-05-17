@@ -116,3 +116,4 @@ Những thông tin hữu ích khác
 3. Chạy lệnh `bundle install`.
 4. Chạy lệnh `bundle exec jekyll serve` để build website và xem nó ở `localhost:4000`.
 5. Website build xong sẽ được lưu trong thư mục `_site`.
+
