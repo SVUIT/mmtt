@@ -56,6 +56,13 @@ Nếu có nội dung nào đó trên web chưa được đề cập về môn h�
 - Nguyễn Thế Lập, KHBC2024
 - Phước
 - Nguyễn Dương Hoàng Phúc
+- HMT
 - Đinh Huỳnh Gia Bảo
+- Trịnh Vinh Đại
+- Nguyễn Văn Sỹ
+- Huỳnh Ngọc Anh Kiệt
+- Phan Hồng Đạt
+- Nguyễn Huy
+- Ngô Mạnh Kiên
 
 Và những bạn đóng góp ẩn danh.
