@@ -57,5 +57,12 @@ Nếu có nội dung nào đó trên web chưa được đề cập về môn h�
 - Phước
 - Nguyễn Dương Hoàng Phúc
 - Đinh Huỳnh Gia Bảo
+- HMT
+- Trịnh Vinh Đại
+- Nguyễn Văn Sỹ
+- Huỳnh Ngọc Anh Kiệt
+- Phan Hồng Đạt
+- Nguyễn Huy
+- Ngô Mạnh Kiên
 
 Và những bạn đóng góp ẩn danh.
