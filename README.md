@@ -11,10 +11,14 @@ Repository này dành cho:
 - Ban quản trị dự án (Administrator)
 - Thành viên đóng góp (Contributor)
 
+
 Nếu bạn muốn chia sẻ tài liệu học tập với chúng mình, bạn có thể:
 
 - Liên hệ chúng mình thông qua địa chỉ email **contact@svuit.org** và đính kèm tệp tài liệu của bạn.
 - Tạo một **Issue** trên [repo GitHub](https://github.com/SVUIT/mmtt) và đính kèm đường dẫn của bạn.
+- Truy cập vào [**Form đóng góp**](https://link.svuit.org/submit) và đính kèm tệp tài liệu của bạn.
+
+Danh sách những người đã đóng góp tài liệu có thể xem [ở đây](https://svuit.org/mmtt/docs/contribute).
 
 Rất hoan nghênh sự đóng góp xây dựng của các bạn. :relaxed:
 
@@ -55,6 +59,8 @@ parent: Folder chứa môn học
 ---
 
 # Mã môn học - Tên môn học
+
+*Ngày cập nhật của folder Google Drive*
 
 ## Tài liệu môn học
 
