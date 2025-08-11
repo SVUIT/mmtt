@@ -5,6 +5,10 @@ on:
     - cron: '0 19 * * 2'
   workflow_dispatch:
 
+permissions:
+  contents: read
+  actions: write
+
 jobs:
   rclone_sync:
     runs-on: ubuntu-latest
