@@ -7,7 +7,7 @@ on:
 
 permissions:
   contents: read 
-  pull_requests: write
+  pull-requests: write
 
 jobs:
   filter:
