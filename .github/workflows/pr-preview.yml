@@ -5,6 +5,10 @@ on:
     branches: ["main"]
     types: [opened, synchronize, reopened, closed]
 
+permissions:
+  contents: read 
+  pull_request: write
+
 jobs:
   filter:
     runs-on: ubuntu-latest
