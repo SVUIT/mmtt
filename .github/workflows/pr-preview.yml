@@ -77,7 +77,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const pr = context.payload.pull_request.number
-            const url = `https://${context.repo.owner}.github.io /mmtt-preview/pr-${pr}/`
+            const url = `https://${context.repo.owner}.github.io/mmtt-preview/pr-${pr}/`
             await github.rest.issues.createComment({
               issue_number: pr,
               owner: context.repo.owner,
