@@ -4,6 +4,8 @@ theme: just-the-docs
 
 url: https://svuit.org/mmtt
 
+baseurl: ""
+
 aux_links:
   Đóng góp: https://svuit.org/mmtt/docs/contribute
 
