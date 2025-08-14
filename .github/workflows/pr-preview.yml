@@ -49,11 +49,8 @@ jobs:
       - name: Inject config for PR preview
         run: |
           PR_NUM=${{ github.event.pull_request.number }}
-          cat _config.yml > _config_preview.yml
-          echo "" >> _config_preview.yml
-          echo "url: https://svuit.org/mmtt-preview" >> _config_preview.yml
+          echo "url: https://svuit.org/mmtt-preview" > _config_preview.yml
           echo "baseurl: /pr-$PR_NUM" >> _config_preview.yml
-
 
       - name: Build Jekyll site
         run: |
