@@ -23,6 +23,7 @@ jobs:
         with: 
           filters: |
             build:
+              - '**/*'
               - '!README.md'
               - '!CODE_OF_CONDUCT.md'
               - '!LICENSE'
@@ -85,22 +86,19 @@ jobs:
               issue_number: pr
             })
 
-            for (const comment of comments) {
-              if (comment.user.login === 'github-actions[bot]' && comment.body.includes('Preview available here:')) {
-                await github.rest.issues.deleteComment({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  comment_id: comment.id
-                })
-              }
-            }
+            const existing = comments.find(comment =>
+              comment.user.login == 'github-actions[bot]' &&
+              comment.body.includes('Preview available here:')
+            )
 
-            await github.rest.issues.createComment({
-              issue_number: pr,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: `Preview available here: ${url}`
-            })
+            if (!existing) {
+              await github.rest.issues.createComment({
+                issue_number: pr,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: `Preview available here: ${url}`
+              })
+            }
 
   delete_preview:
     if: github.event.action == 'closed'
