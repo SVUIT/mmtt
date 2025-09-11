@@ -54,6 +54,8 @@ jobs:
       - name: Create Pull Request
         if: steps.git-check.outputs.changed == 'true'
         uses: peter-evans/create-pull-request@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
         with:
           commit-message: "Update last modified dates in Markdown from Google Drive"
           title: "PR: Update Markdown with latest Google Drive dates"
