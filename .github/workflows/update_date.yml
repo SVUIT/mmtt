@@ -47,10 +47,6 @@ jobs:
             echo "changed=true" >> $GITHUB_OUTPUT
           fi
 
-      - name: Generate timestamp for branch name
-        id: time
-        run: echo "ts=auto/md-update-$(date +'%Y%m%d')" >> $GITHUB_OUTPUT
-
       - name: Create Pull Request
         if: steps.git-check.outputs.changed == 'true'
         uses: peter-evans/create-pull-request@v5
@@ -61,7 +57,7 @@ jobs:
           title: "PR: Update Markdown with latest Google Drive dates"
           body: |
             A pull request automatically created by GitHub Actions to update the last modified date from Google Drive into the Markdown file.
-          branch: ${{ steps.time.outputs.ts }}
+          branch: auto/update-date
           base: main
           delete-branch: true
           reviewers: thu4n
