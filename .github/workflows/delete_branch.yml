@@ -19,6 +19,10 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh api \
-            --method DELETE \
-            repos/${{ github.repository }}/git/refs/heads/auto/update-date 
+          if gh api repos/${{ github.repository }}/git/ref/heads/auto/update-date --silent >/dev/null 2>&1; then
+            gh api \
+              --method DELETE \
+              repos/${{ github.repository }}/git/refs/heads/auto/update-date
+          else
+            echo "Branch auto/update-date does not exist. Skipping delete."
+          fi
