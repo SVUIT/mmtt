@@ -2,7 +2,7 @@ name: Delete auto/md - update branches
 
 on:
   schedule:
-    - cron: '0 0 * * 1'   
+    - cron: '0 2 * * 6'   
   workflow_dispatch:
 
 permissions:
