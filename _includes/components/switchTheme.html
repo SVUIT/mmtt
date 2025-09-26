@@ -1,24 +1,71 @@
 <div class="dm-container">
-    <input type="checkbox" class="checkbox js-toggle-dark-mode" id="checkbox">
-    <label for="checkbox" class="checkbox-label">
-        <i class="fa-solid fa-sun"></i>
-        <i class="fa-solid fa-moon"></i>
-      <span class="ball"></span>
+    <input type="checkbox" 
+           class="checkbox js-toggle-dark-mode" 
+           id="theme-toggle"
+           role="switch"
+           aria-checked="false"
+           aria-labelledby="theme-label"
+           tabindex="0">
+    <label for="theme-toggle" class="checkbox-label" id="theme-label">
+        <span class="sr-only">Chế độ tối:</span>
+        <span class="theme-status" aria-hidden="true">Tắt</span>
+        <i class="fa-solid fa-sun" aria-hidden="true"></i>
+        <i class="fa-solid fa-moon" aria-hidden="true"></i>
+        <span class="ball"></span>
     </label>
-  </div>
+</div>
   <script>
     const toggleDarkMode = document.querySelector('.js-toggle-dark-mode');
     const cbLabel = document.querySelector('.checkbox-label');
-    localStorage.getItem('theme') === 'dark'
-      ? (toggleDarkMode.checked = true, cbLabel.classList.add('dark'))
-      : (toggleDarkMode.checked = false, cbLabel.classList.remove('dark'));
-    jtd.addEvent(toggleDarkMode, 'click', function(){
-      if (jtd.getTheme() === 'dark') {
-        jtd.setTheme('light');
-        window.localStorage.setItem('theme', 'light');
+    const themeStatus = document.querySelector('.theme-status');
+    
+    // Initialize theme
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    const isDarkMode = currentTheme === 'dark';
+    
+    // Set initial state
+    toggleDarkMode.checked = isDarkMode;
+    toggleDarkMode.setAttribute('aria-checked', isDarkMode);
+    themeStatus.textContent = isDarkMode ? 'Bật' : 'Tắt';
+    
+    if (isDarkMode) {
+      cbLabel.classList.add('dark');
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      cbLabel.classList.remove('dark');
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+    
+    // Toggle theme function
+    function toggleTheme() {
+      const isDark = jtd.getTheme() === 'dark';
+      const newTheme = isDark ? 'light' : 'dark';
+      
+      // Update UI
+      toggleDarkMode.setAttribute('aria-checked', !isDark);
+      themeStatus.textContent = !isDark ? 'Bật' : 'Tắt';
+      
+      // Apply theme
+      jtd.setTheme(newTheme);
+      window.localStorage.setItem('theme', newTheme);
+      document.documentElement.setAttribute('data-theme', newTheme);
+      
+      // Toggle dark class for styling
+      if (newTheme === 'dark') {
+        cbLabel.classList.add('dark');
       } else {
-        jtd.setTheme('dark');
-        window.localStorage.setItem('theme', 'dark');
+        cbLabel.classList.remove('dark');
+      }
+    }
+    
+    // Click event
+    jtd.addEvent(toggleDarkMode, 'click', toggleTheme);
+    
+    // Keyboard support
+    jtd.addEvent(toggleDarkMode, 'keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleTheme();
       }
     });
-    </script>
+  </script>

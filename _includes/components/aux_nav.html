@@ -1,17 +1,23 @@
-<nav aria-label="Auxiliary" class="aux-nav">
-    <ul class="aux-nav-list">
+<nav aria-label="Thanh công cụ" class="aux-nav">
+    <ul class="aux-nav-list" role="menubar" aria-label="Công cụ">
       {% for link in site.aux_links %}
-        <li class="aux-nav-list-item">
-          <a href="{{ link.last }}" class="site-button"
-            {% if site.aux_links_new_tab %}
-            target="_blank" rel="noopener noreferrer"
-            {% endif %}
+        <li class="aux-nav-list-item" role="none">
+          <a href="{{ link.last }}" 
+             class="site-button"
+             role="menuitem"
+             {% if site.aux_links_new_tab %}
+             target="_blank" 
+             rel="noopener noreferrer"
+             aria-label="{{ link.first }} (Mở trong cửa sổ mới)"
+             {% endif %}
           >
-            {{ link.first }}
+            <span class="button-text">{{ link.first }}</span>
           </a>
         </li>
       {% endfor %}
-
-      {% include components/switchTheme.html %}
+      
+      <li class="aux-nav-list-item" role="none">
+        {% include components/switchTheme.html %}
+      </li>
     </ul>
   </nav>

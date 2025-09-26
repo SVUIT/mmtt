@@ -1,8 +1,81 @@
-$pink-000: #f77ef1;
-$pink-100: #f967f1;
-$pink-200: #e94ee1;
-$pink-300: #dd2cd4;
-$darkblue-000: #88a8ff;
-$darkblue-100: #608aff;
-$darkblue-200: #4577ff;
-$darkblue-300: #386dff;
+// Color variables with improved contrast for accessibility
+$pink-000: #d60fb7;  // Enhanced contrast
+$pink-100: #c40ea5;
+$pink-200: #b10c92;
+$pink-300: #9e0b80;
+
+$darkblue-000: #4a7cff;  // Enhanced contrast
+$darkblue-100: #2d6bff;
+$darkblue-200: #0f5aff;
+$darkblue-300: #0049e1;
+
+// New accessible color palette
+$text-color: #212529;      // Dark gray for main text (WCAG AA compliant)
+$text-secondary: #495057;  // Slightly lighter gray for secondary text
+$link-color: #0056b3;      // Blue for links (WCAG AA compliant)
+$link-hover: #003d82;      // Darker blue for link hover state
+$border-color: #dee2e6;    // Light gray for borders
+$background-light: #f8f9fa; // Light background color
+$white: #ffffff;           // Pure white
+$black: #000000;           // Pure black
+
+// Alert colors with better contrast
+$success: #198754;         // Green
+$info: #0dcaf0;            // Cyan
+$warning: #ffc107;         // Yellow
+$danger: #dc3545;          // Red
+
+// Text contrast utilities
+.text-high-contrast {
+  color: $text-color;
+  
+  a {
+    color: $link-color;
+    text-decoration: underline;
+    
+    &:hover, &:focus {
+      color: $link-hover;
+      text-decoration: none;
+    }
+  }
+}
+
+// Background utilities
+.bg-high-contrast {
+  background-color: $white;
+  color: $text-color;
+  
+  a {
+    color: $link-color;
+    
+    &:hover, &:focus {
+      color: $link-hover;
+    }
+  }
+}
+
+// Focus styles for better keyboard navigation
+:focus-visible {
+  outline: 3px solid #4d90fe; // Blue focus ring
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+// Print styles for better readability
+@media print {
+  body {
+    background: $white !important;
+    color: $black !important;
+    font-size: 12pt;
+    line-height: 1.5;
+  }
+  
+  a {
+    color: $black !important;
+    text-decoration: underline !important;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+}
