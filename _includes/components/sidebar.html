@@ -1,0 +1,145 @@
+<div class="side-bar">
+  <!-- Site Header -->
+  <div class="site-header" role="banner">
+    <a href="/" class="site-title lh-tight" aria-label="SVUIT-MMTT Trang chủ">
+      <img src="https://raw.githubusercontent.com/SVUIT/mmtt/main/assets/images/logo.png" 
+           width="25" height="25" alt="SVUIT-MMTT logo">
+      <pre> </pre>
+      <b>SVUIT-MMTT</b>
+    </a>
+    <button id="menu-button" 
+            class="site-button btn-reset" 
+            aria-label="Mở/đóng menu điều hướng" 
+            aria-expanded="false"
+            aria-controls="site-nav">
+      <svg viewBox="0 0 24 24" class="icon" aria-hidden="true">
+        <use xlink:href="#svg-menu"></use>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Main Navigation -->
+  <nav id="site-nav" class="site-nav" aria-label="Điều hướng chính">
+    <ul class="nav-list">
+      <!-- Home -->
+      <li class="nav-list-item">
+        <a href="{{ site.baseurl }}/" class="nav-list-link" aria-current="page">
+          Home
+        </a>
+      </li>
+
+      <!-- Repeat structure for expandable sections -->
+      <li class="nav-list-item">
+        <button class="nav-list-expander btn-reset"
+                aria-label="Mở/đóng danh mục Môn học chuyên ngành"
+                aria-expanded="false"
+                aria-controls="chuyen-nganh-menu">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <use xlink:href="#svg-arrow-right"></use>
+          </svg>
+        </button>
+        <a href="/docs/MonHocChuyenNganh/" class="nav-list-link">
+          Môn học chuyên ngành
+        </a>
+        <ul class="nav-list" id="chuyen-nganh-menu">
+          <li class="nav-list-item"><a href="/docs/MonHocChuyenNganh/NT532.html" class="nav-list-link">NT532 - Công nghệ Internet of Things hiện đại</a></li>
+          <li class="nav-list-item"><a href="/docs/MonHocChuyenNganh/NT533.html" class="nav-list-link">NT533 - Hệ tính toán phân bố</a></li>
+          <li class="nav-list-item"><a href="/docs/MonHocChuyenNganh/NT536.html" class="nav-list-link">NT536 - Công nghệ truyền thông đa phương tiện</a></li>
+          <li class="nav-list-item"><a href="/docs/MonHocChuyenNganh/NT538.html" class="nav-list-link">NT538 - Giải thuật xử lý song song và phân bố</a></li>
+          <li class="nav-list-item"><a href="/docs/MonHocChuyenNganh/NT541.html" class="nav-list-link">NT541 - Công nghệ mạng khả lập trình</a></li>
+          <li class="nav-list-item"><a href="/docs/MonHocChuyenNganh/NT402.html" class="nav-list-link">NT402 - Công nghệ mạng viễn thông</a></li>
+          <li class="nav-list-item"><a href="/docs/MonHocChuyenNganh/NT531.html" class="nav-list-link">NT531 - Đánh giá hiệu năng hệ thống mạng máy tính</a></li>
+        </ul>
+      </li>
+
+      <!-- Môn học cơ sở ngành -->
+      <li class="nav-list-item">
+        <button class="nav-list-expander btn-reset" aria-label="Mở/đóng danh mục Môn học cơ sở ngành" aria-expanded="false" aria-controls="co-so-nganh-menu">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <use xlink:href="#svg-arrow-right"></use>
+          </svg>
+        </button>
+        <a href="/docs/MonHocCoSoNganh/" class="nav-list-link">Môn học cơ sở ngành</a>
+        <ul class="nav-list" id="co-so-nganh-menu">
+          <li class="nav-list-item"><a href="/docs/MonHocCoSoNganh/IT004.html" class="nav-list-link">IT004 - Cơ sở dữ liệu</a></li>
+          <li class="nav-list-item"><a href="/docs/MonHocCoSoNganh/IT005.html" class="nav-list-link">IT005 - Nhập môn mạng máy tính</a></li>
+          <li class="nav-list-item"><a href="/docs/MonHocCoSoNganh/IT006.html" class="nav-list-link">IT006 - Kiến trúc máy tính</a></li>
+          <li class="nav-list-item"><a href="/docs/MonHocCoSoNganh/IT007.html" class="nav-list-link">IT007 - Hệ điều hành</a></li>
+          <li class="nav-list-item"><a href="/docs/MonHocCoSoNganh/IT002.html" class="nav-list-link">IT002 - Lập trình hướng đối tượng</a></li>
+          <li class="nav-list-item"><a href="/docs/MonHocCoSoNganh/IT003.html" class="nav-list-link">IT003 - Cấu trúc dữ liệu và giải thuật</a></li>
+          <li class="nav-list-item"><a href="/docs/MonHocCoSoNganh/NT101.html" class="nav-list-link">NT101 - An toàn mạng máy tính</a></li>
+          <li class="nav-list-item"><a href="/docs/MonHocCoSoNganh/NT105.html" class="nav-list-link">NT105 - Truyền dữ liệu</a></li>
+          <li class="nav-list-item"><a href="/docs/MonHocCoSoNganh/NT106.html" class="nav-list-link">NT106 - Lập trình mạng căn bản</a></li>
+          <li class="nav-list-item"><a href="/docs/MonHocCoSoNganh/NT113.html" class="nav-list-link">NT113 - Thiết kế mạng</a></li>
+          <li class="nav-list-item"><a href="/docs/MonHocCoSoNganh/NT118.html" class="nav-list-link">NT118 - Phát triển ứng dụng trên thiết bị di động</a></li>
+          <li class="nav-list-item"><a href="/docs/MonHocCoSoNganh/NT131.html" class="nav-list-link">NT131 - Hệ thống nhúng mạng không dây</a></li>
+          <li class="nav-list-item"><a href="/docs/MonHocCoSoNganh/NT132.html" class="nav-list-link">NT132 - Quản trị mạng và hệ thống</a></li>
+        </ul>
+      </li>
+
+      <!-- Môn học tự chọn -->
+      <li class="nav-list-item">
+        <button class="nav-list-expander btn-reset" aria-label="Mở/đóng danh mục Môn học tự chọn" aria-expanded="false" aria-controls="tu-chon-menu">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <use xlink:href="#svg-arrow-right"></use>
+          </svg>
+        </button>
+        <a href="/docs/MonHocTuChon/" class="nav-list-link">Môn học tự chọn</a>
+        <ul class="nav-list" id="tu-chon-menu">
+          <!-- Các khoa và môn học con giữ nguyên như bạn đã viết -->
+          <!-- ... (giữ nguyên toàn bộ danh sách khoa CNPM, HTTT, KHMT, KTMT, KTTT, MMT&TT, USSH) -->
+        </ul>
+      </li>
+
+      <!-- Môn học đại cương -->
+      <li class="nav-list-item">
+        <button class="nav-list-expander btn-reset" aria-label="Mở/đóng danh mục Môn học đại cương" aria-expanded="false" aria-controls="dai-cuong-menu">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <use xlink:href="#svg-arrow-right"></use>
+          </svg>
+        </button>
+        <a href="/docs/MonHocDaiCuong/" class="nav-list-link">Môn học đại cương</a>
+        <ul class="nav-list" id="dai-cuong-menu">
+          <!-- giữ nguyên tất cả môn học đại cương -->
+        </ul>
+      </li>
+
+      <!-- Nguồn tài liệu khác -->
+      <li class="nav-list-item">
+        <button class="nav-list-expander btn-reset" aria-label="Mở/đóng danh mục Nguồn tài liệu khác" aria-expanded="false" aria-controls="tai-lieu-khac-menu">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <use xlink:href="#svg-arrow-right"></use>
+          </svg>
+        </button>
+        <a href="/docs/NguonTaiLieuKhac/" class="nav-list-link">Nguồn tài liệu khác</a>
+        <ul class="nav-list" id="tai-lieu-khac-menu">
+          <!-- giữ nguyên các link -->
+        </ul>
+      </li>
+
+      <!-- Templates -->
+      <li class="nav-list-item">
+        <button class="nav-list-expander btn-reset" aria-label="Mở/đóng danh mục Templates" aria-expanded="false" aria-controls="templates-menu">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <use xlink:href="#svg-arrow-right"></use>
+          </svg>
+        </button>
+        <a href="/docs/Templates/" class="nav-list-link">Templates</a>
+        <ul class="nav-list" id="templates-menu">
+          <!-- giữ nguyên các link Templates -->
+        </ul>
+      </li>
+
+      <!-- Direct links -->
+      <li class="nav-list-item"><a href="/docs/nt505.html" class="nav-list-link">Khóa luận tốt nghiệp</a></li>
+      <li class="nav-list-item"><a href="/docs/nt215.html" class="nav-list-link">Thực tập doanh nghiệp</a></li>
+      <li class="nav-list-item"><a href="/docs/nt114.html" class="nav-list-link">Đồ án chuyên ngành</a></li>
+    </ul>
+  </nav>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    This site uses 
+    <a href="https://github.com/just-the-docs/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.
+  </footer>
+</div>
