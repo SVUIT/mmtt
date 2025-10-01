@@ -40,15 +40,15 @@ def update_date_in_md(md_content, latest_date):
     new_content = []
     inserted = False
     for line in md_content:
-        if line.strip().startswith("*Ngay cap nhat"):
+        if line.strip().startswith("*Ngày cập nhật"):
             continue
         if not inserted and line.strip() == "## Tai lieu mon hoc":
-            new_content.append(f"*Ngay cap nhat cua folder Google Drive: {latest_date}*\n")
+            new_content.append(f"*Ngày cập nhật của folder Google Drive: {latest_date}*\n")
             inserted = True
         new_content.append(line)
     if not inserted:
         # neu khong tim thay tieu de, chen len dau file
-        new_content = [f"*Ngay cap nhat cua folder Google Drive: {latest_date}*\n"] + new_content
+        new_content = [f"*Ngày cập nhật của folder Google Drive: {latest_date}*\n"] + new_content
     return new_content
 
 def safe(s):
