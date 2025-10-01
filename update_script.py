@@ -64,6 +64,14 @@ def process_folder(service, folder, md_file_path):
     ).execute().get("files", [])
     print(f"So file: {len(files)}")
 
+    # 👇 Thêm đoạn log chi tiết
+    if not files:
+        print("  Khong co file nao trong thu muc.")
+    else:
+        print("  Danh sach file lay duoc:")
+        for f in files:
+            print(f"   - id={f['id']}, name={safe(f['name'])}, modified={f['modifiedTime']}")
+
     latest_date = "Khong co du lieu"
     if files:
         latest_date = max(parser.isoparse(f["modifiedTime"]) for f in files).strftime("%d-%m-%Y")
@@ -79,6 +87,7 @@ def process_folder(service, folder, md_file_path):
         f.writelines(md_content)
 
     print(f"Cap nhat {md_file_path} voi ngay: {latest_date}")
+
 
 def main():
     print("Bat dau cap nhat...")
