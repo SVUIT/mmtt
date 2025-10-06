@@ -379,6 +379,14 @@ textarea {
   display: flex;
   gap: 1rem;
   margin-top: 1rem;
+  padding: 0;
+  list-style: none;
+
+  .social-item {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+  }
 
   .social-link {
     display: flex;
@@ -395,6 +403,7 @@ textarea {
       background-color: #dee2e6;
       color: #0056b3;
       text-decoration: none;
+      transform: translateY(-2px);
     }
   }
 }
