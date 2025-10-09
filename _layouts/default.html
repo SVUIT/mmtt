@@ -32,7 +32,7 @@ layout: table_wrappers
       </nav>
       
       <div id="main-content" class="main-content" role="main">
-        <main tabindex="-1" id="main-content">
+        <main tabindex="-1">
           {% if site.heading_anchors != false %}
             {% include vendor/anchor_headings.html 
               html=content 
@@ -52,7 +52,7 @@ layout: table_wrappers
         </main>
         
         <footer class="main-footer" role="contentinfo">
-          {% include components/footer.html %}
+          {% include footer_custom.html %}
         </footer>
       </div>
     </div>

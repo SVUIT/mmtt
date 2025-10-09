@@ -500,6 +500,32 @@ textarea {
   font-size: 0.85rem;
 }
 
+/* Fix search footer and page footer overlap/clogging */
+.main-footer {
+  position: relative;
+  z-index: 1;
+}
+
+/* ensure the search footer sits below content without overlaying */
+[role="search"] {
+  position: relative;
+  z-index: 0;
+  display: block;
+  clear: both;
+}
+
+/* prevent duplicate margin collapse between search bar section and footer */
+[role="search"] + .mermaid-container,
+[role="search"] + script,
+.main-footer {
+  margin-top: 1rem;
+}
+
+/* guard against fixed/absolute elements inside search footer overlapping */
+[role="search"] * {
+  max-width: 100%;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .footer-content {
