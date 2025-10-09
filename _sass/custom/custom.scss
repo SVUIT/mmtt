@@ -504,6 +504,7 @@ textarea {
 .main-footer {
   position: relative;
   z-index: 1;
+  width: 100%;
 }
 
 /* ensure the search footer sits below content without overlaying */
@@ -524,6 +525,21 @@ textarea {
 /* guard against fixed/absolute elements inside search footer overlapping */
 [role="search"] * {
   max-width: 100%;
+}
+
+/* Sticky footer: make page fill viewport height and footer stay at bottom */
+.main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content-wrap {
+  flex: 1 0 auto;
+}
+
+.main-footer {
+  flex-shrink: 0;
 }
 
 /* Responsive adjustments */
