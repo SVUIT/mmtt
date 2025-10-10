@@ -9,37 +9,69 @@
     </label>
   </div>
   <script>
-    const toggleDarkMode = document.querySelector('.js-toggle-dark-mode');
-    const container = document.querySelector('.dm-container');
-    const setAriaChecked = (el, isChecked) => {
-      el.setAttribute('aria-checked', String(isChecked));
-    };
-    const applyContainerClass = (isDark) => {
-      if (!container) return;
-      container.classList.toggle('dark', isDark);
-    };
+    (function(){
+      const toggleDarkMode = document.querySelector('.js-toggle-dark-mode');
+      const container = document.querySelector('.dm-container');
+      if (!toggleDarkMode) return;
 
-    // Initialize from saved theme or current JTD theme / system preference
-    const saved = localStorage.getItem('theme');
-    const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const currentTheme = saved || (typeof jtd !== 'undefined' && jtd.getTheme && jtd.getTheme()) || (systemPrefersDark ? 'dark' : 'light');
+      const setAriaChecked = (el, isChecked) => {
+        el.setAttribute('aria-checked', String(isChecked));
+      };
+      const applyContainerClass = (isDark) => {
+        if (!container) return;
+        container.classList.toggle('dark', isDark);
+      };
 
-    const isDarkInit = currentTheme === 'dark';
-    toggleDarkMode.checked = isDarkInit;
-    setAriaChecked(toggleDarkMode, isDarkInit);
-    applyContainerClass(isDarkInit);
+      const initWhenJtdReady = () => {
+        if (!(window.jtd && jtd.getTheme && jtd.setTheme && jtd.addEvent)) {
+          requestAnimationFrame(initWhenJtdReady);
+          return;
+        }
 
-    jtd.addEvent(toggleDarkMode, 'click', function(){
-      const isDarkNow = !(jtd.getTheme() === 'dark'); // will switch to opposite
-      if (isDarkNow) {
-        jtd.setTheme('dark');
-        window.localStorage.setItem('theme', 'dark');
-        setAriaChecked(toggleDarkMode, true);
+        // Initialize from saved theme or JTD theme or system preference
+        const saved = localStorage.getItem('theme');
+        const systemMq = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+        const systemPrefersDark = systemMq && systemMq.matches;
+        const currentTheme = saved || jtd.getTheme() || (systemPrefersDark ? 'dark' : 'light');
+
+        const isDarkInit = currentTheme === 'dark';
+        toggleDarkMode.checked = isDarkInit;
+        setAriaChecked(toggleDarkMode, isDarkInit);
+        applyContainerClass(isDarkInit);
+
+        // Sync on user toggle (use change for keyboard compatibility)
+        jtd.addEvent(toggleDarkMode, 'change', function(){
+          const toDark = toggleDarkMode.checked;
+          if (toDark) {
+            jtd.setTheme('dark');
+            localStorage.setItem('theme', 'dark');
+            setAriaChecked(toggleDarkMode, true);
+          } else {
+            jtd.setTheme('light');
+            localStorage.setItem('theme', 'light');
+            setAriaChecked(toggleDarkMode, false);
+          }
+          applyContainerClass(toDark);
+        });
+
+        // React to system theme changes when user chưa chọn rõ ràng
+        if (systemMq && systemMq.addEventListener) {
+          systemMq.addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+              const isDark = e.matches;
+              jtd.setTheme(isDark ? 'dark' : 'light');
+              toggleDarkMode.checked = isDark;
+              setAriaChecked(toggleDarkMode, isDark);
+              applyContainerClass(isDark);
+            }
+          });
+        }
+      };
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initWhenJtdReady);
       } else {
-        jtd.setTheme('light');
-        window.localStorage.setItem('theme', 'light');
-        setAriaChecked(toggleDarkMode, false);
+        initWhenJtdReady();
       }
-      applyContainerClass(isDarkNow);
-    });
+    })();
     </script>
