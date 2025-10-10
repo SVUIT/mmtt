@@ -2,23 +2,14 @@
 <!-- <script src="https://kit.fontawesome.com/cdf299865b.js" crossorigin="anonymous"></script> -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
 <script>
-  (function(){
-    const init = () => {
-      if (!(window.jtd && jtd.getTheme && jtd.setTheme)) {
-        requestAnimationFrame(init);
-        return;
-      }
-      const saved = localStorage.getItem('theme');
-      if (!saved) return; // không ép nếu người dùng chưa chọn rõ ràng
-      const target = saved === 'dark' ? 'dark' : 'light';
-      if (jtd.getTheme() !== target) {
-        jtd.setTheme(target);
-      }
-    };
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', init);
-    } else {
-      init();
+    if (localStorage.getItem('theme') === 'dark') {
+        if (jtd.getTheme() !== 'dark') {
+            jtd.setTheme('dark');
+        }
     }
-  })();
-  </script>
+    else {
+        if (jtd.getTheme() !== 'light') {
+            jtd.setTheme('light');
+        }
+    }
+</script>

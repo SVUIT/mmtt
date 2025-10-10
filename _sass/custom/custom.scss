@@ -3,6 +3,43 @@
 
 
 
+.skip-to-main {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #000;
+  color: #fff;
+  padding: 8px 12px;
+  z-index: 1000;
+}
+
+.skip-to-main:focus { top: 0; }
+
+:focus-visible {
+  outline: 3px solid #1a73e8;
+  outline-offset: 2px;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  height: 1px; width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+}
+
+.site-button,
+a.site-button,
+button,
+input[type="button"],
+input[type="submit"] {
+  min-height: 40px;
+  min-width: 44px;
+}
+
+a { text-decoration-thickness: 0.08em; text-underline-offset: 2px; }
+a:hover,
+a:focus-visible { text-decoration: underline; }
 .dm-container {
   font-family: "Montserrat", sans-serif;
   display: flex;
@@ -34,7 +71,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  outline: none;
 }
 
 .dm-container .fa-moon {color: #fff200; font-size: 15px;}
@@ -56,71 +92,10 @@
   transform: translateX(24px);
 }
 
-/* Focus styles for keyboard users */
-.checkbox:focus + .checkbox-label,
-.checkbox-label:focus {
-  box-shadow: 0 0 0 3px rgba(26,115,232,0.4), 0 0 0 1px #1a73e8 inset;
-}
-
-/* Visually hidden utility (for accessible labels) */
-.visually-hidden {
-  position: absolute !important;
-  height: 1px; width: 1px;
-  overflow: hidden;
-  clip: rect(1px, 1px, 1px, 1px);
-  white-space: nowrap; /* prevent line breaks */
-}
-
 .aux-nav .aux-nav-list {
     margin-right: 20px;
     justify-content: space-between;
 }
-
-/* Buttons / CTAs: ensure contrast and focus (theme-aware) */
-html[data-theme="light"] .site-button,
-html[data-theme="light"] .btn,
-html[data-theme="light"] button,
-html[data-theme="light"] input[type="button"],
-html[data-theme="light"] input[type="submit"] {
-  color: #111;
-  background-color: #e6e6e6;
-}
-html[data-theme="dark"] .site-button,
-html[data-theme="dark"] .btn,
-html[data-theme="dark"] button,
-html[data-theme="dark"] input[type="button"],
-html[data-theme="dark"] input[type="submit"] {
-  color: #e8eaed;
-  background-color: #2d2f3a; /* subtle dark surface */
-  border-color: #3c4043;
-}
-html[data-theme] .site-button:focus,
-html[data-theme] .site-button:hover,
-html[data-theme] .btn:focus,
-html[data-theme] .btn:hover,
-html[data-theme] button:focus,
-html[data-theme] button:hover,
-html[data-theme] input[type="button"]:focus,
-html[data-theme] input[type="button"]:hover,
-html[data-theme] input[type="submit"]:focus,
-html[data-theme] input[type="submit"]:hover {
-  outline: 2px solid transparent;
-  box-shadow: 0 0 0 3px rgba(26,115,232,0.35);
-}
-
-/* Inline emphasis: ensure sufficient contrast */
-em, i { color: #0d3b66; }
-strong, b { color: #0b2e59; }
-
-/* List items: spacing, target size, marker visibility */
-ul, ol { line-height: 1.65; }
-li { margin-block: 0.25rem; }
-li a { text-underline-offset: 2px; }
-
-/* Links: default, hover, visited for contrast */
-a { color: #0b57d0; }
-a:visited { color: #7b1fa2; }
-a:hover, a:focus { box-shadow: 0 2px 0 0 currentColor inset; }
 
 .fs-9 {
   font-weight: 500;
@@ -171,45 +146,6 @@ a:hover, a:focus { box-shadow: 0 2px 0 0 currentColor inset; }
 
 }
 
-/* Ensure footer links have visible focus */
-.icon_footer a:focus,
-.icon_footer a:hover,
-.link_footer a:focus,
-.link_footer a:hover {
-  outline: 2px solid transparent;
-  box-shadow: 0 0 0 3px rgba(26,115,232,0.35);
-  border-radius: 6px;
-}
-
-/* Improve contrast for light theme on subtle text */
-.btn-youtube {
-  color: #111;
-}
-.link_footer a { color: #0b57d0; }
-.link_footer a:visited { color: #7b1fa2; }
-
-/* Skip-link styling for visibility */
-.skip-to-main {
-  position: absolute;
-  left: -999px;
-  top: auto;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-}
-.skip-to-main:focus {
-  position: absolute;
-  left: 8px;
-  top: 8px;
-  width: auto;
-  height: auto;
-  padding: 8px 12px;
-  background: #1a73e8;
-  color: #fff;
-  z-index: 10000;
-  border-radius: 4px;
-}
-
 .d-flex{
   margin-top: 0 !important;
 }
@@ -220,19 +156,30 @@ a:hover, a:focus { box-shadow: 0 2px 0 0 currentColor inset; }
   cursor: pointer;
 }
 
-/* YouTube button surface respects theme */
 .btn-youtube{
   display: inline -flex;
   align-items: center;
   justify-content: center;
   width:max-content;
+  background-color: #F0F0FFFF;
 }
-html[data-theme="light"] .btn-youtube{ background-color: #f0f0ff; color: #111; }
-html[data-theme="dark"] .btn-youtube{ background-color: #2d2f3a; color: #e8eaed; }
 
 .btn-youtube::after{
   font-family: fontAwesome;
   font-size: 1.225rem;
   margin-left: 6px ;
   content: "\f167";
+}
+
+/* Contrast and a11y link styles */
+.link_footer a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.icon_footer a:focus-visible,
+.link_footer a:focus-visible,
+.site-button:focus-visible {
+  outline: 3px solid #1a73e8;
+  outline-offset: 2px;
 }

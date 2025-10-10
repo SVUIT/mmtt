@@ -1,78 +1,26 @@
-<div class="dm-container" role="group" aria-label="Chuyển chủ đề">
-    <input type="checkbox" class="checkbox js-toggle-dark-mode" id="theme-switch"
-      role="switch" aria-checked="false" aria-label="Chuyển chế độ tối">
-    <label for="theme-switch" class="checkbox-label">
+<div class="dm-container">
+    <input type="checkbox" class="checkbox js-toggle-dark-mode" id="toggle-theme" aria-label="Chuyển chế độ sáng/tối">
+    <label for="toggle-theme" class="checkbox-label" role="button" aria-pressed="false">
         <i class="fa-solid fa-sun" aria-hidden="true"></i>
         <i class="fa-solid fa-moon" aria-hidden="true"></i>
       <span class="ball" aria-hidden="true"></span>
-      <span class="visually-hidden">Bật/tắt chế độ tối</span>
     </label>
   </div>
   <script>
-    (function(){
-      try {
-        const toggleDarkMode = document.querySelector('.js-toggle-dark-mode');
-        const container = document.querySelector('.dm-container');
-        if (!toggleDarkMode) return;
-
-        const setAriaChecked = (el, isChecked) => {
-          el.setAttribute('aria-checked', String(isChecked));
-        };
-        const applyContainerClass = (isDark) => {
-          if (!container) return;
-          container.classList.toggle('dark', isDark);
-        };
-
-        const initWhenJtdReady = () => {
-          if (!(window.jtd && jtd.getTheme && jtd.setTheme && jtd.addEvent)) {
-            requestAnimationFrame(initWhenJtdReady);
-            return;
-          }
-
-          const saved = localStorage.getItem('theme');
-          const systemMq = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
-          const systemPrefersDark = systemMq && systemMq.matches;
-          const currentTheme = saved || jtd.getTheme() || (systemPrefersDark ? 'dark' : 'light');
-
-          const isDarkInit = currentTheme === 'dark';
-          toggleDarkMode.checked = isDarkInit;
-          setAriaChecked(toggleDarkMode, isDarkInit);
-          applyContainerClass(isDarkInit);
-
-          jtd.addEvent(toggleDarkMode, 'change', function(){
-            const toDark = toggleDarkMode.checked;
-            if (toDark) {
-              jtd.setTheme('dark');
-              localStorage.setItem('theme', 'dark');
-              setAriaChecked(toggleDarkMode, true);
-            } else {
-              jtd.setTheme('light');
-              localStorage.setItem('theme', 'light');
-              setAriaChecked(toggleDarkMode, false);
-            }
-            applyContainerClass(toDark);
-          });
-
-          if (systemMq && systemMq.addEventListener) {
-            systemMq.addEventListener('change', (e) => {
-              if (!localStorage.getItem('theme')) {
-                const isDark = e.matches;
-                jtd.setTheme(isDark ? 'dark' : 'light');
-                toggleDarkMode.checked = isDark;
-                setAriaChecked(toggleDarkMode, isDark);
-                applyContainerClass(isDark);
-              }
-            });
-          }
-        };
-
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', initWhenJtdReady);
-        } else {
-          initWhenJtdReady();
-        }
-      } catch (e) {
-        console.error('Theme switch init error', e);
+    const toggleDarkMode = document.querySelector('.js-toggle-dark-mode');
+    const cbLabel = document.querySelector('.checkbox-label');
+    localStorage.getItem('theme') === 'dark'
+      ? (toggleDarkMode.checked = true, cbLabel.classList.add('dark'), cbLabel.setAttribute('aria-pressed','true'))
+      : (toggleDarkMode.checked = false, cbLabel.classList.remove('dark'), cbLabel.setAttribute('aria-pressed','false'));
+    jtd.addEvent(toggleDarkMode, 'click', function(){
+      if (jtd.getTheme() === 'dark') {
+        jtd.setTheme('light');
+        window.localStorage.setItem('theme', 'light');
+        cbLabel.setAttribute('aria-pressed','false');
+      } else {
+        jtd.setTheme('dark');
+        window.localStorage.setItem('theme', 'dark');
+        cbLabel.setAttribute('aria-pressed','true');
       }
-    })();
+    });
     </script>

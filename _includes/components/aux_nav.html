@@ -1,10 +1,10 @@
-<nav aria-label="Liên kết phụ trợ" class="aux-nav">
+<nav aria-label="Liên kết phụ" class="aux-nav">
     <ul class="aux-nav-list">
       {% for link in site.aux_links %}
         <li class="aux-nav-list-item">
           <a href="{{ link.last }}" class="site-button"
             {% if site.aux_links_new_tab %}
-            target="_blank" rel="noopener noreferrer"
+            target="_blank" rel="noopener noreferrer" aria-label="{{ link.first }} (mở trong tab mới)"
             {% endif %}
           >
             {{ link.first }}
