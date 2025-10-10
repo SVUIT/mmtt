@@ -10,29 +10,36 @@
   </div>
   <script>
     const toggleDarkMode = document.querySelector('.js-toggle-dark-mode');
-    const cbLabel = document.querySelector('.checkbox-label');
+    const container = document.querySelector('.dm-container');
     const setAriaChecked = (el, isChecked) => {
       el.setAttribute('aria-checked', String(isChecked));
     };
-    if (localStorage.getItem('theme') === 'dark') {
-      toggleDarkMode.checked = true;
-      cbLabel.classList.add('dark');
-      setAriaChecked(toggleDarkMode, true);
-    } else {
-      toggleDarkMode.checked = false;
-      cbLabel.classList.remove('dark');
-      setAriaChecked(toggleDarkMode, false);
-    }
+    const applyContainerClass = (isDark) => {
+      if (!container) return;
+      container.classList.toggle('dark', isDark);
+    };
+
+    // Initialize from saved theme or current JTD theme / system preference
+    const saved = localStorage.getItem('theme');
+    const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const currentTheme = saved || (typeof jtd !== 'undefined' && jtd.getTheme && jtd.getTheme()) || (systemPrefersDark ? 'dark' : 'light');
+
+    const isDarkInit = currentTheme === 'dark';
+    toggleDarkMode.checked = isDarkInit;
+    setAriaChecked(toggleDarkMode, isDarkInit);
+    applyContainerClass(isDarkInit);
+
     jtd.addEvent(toggleDarkMode, 'click', function(){
-      const isDark = jtd.getTheme() === 'dark';
-      if (isDark) {
-        jtd.setTheme('light');
-        window.localStorage.setItem('theme', 'light');
-        setAriaChecked(toggleDarkMode, false);
-      } else {
+      const isDarkNow = !(jtd.getTheme() === 'dark'); // will switch to opposite
+      if (isDarkNow) {
         jtd.setTheme('dark');
         window.localStorage.setItem('theme', 'dark');
         setAriaChecked(toggleDarkMode, true);
+      } else {
+        jtd.setTheme('light');
+        window.localStorage.setItem('theme', 'light');
+        setAriaChecked(toggleDarkMode, false);
       }
+      applyContainerClass(isDarkNow);
     });
     </script>
