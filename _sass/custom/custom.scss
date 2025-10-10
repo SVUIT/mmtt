@@ -76,25 +76,34 @@
     justify-content: space-between;
 }
 
-/* Buttons / CTAs: ensure contrast and focus */
-.site-button,
-.btn,
-button,
-input[type="button"],
-input[type="submit"] {
+/* Buttons / CTAs: ensure contrast and focus (theme-aware) */
+html[data-theme="light"] .site-button,
+html[data-theme="light"] .btn,
+html[data-theme="light"] button,
+html[data-theme="light"] input[type="button"],
+html[data-theme="light"] input[type="submit"] {
   color: #111;
   background-color: #e6e6e6;
 }
-.site-button:focus,
-.site-button:hover,
-.btn:focus,
-.btn:hover,
-button:focus,
-button:hover,
-input[type="button"]:focus,
-input[type="button"]:hover,
-input[type="submit"]:focus,
-input[type="submit"]:hover {
+html[data-theme="dark"] .site-button,
+html[data-theme="dark"] .btn,
+html[data-theme="dark"] button,
+html[data-theme="dark"] input[type="button"],
+html[data-theme="dark"] input[type="submit"] {
+  color: #e8eaed;
+  background-color: #2d2f3a; /* subtle dark surface */
+  border-color: #3c4043;
+}
+html[data-theme] .site-button:focus,
+html[data-theme] .site-button:hover,
+html[data-theme] .btn:focus,
+html[data-theme] .btn:hover,
+html[data-theme] button:focus,
+html[data-theme] button:hover,
+html[data-theme] input[type="button"]:focus,
+html[data-theme] input[type="button"]:hover,
+html[data-theme] input[type="submit"]:focus,
+html[data-theme] input[type="submit"]:hover {
   outline: 2px solid transparent;
   box-shadow: 0 0 0 3px rgba(26,115,232,0.35);
 }
@@ -211,13 +220,15 @@ a:hover, a:focus { box-shadow: 0 2px 0 0 currentColor inset; }
   cursor: pointer;
 }
 
+/* YouTube button surface respects theme */
 .btn-youtube{
   display: inline -flex;
   align-items: center;
   justify-content: center;
   width:max-content;
-  background-color: #F0F0FFFF;
 }
+html[data-theme="light"] .btn-youtube{ background-color: #f0f0ff; color: #111; }
+html[data-theme="dark"] .btn-youtube{ background-color: #2d2f3a; color: #e8eaed; }
 
 .btn-youtube::after{
   font-family: fontAwesome;
