@@ -34,6 +34,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  outline: none;
 }
 
 .dm-container .fa-moon {color: #fff200; font-size: 15px;}
@@ -55,10 +56,62 @@
   transform: translateX(24px);
 }
 
+/* Focus styles for keyboard users */
+.checkbox:focus + .checkbox-label,
+.checkbox-label:focus {
+  box-shadow: 0 0 0 3px rgba(26,115,232,0.4), 0 0 0 1px #1a73e8 inset;
+}
+
+/* Visually hidden utility (for accessible labels) */
+.visually-hidden {
+  position: absolute !important;
+  height: 1px; width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap; /* prevent line breaks */
+}
+
 .aux-nav .aux-nav-list {
     margin-right: 20px;
     justify-content: space-between;
 }
+
+/* Buttons / CTAs: ensure contrast and focus */
+.site-button,
+.btn,
+button,
+input[type="button"],
+input[type="submit"] {
+  color: #111;
+  background-color: #e6e6e6;
+}
+.site-button:focus,
+.site-button:hover,
+.btn:focus,
+.btn:hover,
+button:focus,
+button:hover,
+input[type="button"]:focus,
+input[type="button"]:hover,
+input[type="submit"]:focus,
+input[type="submit"]:hover {
+  outline: 2px solid transparent;
+  box-shadow: 0 0 0 3px rgba(26,115,232,0.35);
+}
+
+/* Inline emphasis: ensure sufficient contrast */
+em, i { color: #0d3b66; }
+strong, b { color: #0b2e59; }
+
+/* List items: spacing, target size, marker visibility */
+ul, ol { line-height: 1.65; }
+li { margin-block: 0.25rem; }
+li a { text-underline-offset: 2px; }
+
+/* Links: default, hover, visited for contrast */
+a { color: #0b57d0; }
+a:visited { color: #7b1fa2; }
+a:hover, a:focus { box-shadow: 0 2px 0 0 currentColor inset; }
 
 .fs-9 {
   font-weight: 500;
@@ -107,6 +160,45 @@
   cursor: pointer;
   font-size: small !important;
 
+}
+
+/* Ensure footer links have visible focus */
+.icon_footer a:focus,
+.icon_footer a:hover,
+.link_footer a:focus,
+.link_footer a:hover {
+  outline: 2px solid transparent;
+  box-shadow: 0 0 0 3px rgba(26,115,232,0.35);
+  border-radius: 6px;
+}
+
+/* Improve contrast for light theme on subtle text */
+.btn-youtube {
+  color: #111;
+}
+.link_footer a { color: #0b57d0; }
+.link_footer a:visited { color: #7b1fa2; }
+
+/* Skip-link styling for visibility */
+.skip-to-main {
+  position: absolute;
+  left: -999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.skip-to-main:focus {
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  width: auto;
+  height: auto;
+  padding: 8px 12px;
+  background: #1a73e8;
+  color: #fff;
+  z-index: 10000;
+  border-radius: 4px;
 }
 
 .d-flex{

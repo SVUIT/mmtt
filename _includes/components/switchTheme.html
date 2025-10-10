@@ -1,24 +1,38 @@
-<div class="dm-container">
-    <input type="checkbox" class="checkbox js-toggle-dark-mode" id="checkbox">
-    <label for="checkbox" class="checkbox-label">
-        <i class="fa-solid fa-sun"></i>
-        <i class="fa-solid fa-moon"></i>
-      <span class="ball"></span>
+<div class="dm-container" role="group" aria-label="Chuyển chủ đề">
+    <input type="checkbox" class="checkbox js-toggle-dark-mode" id="theme-switch"
+      role="switch" aria-checked="false" aria-label="Chuyển chế độ tối">
+    <label for="theme-switch" class="checkbox-label">
+        <i class="fa-solid fa-sun" aria-hidden="true"></i>
+        <i class="fa-solid fa-moon" aria-hidden="true"></i>
+      <span class="ball" aria-hidden="true"></span>
+      <span class="visually-hidden">Bật/tắt chế độ tối</span>
     </label>
   </div>
   <script>
     const toggleDarkMode = document.querySelector('.js-toggle-dark-mode');
     const cbLabel = document.querySelector('.checkbox-label');
-    localStorage.getItem('theme') === 'dark'
-      ? (toggleDarkMode.checked = true, cbLabel.classList.add('dark'))
-      : (toggleDarkMode.checked = false, cbLabel.classList.remove('dark'));
+    const setAriaChecked = (el, isChecked) => {
+      el.setAttribute('aria-checked', String(isChecked));
+    };
+    if (localStorage.getItem('theme') === 'dark') {
+      toggleDarkMode.checked = true;
+      cbLabel.classList.add('dark');
+      setAriaChecked(toggleDarkMode, true);
+    } else {
+      toggleDarkMode.checked = false;
+      cbLabel.classList.remove('dark');
+      setAriaChecked(toggleDarkMode, false);
+    }
     jtd.addEvent(toggleDarkMode, 'click', function(){
-      if (jtd.getTheme() === 'dark') {
+      const isDark = jtd.getTheme() === 'dark';
+      if (isDark) {
         jtd.setTheme('light');
         window.localStorage.setItem('theme', 'light');
+        setAriaChecked(toggleDarkMode, false);
       } else {
         jtd.setTheme('dark');
         window.localStorage.setItem('theme', 'dark');
+        setAriaChecked(toggleDarkMode, true);
       }
     });
     </script>
