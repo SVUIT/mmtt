@@ -59,7 +59,7 @@ Nếu có nội dung nào đó trên web chưa được đề cập về môn h�
   <div class="top1-wrapper">
     <div class="contributor-card-top top1">
       <div class="rank-badge">
-        <img src="{{ '/assets/images/Star.png' | relative_url }}" alt="Star" class="rank-star">
+        <img src="{{ '/assets/images/star.svg' | relative_url }}" alt="Star" class="rank-star">
         <span class="rank-number-star">1</span>
       </div>
       <div class="contributor-name-wrapper">
@@ -99,7 +99,7 @@ Nếu có nội dung nào đó trên web chưa được đề cập về môn h�
   <div class="top2-wrapper">
     <div class="contributor-card-top top2">
       <div class="rank-badge">
-        <img src="{{ '/assets/images/Star.png' | relative_url }}" alt="Star" class="rank-star">
+        <img src="{{ '/assets/images/star.svg' | relative_url }}" alt="Star" class="rank-star">
         <span class="rank-number-star">2</span>
       </div>
 
@@ -142,7 +142,7 @@ Nếu có nội dung nào đó trên web chưa được đề cập về môn h�
   <div class="top3-wrapper">
     <div class="contributor-card-top top3">
       <div class="rank-badge">
-        <img src="{{ '/assets/images/Star.png' | relative_url }}" alt="Star" class="rank-star">
+        <img src="{{ '/assets/images/star.svg' | relative_url }}" alt="Star" class="rank-star">
         <span class="rank-number-star">3</span>
       </div>
 
