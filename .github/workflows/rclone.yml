@@ -1,0 +1,68 @@
+name: Rclone Sync
+
+on:
+  schedule:
+    - cron: '0 19 * * 2'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  rclone_sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Rclone
+        uses: AnimMouse/setup-rclone@v1
+        with:
+          rclone_config: ${{ secrets.RCLONE_CONFIG }}
+      - name: Sync with Rclone
+        run: |
+          set -e  # Bật chế độ kiểm tra lỗi
+          rclone sync main:Docs backup:Docs --verbose --stats=1s --log-file=rclone_log.txt
+          if [ ! -s rclone_log.txt ]; then
+            echo "No changes detected" > rclone_log.txt
+          fi
+          cat rclone_log.txt
+
+      - name: Upload log artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: rclone-log
+          path: rclone_log.txt
+        
+  send_email:
+    runs-on: ubuntu-latest
+    needs: rclone_sync
+    steps:
+      - name: Download log artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: rclone-log
+          path: .
+
+      - name: Read log into variable
+        id: read_log
+        run: |
+          LOG_CONTENT=$(cat rclone_log.txt)
+          echo "LOG_CONTENT<<EOF" >> $GITHUB_ENV
+          echo "$LOG_CONTENT" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+      - name: Send mail
+        uses: dawidd6/action-send-mail@v4
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          ignore_cert: true
+          secure: true
+          username: ${{ secrets.GMAIL_USER }}
+          password: ${{ secrets.GMAIL_APPWRD }}
+          subject: Backup results
+          to: ${{ secrets.EMAIL_RECIPIENT }}
+          from: UIT-Learning-Archive
+          body: |
+            Backup process completed.
+            See attached log for details.
+          attachments: rclone_log.txt

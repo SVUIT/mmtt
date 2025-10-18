@@ -19,3 +19,7 @@ vendor/
 # VScode setting
 
 .vscode
+
+#JsonFile
+drive_api_key.json
+

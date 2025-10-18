@@ -1,0 +1,133 @@
+name: PR Preview
+
+on:
+  pull_request:
+    branches: ["main"]
+    types: [opened, synchronize, reopened, closed]
+
+permissions:
+  contents: read 
+  pull-requests: write
+
+jobs:
+  filter:
+    runs-on: ubuntu-latest
+    outputs:
+      build: ${{ steps.filter.outputs.build }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Filter paths
+        id: filter
+        uses: dorny/paths-filter@v3
+        with: 
+          filters: |
+            build:
+              - '**/*'
+              - '!README.md'
+              - '!CODE_OF_CONDUCT.md'
+              - '!LICENSE'
+
+
+  build-preview:
+    needs: filter
+    if: github.event.action != 'closed' && needs.filter.outputs.build == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+          cache-version: 0
+
+      - name: Install dependencies
+        run: bundle install
+
+      - name: Inject config for PR preview
+        run: |
+          PR_NUM=${{ github.event.pull_request.number }}
+          echo "url: https://svuit.org" > _config_preview.yml
+          echo "baseurl: /mmtt-preview/pr-$PR_NUM" >> _config_preview.yml
+
+      - name: Build Jekyll site
+        run: |
+          bundle exec jekyll build --config _config.yml,_config_preview.yml
+
+      - name: Push to preview repo 
+        run: |
+          PR_NUM=${{ github.event.pull_request.number }}
+          TARGET_DIR=pr-$PR_NUM
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          git clone https://x-access-token:${{ secrets.PREVIEW_TOKEN }}@github.com/${{ github.repository_owner }}/mmtt-preview.git
+          cd mmtt-preview
+          rm -rf $TARGET_DIR
+          cp -R ../_site $TARGET_DIR
+          git add .
+          git commit -m "Deploy preview for PR #$PR_NUM" || true
+          git push || true
+
+      - name: Comment PR with preview link
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const pr = context.payload.pull_request.number
+            const url = `https://${context.repo.owner}.github.io/mmtt-preview/pr-${pr}/`
+
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: pr
+            })
+
+            const existing = comments.find(comment =>
+              comment.user.login == 'github-actions[bot]' &&
+              comment.body.includes('Preview available here:')
+            )
+
+            if (!existing) {
+              await github.rest.issues.createComment({
+                issue_number: pr,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: `Preview available here: ${url}`
+              })
+            }
+
+  delete_preview:
+    if: github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Remove preview folder
+        run: |
+          PR_NUM=${{ github.event.pull_request.number }}
+          TARGET_DIR=pr-$PR_NUM
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          git clone https://x-access-token:${{ secrets.PREVIEW_TOKEN }}@github.com/${{ github.repository_owner }}/mmtt-preview.git
+          cd mmtt-preview
+          rm -rf $TARGET_DIR
+          git add .
+          git commit -m "Remove preview for PR #$PR_NUM"
+          git push
+
+      - name: Comment PR closed
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const pr = context.payload.pull_request.number
+            await github.rest.issues.createComment({
+              issue_number: pr,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `This PR has been merged/closed. The preview URL will no longer work.`
+            })
+
