@@ -47,5 +47,5 @@ jobs:
           branch: recovery/replace-links
           base: main
           delete-branch: true
-          # reviewers: thu4n
+          # reviewers: thu4n, hlocuwu
           # assignees: thu4n
