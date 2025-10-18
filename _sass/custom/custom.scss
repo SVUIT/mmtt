@@ -133,3 +133,612 @@
   margin-left: 6px ;
   content: "\f167";
 }
+
+/* CONTRIBUTORS */
+.top3-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  gap: 1rem;
+  flex-wrap: nowrap; /* Không cho xuống hàng */
+  margin-top: 2rem;
+  padding-top: 60px;
+  padding: 60px 1rem 0 1rem;
+}
+
+/* Oval background đằng sau top 1, 2, 3 */
+.top3-container::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%; /* Chiếm 70% chiều rộng container */
+  height: 200px; /* Chiều cao của oval */
+  background: rgba(123, 91, 253, 0.6); /* #7B5BFD với 60% opacity */
+  border-radius: 50%; /* Tạo hình oval */
+  z-index: 0; /* Đặt phía sau các card */
+  filter: blur(150px); /* Làm mờ oval để tạo hiệu ứng ánh sáng */
+}
+
+/* Đảm bảo các wrapper nằm trên oval */
+.top1-wrapper,
+.top2-wrapper,
+.top3-wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+/* ==== Top 1 ==== */
+.top1-wrapper {
+  order: 2;               /* top1 ở giữa */
+  z-index: 5;
+  flex: 1 1 0;           /* Cho phép co giãn đều */
+  max-width: 280px;
+  min-width: 200px;
+  margin-top: 0px;   /* Nhô lên cao hơn top 2 và 3 */
+}
+
+/* ==== Top 2 ==== */
+.top2-wrapper {
+  order: 1;               /* Top 2 bên trái */
+  z-index: 2;
+  flex: 1 1 0;           /* Cho phép co giãn đều */
+  max-width: 280px;
+  min-width: 200px;
+  margin-top: 70px;
+}
+
+/* ==== Top 3 ==== */
+.top3-wrapper {
+  order: 3;               /* Top 3 bên phải */
+  z-index: 2;
+  flex: 1 1 0;           /* Cho phép co giãn đều */
+  max-width: 280px;
+  min-width: 200px;
+  margin-top: 70px;
+}
+
+/* ==== Card contributor ==== */
+.contributor-card-top {
+  position: relative;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  padding: 30px 0px 0px 0px;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 150px;
+}
+
+
+.contributors-grid {
+  display: flex;
+  flex-direction: column;  /* Xếp dọc mỗi card 1 hàng */
+  gap: 15px;               /* Khoảng cách giữa các card */
+  margin-top: 30px;
+}
+
+.contributor-card {
+  display: grid;                /* Xếp ngang nội dung */
+  grid-template-columns: 2fr 1fr 1fr 1fr; 
+  align-items: center;          /* Căn giữa theo chiều dọc */
+  width: 100%;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  padding: 12px 18px;
+  transition: transform 0.2s ease;
+}
+
+body.dark .contributor-card {
+  background: #464452;
+}
+
+.contributor-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* ==== Top 3 style ==== */
+.top1 {
+  background: #6A46FD;
+  border: 5px solid #AA96FF; 
+  color: #fff;
+}
+
+body.dark .top1 {
+  border: 5px solid #5738D6 !important;
+}
+
+.top2 {
+  background: #7B5BFD;
+  border: 5px solid #A18CF7; 
+  color: #fff;
+}
+
+body.dark .top2 {
+  border: 5px solid #5D44C5 !important;
+}
+
+.top3 {
+  background: #9D85FF;
+  border: 5px solid #C4B5FF; 
+  color: #fff;
+}
+
+body.dark .top3 {
+  border: 5px solid #7663C5 !important;
+}
+
+
+/* ==== Tên contributor ==== */
+.contributor-name {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.1rem;
+  color: #000;
+}
+
+body.dark .contributor-name {
+  color: #fff;
+}
+
+.contributor-name-top {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.1rem;
+  color: #fff;
+}
+
+
+.contributor-name a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.contributor-name a:hover {
+  text-decoration: underline;
+}
+
+/* ==== Class ==== */
+
+.contributor-class-top {
+  font-size: 0.85rem;
+  color: #fff;
+  opacity: 0.7;
+  margin-bottom: 0.5rem;
+}
+
+.contributor-class {
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+body.dark .contributor-class {
+  color: #BFBCD4;
+}
+
+/* ==== Stats ==== */
+/* ==== Stats cho top 1, 2, 3 ==== */
+.contributor-stats {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 0.5rem;
+  position: relative;
+  min-height: 4rem;
+}
+
+/* Tạo gạch dọc giữa Submits và Files */
+.contributor-stats::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 1.5px;
+  background-color: rgba(255, 255, 255, 0.5);
+  top: 1rem;
+  left: 50%;
+  border-radius: 2px;
+}
+
+.rank-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background-color: #F5F6FA;
+  color: #000;
+  border-radius: 10px;
+  font-weight: 750;
+  font-size: 1rem;
+  margin-right: 8px;
+  flex-shrink: 0;
+  padding: 25px;
+}
+
+body.dark .rank-number {
+  background-color: #7A7887;
+  color: #fff;
+}
+
+.contributor-submits {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+.contributor-files {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.stat-number-top {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+}
+
+.stat-label-top {
+  font-size: 0.8rem;
+  color: #fff;
+  opacity: 0.7;
+  margin-top: 4px;
+}
+
+.stat-number {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #000;
+  line-height: 1;
+}
+
+body.dark .stat-number {
+  color: #fff;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: #000;
+  opacity: 0.7;
+  margin-top: 4px;
+}
+
+body.dark .stat-label {
+  color: #BFBCD4;
+}
+
+.rank-badge {
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 48px;
+  height: auto;
+}
+
+/* SVG ngôi sao — nền */
+.rank-star {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+/* Số hạng nằm ĐÈ lên giữa ngôi sao */
+.rank-number-star {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -55%);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1rem;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* ========================================
+   RESPONSIVE STYLES
+   ======================================== */
+
+/* Tablet lớn và nhỏ hơn (1024px trở xuống) */
+@media (max-width: 1024px) {
+  .top3-container {
+    gap: 1.5rem;
+    padding: 50px 1rem 0 1rem;
+  }
+
+  .top1-wrapper,
+  .top2-wrapper,
+  .top3-wrapper {
+    max-width: 240px;
+    min-width: 180px;
+  }
+
+  .top1-wrapper {
+    margin-top: 0px;
+  }
+
+  .top2-wrapper,
+  .top3-wrapper {
+    margin-top: 50px;
+  }
+
+  .contributor-card-top {
+    padding: 25px 0px 0px 0px;
+  }
+
+  .contributor-name,
+  .contributor-name-top {
+    font-size: 1rem;
+  }
+
+  .stat-number,
+  .stat-number-top {
+    font-size: 1.2rem;
+  }
+
+  .rank-number {
+    padding: 20px;
+  }
+
+  .contributor-stats {
+    min-height: 3.5rem;
+    gap: 0.4rem;
+  }
+
+  .rank-badge {
+    width: 42px;
+    height: auto;
+    top: -20px;
+  }
+
+  .rank-number-star {
+    font-size: 0.9rem;
+  }
+}
+
+/* Tablet nhỏ (768px trở xuống) */
+@media (max-width: 768px) {
+  .top3-container {
+    gap: 1.25rem;
+    padding: 40px 1rem 0 1rem;
+  }
+
+  .top1-wrapper,
+  .top2-wrapper,
+  .top3-wrapper {
+    max-width: 200px;
+    min-width: 120px;
+  }
+
+  .top1-wrapper {
+    margin-top: 0px;
+  }
+
+  .top2-wrapper,
+  .top3-wrapper {
+    margin-top: 50px;
+  }
+
+  .contributor-card-top {
+    min-height: 130px;
+    padding: 25px 0px 0px 0px;
+  }
+
+  .contributor-card {
+    grid-template-columns: 2.5fr 1fr 1fr 0.8fr;
+    padding: 10px 14px;
+    gap: 8px;
+  }
+
+  .rank-number {
+    padding: 18px;
+    font-size: 0.9rem;
+  }
+
+  .contributor-name,
+  .contributor-name-top {
+    font-size: 0.95rem;
+    margin-bottom: 0.05rem;
+  }
+
+  .contributor-class,
+  .contributor-class-top {
+    font-size: 0.8rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .stat-number,
+  .stat-number-top {
+    font-size: 1.1rem;
+  }
+
+  .stat-label,
+  .stat-label-top {
+    font-size: 0.75rem;
+    margin-top: 3px;
+  }
+
+  .contributor-stats {
+    min-height: 3.2rem;
+    gap: 0.3rem;
+  }
+
+  .rank-badge {
+    width: 40px;
+    height: auto;
+    top: -20px;
+  }
+
+  .rank-number-star {
+    font-size: 0.85rem;
+  }
+}
+
+/* Mobile lớn (576px trở xuống) */
+@media (max-width: 576px) {
+  .top3-container {
+    gap: 1rem;
+    padding: 30px 1rem 0 1rem;
+  }
+
+  .top1-wrapper,
+  .top2-wrapper,
+  .top3-wrapper {
+    max-width: 160px;
+    min-width: 100px;
+  }
+
+  .top1-wrapper {
+    margin-top: 0px;
+  }
+
+  .top2-wrapper,
+  .top3-wrapper {
+    margin-top: 50px;
+  }
+
+  .contributor-card-top {
+    min-height: 120px;
+    padding: 25px 0px 0px 0px;
+  }
+
+  .contributor-card {
+    grid-template-columns: 2fr 1fr 1fr 0.7fr;
+    padding: 10px 12px;
+    gap: 6px;
+  }
+
+  .rank-number {
+    padding: 15px;
+    font-size: 0.85rem;
+    margin-right: 6px;
+  }
+
+  .contributor-name,
+  .contributor-name-top {
+    font-size: 0.9rem;
+  }
+
+  .contributor-class,
+  .contributor-class-top {
+    font-size: 0.75rem;
+  }
+
+  .stat-number,
+  .stat-number-top {
+    font-size: 1rem;
+  }
+
+  .stat-label,
+  .stat-label-top {
+    font-size: 0.7rem;
+  }
+
+  .rank-badge {
+    width: 37px;
+    height: auto;
+    top: -20px;
+  }
+
+  .rank-number-star {
+    font-size: 0.8rem;
+  }
+
+  .contributors-grid {
+    gap: 12px;
+    margin-top: 20px;
+  }
+}
+
+/* Mobile nhỏ (400px trở xuống) */
+@media (max-width: 400px) {
+  .top3-container {
+    padding: 20px 0.5rem 0 0.5rem;
+    gap: 0.6rem;
+  }
+
+  .top1-wrapper,
+  .top2-wrapper,
+  .top3-wrapper {
+    max-width: 200px;
+  }
+
+  .top1-wrapper {
+    margin-bottom: 0.6rem !important;
+  }
+
+  .top2-wrapper {
+    margin-bottom: 0.6rem !important;
+  }
+
+  .contributor-card-top {
+    padding: 20px 0px 0px 0px;
+    min-height: 110px;
+  }
+
+  .contributor-card {
+    grid-template-columns: 2fr 0.8fr 0.8fr 0.6fr;
+    padding: 8px 10px;
+    font-size: 0.85rem;
+  }
+
+  .rank-number {
+    padding: 12px;
+    font-size: 0.8rem;
+  }
+
+  .rank-badge {
+    width: 32px;
+    height: auto;
+    top: -16px;
+  }
+
+  .rank-number-star {
+    font-size: 0.8rem;
+  }
+
+  .contributor-name,
+  .contributor-name-top {
+    font-size: 0.75rem;
+  }
+
+  .stat-number,
+  .stat-number-top {
+    font-size: 0.9rem;
+  }
+
+  .stat-label,
+  .stat-label-top {
+    font-size: 0.65rem;
+  }
+
+  .contributor-class,
+  .contributor-class-top {
+    font-size: 0.7rem;
+  }
+}
