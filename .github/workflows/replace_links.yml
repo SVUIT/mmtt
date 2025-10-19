@@ -48,4 +48,3 @@ jobs:
           base: main
           delete-branch: true
           reviewers: thu4n, hlocuwu
-          assignees: thu4n
