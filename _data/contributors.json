@@ -33,7 +33,8 @@
     "name": "Nguyễn Thế Lập",
     "class": "KHBC2024",
     "submits": 2,
-    "files": 5
+    "files": 5,
+    "comment": "Lost track of this contributor"
   },
   {
     "name": "Phạm Việt Hoàng",
@@ -87,7 +88,8 @@
     "name": "Lộc",
     "class": "MMTT2023.2",
     "submits": 1,
-    "files": 1
+    "files": 1,
+    "comment": "Lost track of this contributor"
   },
   {
     "name": "Nguyễn Dương Hoàng Phúc",
@@ -172,5 +174,103 @@
     "class": "Unknown",
     "submits": 1,
     "files": 22
+  },
+  {
+    "name": "Nguyễn Đăng Tố",
+    "class": "MMCL2021",
+    "submits": 1,
+    "files": 2,
+    "comment": "Lost track of this contributor"
+  },
+  {
+    "name": "Lê Đình Trí",
+    "class": "MMTT2021",
+    "submits": 1,
+    "files": 2,
+    "comment": "Lost track of this contributor"
+  },
+  {
+    "name": "Trần Mai Hân",
+    "class": "MMTT2021",
+    "submits": 1,
+    "files": 2,
+    "comment": "Lost track of this contributor"
+  },
+  {
+    "name": "quocanuit",
+    "class": "GitHub",
+    "submits": 1,
+    "files": 2,
+    "comment": "Lost track of this contributor"
+  },
+  {
+    "name": "NGODAT0103",
+    "class": "GitHub",
+    "submits": 1,
+    "files": 2,
+    "comment": "Lost track of this contributor"
+  },
+  {
+    "name": "Đặng Chí Thành",
+    "class": "MMTT2022.3",
+    "submits": 1,
+    "files": 2,
+    "comment": "Lost track of this contributor"
+  },
+  {
+    "name": "Đoàn Nguyễn Lâm",
+    "class": "CNTT.1",
+    "submits": 1,
+    "files": 2,
+    "comment": "Lost track of this contributor"
+  },
+  {
+    "name": "Phạm Gia Tuệ",
+    "class": "Waseda University",
+    "submits": 1,
+    "files": 2,
+    "comment": "Lost track of this contributor"
+  },
+  {
+    "name": "Đoàn Quốc An",
+    "class": "MMTT2023.1",
+    "submits": 1,
+    "files": 2,
+    "comment": "Lost track of this contributor"
+  },
+  {
+    "name": "dinhkarate",
+    "class": "GitHub",
+    "submits": 1,
+    "files": 2,
+    "comment": "Lost track of this contributor"
+  },
+  {
+    "name": "Nguyễn Thành An",
+    "class": "MTIC2024",
+    "submits": 1,
+    "files": 2,
+    "comment": "Lost track of this contributor"
+  },
+  {
+    "name": "Nguyễn Trần Trung Nguyên",
+    "class": "ATCL2021",
+    "submits": 1,
+    "files": 2,
+    "comment": "Lost track of this contributor"
+  },
+  {
+    "name": "Thái Công Anh Quốc",
+    "class": "Unknown",
+    "submits": 1,
+    "files": 2,
+    "comment": "Lost track of this contributor"
+  },
+  {
+    "name": "Bùi Thị Ngọc Trăm",
+    "class": "MMTT2022.3",
+    "submits": 1,
+    "files": 2,
+    "comment": "Lost track of this contributor"
   }
 ]
