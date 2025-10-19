@@ -1,0 +1,50 @@
+name: Replace Drive Links with Backup
+
+on:
+  workflow_dispatch:   # Run manually when recovery is needed
+
+jobs:
+  replace:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          
+      - name: Fetch link data from Supabase API
+        id: fetch_data
+        run: |
+          JSON_RESPONSE=$(curl -s "${{ secrets.SUPABASE_URL }}/rest/v1/svuit?select=primary_link,backup_link" \
+            -H "apikey: ${{ secrets.SUPABASE_SERVICE_KEY }}" \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_KEY }}")
+
+            echo "$JSON_RESPONSE" > links_data.json
+      
+      - name: Run link replacement script
+        run: python scripts/replace_links.py links_data.json  
+
+      - name: Remove temporary JSON
+        run: |
+          rm -f links_data.json
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v7
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+        with:
+          commit-message: "[BOT] Replace Drive links with backup versions"
+
+          title: "PR: Replace Drive links with backup links "
+          body: |
+             This is an automated PR created by GitHub Actions to replace broken Google Drive links with their backup versions.
+          branch: recovery/replace-links
+          base: main
+          delete-branch: true
+          reviewers: thu4n, hlocuwu
