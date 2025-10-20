@@ -143,7 +143,7 @@ Nếu có nội dung nào đó trên web chưa được đề cập về môn h�
   <div class="top3-wrapper">
     <div class="contributor-card-top top3">
       <div class="rank-badge">
-        <img src="{{ '/assets/images/star.svg' | relative_url }}" alt="Star" class="rank-star">
+        <img src="{{ '/assets/images/star.svg' | relative_url }}" alt="Ngôi sao xếp hạng" class="rank-star">
         <span class="rank-number-star">3</span>
       </div>
 
