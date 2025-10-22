@@ -12,6 +12,7 @@ permissions:
 jobs:
   rclone_sync:
     runs-on: ubuntu-latest
+    environment: prd
     steps:
       - name: Setup Rclone
         uses: AnimMouse/setup-rclone@v1
@@ -35,6 +36,7 @@ jobs:
   send_email:
     runs-on: ubuntu-latest
     needs: rclone_sync
+    environment: prd
     steps:
       - name: Download log artifact
         uses: actions/download-artifact@v4
