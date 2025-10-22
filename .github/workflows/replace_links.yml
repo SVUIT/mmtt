@@ -6,6 +6,7 @@ on:
 jobs:
   replace:
     runs-on: ubuntu-latest
+    environment: prd
     permissions:
       contents: write
       pull-requests: write
