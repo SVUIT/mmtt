@@ -12,7 +12,7 @@ permissions:
 jobs:
   rclone_sync:
     runs-on: ubuntu-latest
-    environment: prd
+    environment: dev
     steps:
       - name: Setup Rclone
         uses: AnimMouse/setup-rclone@v1
