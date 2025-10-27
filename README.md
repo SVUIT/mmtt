@@ -16,7 +16,7 @@ Danh sách những người đã đóng góp tài liệu có thể xem [ở đâ
 
 Rất hoan nghênh sự đóng góp xây dựng của các bạn. :relaxed:
 
-## :clap: Thành viên
+## :clap: Contributors
 
 <a href="https://github.com/SVUIT/mmtt/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=SVUIT/mmtt" />
