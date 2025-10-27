@@ -50,9 +50,10 @@ jobs:
 
       - name: Inject config for PR preview
         run: |
+          REPO_NAME=${{ github.event.repository.name }}
           PR_NUM=${{ github.event.pull_request.number }}
           echo "url: https://svuit.org" > _config_preview.yml
-          echo "baseurl: /mmtt-preview/pr-$PR_NUM" >> _config_preview.yml
+          echo "baseurl: /mmtt-preview/${REPO_NAME}-${PR_NUM}" >> _config_preview.yml
 
       - name: Build Jekyll site
         run: |
@@ -60,8 +61,9 @@ jobs:
 
       - name: Push to preview repo 
         run: |
+          REPO_NAME=${{ github.event.repository.name }}
           PR_NUM=${{ github.event.pull_request.number }}
-          TARGET_DIR=pr-$PR_NUM
+          TARGET_DIR=${REPO_NAME}-${PR_NUM}
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
@@ -70,7 +72,7 @@ jobs:
           rm -rf $TARGET_DIR
           cp -R ../_site $TARGET_DIR
           git add .
-          git commit -m "Deploy preview for PR #$PR_NUM" || true
+          git commit -m "Deploy preview for PR #${PR_NUM} (${REPO_NAME})" || true
           git push || true
 
       - name: Comment PR with preview link
@@ -79,7 +81,8 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const pr = context.payload.pull_request.number
-            const url = `https://${context.repo.owner}.github.io/mmtt-preview/pr-${pr}/`
+            const repo = context.payload.repository.name
+            const url = `https://${context.repo.owner}.github.io/mmtt-preview/${repo}-${pr}/`
 
             const { data: comments } = await github.rest.issues.listComments({
               owner: context.repo.owner,
@@ -102,14 +105,16 @@ jobs:
             }
 
   delete_preview:
-    if: github.event.action == 'closed'
+    needs: filter
+    if: github.event.action == 'closed' && needs.filter.outputs.build == 'true'
     runs-on: ubuntu-latest
     environment: prd
     steps:
       - name: Remove preview folder
         run: |
           PR_NUM=${{ github.event.pull_request.number }}
-          TARGET_DIR=pr-$PR_NUM
+          REPO_NAME=${{ github.event.repository.name }}
+          TARGET_DIR=${REPO_NAME}-${PR_NUM}
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
@@ -117,8 +122,8 @@ jobs:
           cd mmtt-preview
           rm -rf $TARGET_DIR
           git add .
-          git commit -m "Remove preview for PR #$PR_NUM"
-          git push
+          git commit -m "Remove preview for PR #${PR_NUM} (${REPO_NAME})" || true
+          git push || true
 
       - name: Comment PR closed
         uses: actions/github-script@v7

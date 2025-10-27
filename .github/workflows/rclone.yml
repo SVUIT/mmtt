@@ -20,12 +20,19 @@ jobs:
           rclone_config: ${{ secrets.RCLONE_CONFIG }}
       - name: Sync with Rclone
         run: |
-          set -e  # Bật chế độ kiểm tra lỗi
-          rclone sync main:Docs backup:Docs --verbose --stats=1s --log-file=rclone_log.txt
+          RCLONE_EXIT=0
+          rclone sync svuit_main:Docs svuit_backup:Docs --verbose --stats=1s --log-file=rclone_log.txt || RCLONE_EXIT=$?
+            
           if [ ! -s rclone_log.txt ]; then
-            echo "No changes detected" > rclone_log.txt
+            echo "No changes detected or rclone produced no output" > rclone_log.txt
           fi
+          
+          echo "" >> rclone_log.txt
+          echo "rclone exit code: $RCLONE_EXIT" >> rclone_log.txt
+        
           cat rclone_log.txt
+          
+          exit $RCLONE_EXIT
 
       - name: Upload log artifact
         uses: actions/upload-artifact@v4
