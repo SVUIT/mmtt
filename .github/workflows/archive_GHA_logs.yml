@@ -29,7 +29,6 @@ jobs:
           script: |
             const fs = require('fs');
             const path = require('path');
-            const core = require('@actions/core');
 
             const run = context.payload.workflow_run;
             const runId = run.id;
@@ -68,15 +67,21 @@ jobs:
 
             console.log(`Wrote logs to ${fullPath}`);
 
-      - name: Install AWS CLI
+      - name: Ensure AWS CLI v2 is available
         shell: bash
         run: |
           set -euo pipefail
-          echo "Installing AWS CLI..."
-          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-          unzip -q awscliv2.zip
-          sudo ./aws/install
-          aws --version
+          # If aws is already present on the runner, use it. Otherwise download and install.
+          if command -v aws >/dev/null 2>&1; then
+            echo "aws exists: $(aws --version)"
+          else
+            echo "Installing AWS CLI..."
+            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+            unzip -q awscliv2.zip
+            # use --update where appropriate; installer will succeed when there is no preexisting installation
+            sudo ./aws/install --update || sudo ./aws/install
+            aws --version
+          fi
 
       - name: Upload logs
         shell: bash
