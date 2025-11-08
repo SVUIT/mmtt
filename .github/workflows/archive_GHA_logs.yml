@@ -1,0 +1,92 @@
+name: archive_logs_to_r2
+
+on:
+    workflow_dispatch:
+
+    push:
+        branches: [main]
+
+jobs:
+    test-upload:
+        runs-on: ubuntu-latest
+        env:
+            AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+            AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+            R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
+            R2_BUCKET: ${{ secrets.R2_BUCKET_NAME }}
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Install AWS CLI (S3 client for Cloudflare R2)
+              run: |
+                  echo "Installing AWS CLI..."
+                  curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+                  unzip -q awscliv2.zip
+                  sudo ./aws/install
+                  aws --version
+
+            - name: Configure AWS CLI for Cloudflare R2
+              run: |
+                  echo "Configuring AWS CLI..."
+                  aws configure set aws_access_key_id ${{ secrets.R2_ACCESS_KEY_ID }}
+                  aws configure set aws_secret_access_key ${{ secrets.R2_SECRET_ACCESS_KEY }}
+                  aws configure set default.region auto
+                  echo "Configuration complete"
+
+            - name: Check connection - List bucket objects
+              run: |
+                  echo "Checking connection by listing objects in the bucket..."
+                  aws s3 ls --endpoint-url ${{ secrets.R2_ENDPOINT }}
+
+            - name: Create log file
+              shell: bash
+              run: |
+                  set -euo pipefail
+                  echo "Creating log file..."
+                  DATE=$(date +%Y%m%d)
+                  REPO_NAME="${GITHUB_REPOSITORY##*/}"
+                  WORKFLOW_NAME="${GITHUB_WORKFLOW// /_}"
+                  echo "Log upload from GitHub Actions" > log-file.txt
+                  echo "Timestamp: $(date)" >> log-file.txt
+                  echo "Run ID: ${GITHUB_RUN_ID}" >> log-file.txt
+                  echo "Repository: ${GITHUB_REPOSITORY}" >> log-file.txt
+                  echo "Workflow: ${GITHUB_WORKFLOW}" >> log-file.txt
+                  cat log-file.txt
+                  # prepare filename: YYYYMMDD-<repo>-<workflow>-<run-id>
+                  LOG_FILENAME="${DATE}-${REPO_NAME}-${WORKFLOW_NAME}-${GITHUB_RUN_ID}.log"
+                  echo "LOG_FILENAME=${LOG_FILENAME}" >> $GITHUB_ENV
+
+            - name: Upload log file to R2
+              shell: bash
+              run: |
+                  set -euo pipefail
+                  echo "Uploading to R2..."
+                  # ensure LOG_FILENAME is set (from previous step via GITHUB_ENV)
+                  if [ -z "${LOG_FILENAME-}" ]; then
+                    DATE=$(date +%Y%m%d)
+                    REPO_NAME="${GITHUB_REPOSITORY##*/}"
+                    WORKFLOW_NAME="${GITHUB_WORKFLOW// /_}"
+                    LOG_FILENAME="${DATE}-${REPO_NAME}-${WORKFLOW_NAME}-${GITHUB_RUN_ID}.log"
+                  fi
+                  FILE_PATH="logs/${LOG_FILENAME}"
+
+                  aws s3 cp log-file.txt \
+                    s3://${R2_BUCKET}/${FILE_PATH} \
+                    --endpoint-url "${R2_ENDPOINT}"
+
+                  echo "Upload successful!"
+                  echo "File location: ${FILE_PATH}"
+
+            - name: List logs in bucket
+              run: |
+                  echo "Listing log files in bucket..."
+                  aws s3 ls s3://${{ secrets.R2_BUCKET_NAME }}/logs/ \
+                    --endpoint-url ${{ secrets.R2_ENDPOINT }} \
+                    --recursive
+
+            - name: Completed
+              run: |
+                  echo "All steps completed."
+                  echo "R2 integration finished."
