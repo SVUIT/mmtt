@@ -1,92 +1,113 @@
 name: archive_logs_to_r2
 
 on:
-    workflow_dispatch:
+  workflow_run:
+    workflows: ["*"]
+    types: [completed]
+  workflow_dispatch:
 
-    push:
-        branches: [main]
+permissions:
+  actions: read
 
 jobs:
-    test-upload:
-        runs-on: ubuntu-latest
+  archive-to-r2:
+    runs-on: ubuntu-latest
+    # skip if the workflow run is this same workflow (self-archiving)
+    if: ${{ github.event.workflow_run.name != github.workflow }}
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+      R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
+      R2_BUCKET: ${{ secrets.R2_BUCKET_NAME }}
+
+    steps:
+      - name: Download workflow run logs
+        id: download
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            const core = require('@actions/core');
+
+            const run = context.payload.workflow_run;
+            const runId = run.id;
+            const rawName = run.name || `workflow-${runId}`;
+            const safeName = rawName.replace(/[^a-z0-9]/gi, '-').toLowerCase();
+            const ts = new Date(run.created_at).toISOString().replace(/[:.]/g, '-');
+            const base = 'archived-logs';
+            const dir = path.join(base, `${safeName}-${runId}-${ts}`);
+            if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+
+            const logs = await github.rest.actions.downloadWorkflowRunLogs({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              run_id: runId,
+            });
+
+            // create filename in requested format: YYYYMMDD-<repo>-<workflow>-<runId>
+            const repoName = context.repo.repo;
+            const datePart = new Date(run.created_at).toISOString().split('T')[0].replace(/-/g, ''); // YYYYMMDD
+            const filename = `${datePart}-${repoName}-${safeName}-${runId}.zip`;
+            const fullPath = path.join(dir, filename);
+            fs.writeFileSync(fullPath, Buffer.from(logs.data));
+
+            // export outputs and write to GITHUB_ENV so subsequent `run:` steps can use them
+            core.setOutput('archive_path', fullPath);
+            core.setOutput('archive_name', filename);
+            core.setOutput('run_dir', dir);
+
+            // write env entries directly to the environment file to avoid compile-time warnings
+            if (process.env.GITHUB_ENV) {
+              // ARCHIVE_PATH = path to zip; ARCHIVE_NAME = directory-style name without .zip
+              const archiveNameDir = filename.replace(/\.zip$/i, '');
+              fs.appendFileSync(process.env.GITHUB_ENV, `ARCHIVE_PATH=${fullPath}\n`);
+              fs.appendFileSync(process.env.GITHUB_ENV, `ARCHIVE_NAME=${archiveNameDir}\n`);
+            }
+
+            console.log(`Wrote logs to ${fullPath}`);
+
+      - name: Install AWS CLI
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "Installing AWS CLI..."
+          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+          unzip -q awscliv2.zip
+          sudo ./aws/install
+          aws --version
+
+      - name: Upload logs
+        shell: bash
         env:
-            AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
-            AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
-            R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
-            R2_BUCKET: ${{ secrets.R2_BUCKET_NAME }}
+          R2_ENDPOINT: ${{ env.R2_ENDPOINT }}
+          R2_BUCKET: ${{ env.R2_BUCKET }}
+        run: |
+          set -euo pipefail
+          if [ -z "${ARCHIVE_PATH-}" ] || [ ! -f "${ARCHIVE_PATH}" ]; then
+            echo "Archive not found: ${ARCHIVE_PATH}"
+            exit 1
+          fi
 
-        steps:
-            - name: Checkout code
-              uses: actions/checkout@v4
+          WORKDIR=$(mktemp -d)
+          echo "Extracting ${ARCHIVE_PATH} to ${WORKDIR}..."
+          unzip -q "${ARCHIVE_PATH}" -d "${WORKDIR}"
 
-            - name: Install AWS CLI (S3 client for Cloudflare R2)
-              run: |
-                  echo "Installing AWS CLI..."
-                  curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-                  unzip -q awscliv2.zip
-                  sudo ./aws/install
-                  aws --version
+          # Destination prefix in the bucket: YYYYMMDD-<repo>-<workflow>-<run-id>/
+          DEST_PREFIX="${ARCHIVE_NAME}"
+          echo "Syncing extracted logs to s3://${R2_BUCKET}/${DEST_PREFIX}/"
 
-            - name: Configure AWS CLI for Cloudflare R2
-              run: |
-                  echo "Configuring AWS CLI..."
-                  aws configure set aws_access_key_id ${{ secrets.R2_ACCESS_KEY_ID }}
-                  aws configure set aws_secret_access_key ${{ secrets.R2_SECRET_ACCESS_KEY }}
-                  aws configure set default.region auto
-                  echo "Configuration complete"
+          # Use aws s3 sync to upload all files preserving folder structure
+          aws s3 sync "${WORKDIR}/" "s3://${R2_BUCKET}/${DEST_PREFIX}/" --endpoint-url "${R2_ENDPOINT}"
 
-            - name: Check connection - List bucket objects
-              run: |
-                  echo "Checking connection by listing objects in the bucket..."
-                  aws s3 ls --endpoint-url ${{ secrets.R2_ENDPOINT }}
+          echo "Upload complete: s3://${R2_BUCKET}/${DEST_PREFIX}/"
+          # export the destination for later steps to echo (folder prefix)
+          echo "ARCHIVE_DEST=${DEST_PREFIX}" >> $GITHUB_ENV
+          rm -rf "${WORKDIR}"
+          # remove the zip from runner to save space
+          rm -f "${ARCHIVE_PATH}"
 
-            - name: Create log file
-              shell: bash
-              run: |
-                  set -euo pipefail
-                  echo "Creating log file..."
-                  DATE=$(date +%Y%m%d)
-                  REPO_NAME="${GITHUB_REPOSITORY##*/}"
-                  WORKFLOW_NAME="${GITHUB_WORKFLOW// /_}"
-                  echo "Log upload from GitHub Actions" > log-file.txt
-                  echo "Timestamp: $(date)" >> log-file.txt
-                  echo "Run ID: ${GITHUB_RUN_ID}" >> log-file.txt
-                  echo "Repository: ${GITHUB_REPOSITORY}" >> log-file.txt
-                  echo "Workflow: ${GITHUB_WORKFLOW}" >> log-file.txt
-                  cat log-file.txt
-                  # prepare filename: YYYYMMDD-<repo>-<workflow>-<run-id>
-                  LOG_FILENAME="${DATE}-${REPO_NAME}-${WORKFLOW_NAME}-${GITHUB_RUN_ID}.log"
-                  echo "LOG_FILENAME=${LOG_FILENAME}" >> $GITHUB_ENV
-
-            - name: Upload log file to R2
-              shell: bash
-              run: |
-                  set -euo pipefail
-                  echo "Uploading to R2..."
-                  # ensure LOG_FILENAME is set (from previous step via GITHUB_ENV)
-                  if [ -z "${LOG_FILENAME-}" ]; then
-                    DATE=$(date +%Y%m%d)
-                    REPO_NAME="${GITHUB_REPOSITORY##*/}"
-                    WORKFLOW_NAME="${GITHUB_WORKFLOW// /_}"
-                    LOG_FILENAME="${DATE}-${REPO_NAME}-${WORKFLOW_NAME}-${GITHUB_RUN_ID}.log"
-                  fi
-                  FILE_PATH="logs/${LOG_FILENAME}"
-
-                  aws s3 cp log-file.txt \
-                    s3://${R2_BUCKET}/${FILE_PATH} \
-                    --endpoint-url "${R2_ENDPOINT}"
-
-                  echo "Upload successful!"
-                  echo "File location: ${FILE_PATH}"
-
-            - name: List logs in bucket
-              run: |
-                  echo "Listing log files in bucket..."
-                  aws s3 ls s3://${{ secrets.R2_BUCKET_NAME }}/logs/ \
-                    --endpoint-url ${{ secrets.R2_ENDPOINT }} \
-                    --recursive
-
-            - name: Completed
-              run: |
-                  echo "All steps completed."
-                  echo "R2 integration finished."
+      - name: Done
+        run: |
+          echo "Archive uploaded to R2: s3://${R2_BUCKET}/${ARCHIVE_DEST}"
