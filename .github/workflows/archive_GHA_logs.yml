@@ -12,13 +12,14 @@ permissions:
 jobs:
   archive-to-r2:
     runs-on: ubuntu-latest
+    environment: prd
     # skip if the workflow run is this same workflow (self-archiving)
     if: ${{ github.event.workflow_run.name != github.workflow }}
     env:
-      AWS_ACCESS_KEY_ID: ${{ vars.R2_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ vars.R2_SECRET_ACCESS_KEY }}
-      R2_ENDPOINT: ${{ vars.R2_ENDPOINT }}
-      R2_BUCKET: ${{ vars.R2_BUCKET_NAME }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+      R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
+      R2_BUCKET: ${{ secrets.R2_BUCKET_NAME }}
 
     steps:
       - name: Download workflow run logs
