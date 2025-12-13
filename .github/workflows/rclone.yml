@@ -2,7 +2,7 @@ name: Rclone Sync
 
 on:
   schedule:
-    - cron: '0 19 * * 2'
+    - cron: '17/5 * * * *'
   workflow_dispatch:
 
 permissions:
@@ -18,20 +18,20 @@ jobs:
         uses: AnimMouse/setup-rclone@v1
         with:
           rclone_config: ${{ secrets.RCLONE_CONFIG }}
+
       - name: Sync with Rclone
         run: |
           RCLONE_EXIT=0
-          rclone sync svuit_main:Docs svuit_backup:Docs --verbose --stats=1s --log-file=rclone_log.txt || RCLONE_EXIT=$?
-            
+          rclone sync svuit_main:Docs svuit_backup:Docs \
+            --verbose --stats=1s --log-file=rclone_log.txt || RCLONE_EXIT=$?
+
           if [ ! -s rclone_log.txt ]; then
             echo "No changes detected or rclone produced no output" > rclone_log.txt
           fi
-          
+
           echo "" >> rclone_log.txt
           echo "rclone exit code: $RCLONE_EXIT" >> rclone_log.txt
-        
           cat rclone_log.txt
-          
           exit $RCLONE_EXIT
 
       - name: Upload log artifact
@@ -39,7 +39,7 @@ jobs:
         with:
           name: rclone-log
           path: rclone_log.txt
-        
+
   send_email:
     runs-on: ubuntu-latest
     needs: rclone_sync
@@ -51,20 +51,11 @@ jobs:
           name: rclone-log
           path: .
 
-      - name: Read log into variable
-        id: read_log
-        run: |
-          LOG_CONTENT=$(cat rclone_log.txt)
-          echo "LOG_CONTENT<<EOF" >> $GITHUB_ENV
-          echo "$LOG_CONTENT" >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
-
       - name: Send mail
         uses: dawidd6/action-send-mail@v4
         with:
           server_address: smtp.gmail.com
           server_port: 465
-          ignore_cert: true
           secure: true
           username: ${{ secrets.GMAIL_USER }}
           password: ${{ secrets.GMAIL_APPWRD }}
