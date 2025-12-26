@@ -4,7 +4,7 @@ title: Vo Anh Kiet
 parent: Nguồn tài liệu khác
 ---
 
-- **Đây là nguồn tài liệu được cung cấp GitHub của sinh viên Võ Anh Kiệt, bao gồm lộ trình từ các môn đại cương đến chuyên sâu về bảo mật. Chủ yếu là các môn học thuộc khoa Mạng máy tính.**
+- **Đây là nguồn tài liệu được cung cấp từ GitHub của sinh viên Võ Anh Kiệt, bao gồm lộ trình từ các môn đại cương đến chuyên sâu về bảo mật. Chủ yếu là các môn học thuộc khoa Mạng máy tính và Truyền thông.**
 
 ## Table of contents
 
