@@ -4,8 +4,7 @@ title: Vo Anh Kiet
 parent: Nguồn tài liệu khác
 ---
 
-- **Hệ thống tài liệu tham khảo này được xây dựng dựa trên các dự án và bài tập thực hành trên GitHub của sinh viên Võ Anh Kiệt, bao gồm lộ trình từ các môn đại cương đến chuyên sâu về bảo mật. Chủ yếu là các môn học chuyên ngành An toàn thông tin và hệ thống. **
-- 
+- **Hệ thống tài liệu tham khảo này được xây dựng dựa trên các dự án và bài tập thực hành trên GitHub của sinh viên Võ Anh Kiệt, bao gồm lộ trình từ các môn đại cương đến chuyên sâu về bảo mật. Chủ yếu là các môn học chuyên ngành An toàn thông tin và hệ thống.**
 
 ## Table of contents
 
