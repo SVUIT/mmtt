@@ -8,8 +8,8 @@
   {
     "name": "Sơn Nguyễn Kỳ Duyên",
     "class": "HTTT2024.1",
-    "submits": 9,
-    "files": 50
+    "submits": 10,
+    "files": 51
   },
   {
     "name": "Phước đẹp trai",
@@ -20,8 +20,8 @@
   {
     "name": "Vinh",
     "class": "Unknown",
-    "submits": 3,
-    "files": 7
+    "submits": 4,
+    "files": 16
   },
   {
     "name": "Lê Công Anh Tuấn",
@@ -39,8 +39,8 @@
   {
     "name": "Phạm Việt Hoàng",
     "class": "MTIC2024",
-    "submits": 2,
-    "files": 2
+    "submits": 4,
+    "files": 4
   },
   {
     "name": "23521047",
@@ -273,5 +273,11 @@
     "submits": 1,
     "files": 2,
     "comment": "Lost track of this contributor"
+  },
+  {
+    "name": "Nguyễn Minh Quang ",
+    "class": "KHMT2025.4",
+    "submits": 2,
+    "files": 2
   }
 ]
