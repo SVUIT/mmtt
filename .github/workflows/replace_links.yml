@@ -22,9 +22,9 @@ jobs:
       - name: Fetch link data from Supabase API
         id: fetch_data
         run: |
-          JSON_RESPONSE=$(curl -s "${{ secrets.SUPABASE_URL }}/rest/v1/svuit?select=primary_link,backup_link" \
-            -H "apikey: ${{ secrets.SUPABASE_SERVICE_KEY }}" \
-            -H "Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_KEY }}")
+          JSON_RESPONSE=$(curl -s "${{ secrets.SB_URL_DRPLAN }}/rest/v1/svuit?select=primary_link,backup_link" \
+            -H "apikey: ${{ secrets.SB_DRPLAN }}" \
+            -H "Authorization: Bearer ${{ secrets.SB_DRPLAN }}")
 
             echo "$JSON_RESPONSE" > links_data.json
       
