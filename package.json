@@ -1,0 +1,30 @@
+{
+  "name": "mmtt",
+  "version": "1.0.0",
+  "description": "![Alt](https://repobeats.axiom.co/api/embed/e73603f1010868482e65699b60fc62c7b99d2109.svg \"Repobeats analytics image\")",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SVUIT/mmtt.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/SVUIT/mmtt/issues"
+  },
+  "homepage": "https://github.com/SVUIT/mmtt#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^21.0.1",
+    "@commitlint/config-conventional": "^21.0.1",
+    "husky": "^9.1.7"
+  }
+}
