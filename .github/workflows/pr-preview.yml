@@ -137,4 +137,3 @@ jobs:
               repo: context.repo.repo,
               body: `This PR has been merged/closed. The preview URL will no longer work.`
             })
-
