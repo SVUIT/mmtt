@@ -1,0 +1,32 @@
+name: Weekly Dead Link Checker
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check-links:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Quét website tìm link chết
+        uses: lycheeverse/lychee-action@v2
+        id: lychee
+        with:
+          args: 'https://svuit.org/mmtt/'
+          format: markdown
+          output: dead-links-report.md
+
+      - name: Upload log artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dead-links-log
+          path: dead-links-report.md
+          retention-days: 14
