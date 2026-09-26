@@ -2,10 +2,14 @@
 name: Weekly Dead Link Checker
 
 'on':
+  push:
+    branches:
+      - VietHoang
+    paths:
+      - '.github/workflows/check-links.yml'
   schedule:
     - cron: '0 0 * * 0'
   workflow_dispatch:
-
 permissions:
   contents: read
 
