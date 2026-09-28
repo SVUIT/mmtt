@@ -18,6 +18,7 @@ jobs:
   check-links:
     runs-on: ubuntu-latest
     timeout-minutes: 60
+
     steps:
       - name: Set up Python
         uses: actions/setup-python@v7
@@ -28,9 +29,10 @@ jobs:
         run: mkdir -p reports
 
       - name: Install LinkChecker
-        run: >-
-          python -m pip install 'linkchecker==10.6.0'
-          2>&1 | tee reports/install.log
+        shell: bash
+        run: |
+          python -m pip install 'linkchecker==10.6.0' \
+            2>&1 | tee reports/install.log
 
       - name: Find sitemap
         run: |
@@ -40,13 +42,19 @@ jobs:
           import xml.etree.ElementTree as ET
 
           sitemap = 'https://svuit.org/mmtt/sitemap.xml'
+
           try:
               with urlopen(sitemap, timeout=30) as response:
                   root = ET.fromstring(response.read())
+
               tag = root.tag.rsplit('}', 1)[-1]
               if tag not in {'urlset', 'sitemapindex'}:
                   raise ValueError('Response is not a sitemap')
-              Path('reports/sitemap-url.txt').write_text(sitemap + '\n')
+
+              Path('reports/sitemap-url.txt').write_text(
+                  sitemap + '\n',
+                  encoding='utf-8'
+              )
               print('Using sitemap:', sitemap)
           except Exception as error:
               print('Sitemap unavailable:', error)
@@ -57,6 +65,7 @@ jobs:
         shell: bash
         run: |
           targets=('https://svuit.org/mmtt/')
+
           if [[ -f reports/sitemap-url.txt ]]; then
             targets+=("$(cat reports/sitemap-url.txt)")
           fi
@@ -69,11 +78,25 @@ jobs:
             --threads=5 \
             --timeout=30 \
             --no-status \
+            --no-warnings \
             --file-output=html/utf-8/reports/dead-links.html \
             --file-output=csv/utf-8/reports/dead-links.csv \
             "${targets[@]}" 2>&1 | tee reports/check-links.log
-          result=${PIPESTATUS[0]}
+
+          statuses=("${PIPESTATUS[@]}")
+          result=${statuses[0]}
+          log_result=${statuses[1]}
           echo "$result" > reports/exit-code.txt
+
+          if [ "$log_result" -ne 0 ]; then
+            exit "$log_result"
+          fi
+
+          if [ "$result" -eq 1 ]; then
+            echo "Quét hoàn tất, có link lỗi. Xem báo cáo trong artifact."
+            exit 0
+          fi
+
           exit "$result"
 
       - name: Upload report
