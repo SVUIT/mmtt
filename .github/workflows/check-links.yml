@@ -57,16 +57,31 @@ jobs:
           source = Path("dead-links-report.md")
           report = source.read_text(encoding="utf-8")
 
-          match = re.search(
-              r"^#{1,6}\s+Errors in\b",
-              report,
-              flags=re.MULTILINE
-          )
+          selected = []
+          heading = ""
+          heading_added = False
 
-          if match:
-              content = report[match.start():]
-          else:
-              content = "Không có mục link lỗi trong báo cáo."
+          for line in report.splitlines():
+              if re.match(r"^#{1,6}\s+Errors in\b", line):
+                  heading = line
+                  heading_added = False
+                  continue
+
+              if re.match(r"^#{1,6}\s+", line):
+                  heading = ""
+                  continue
+
+              if heading and re.match(
+                  r"^\s*[-*+]\s+\[404\](?:\s|$)", line
+              ):
+                  if not heading_added:
+                      selected.extend([heading, ""])
+                      heading_added = True
+                  selected.extend([line, ""])
+
+          content = "\n".join(selected)
+          if not content:
+              content = "Không phát hiện link trả về mã 404."
 
           body = markdown.markdown(
               content,
@@ -79,7 +94,7 @@ jobs:
             <meta charset="utf-8">
             <meta name="viewport"
                   content="width=device-width, initial-scale=1">
-            <title>Báo cáo link lỗi</title>
+            <title>Báo cáo link 404</title>
             <style>
               body {
                 font-family: Arial, sans-serif;
@@ -115,7 +130,7 @@ jobs:
             </style>
           </head>
           <body>
-            <h1>Báo cáo link lỗi</h1>
+            <h1>Báo cáo link 404</h1>
           """ + body + """
           </body>
           </html>
