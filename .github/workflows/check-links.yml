@@ -7,7 +7,7 @@ name: Weekly Dead Link Checker
       - VietHoang
     paths:
       - '.github/workflows/check-links.yml'
-      - 'docs/**/*.md'
+      - '**/*.md'
   schedule:
     - cron: '0 0 * * 0'
   workflow_dispatch:
@@ -24,6 +24,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+
       - name: Check links in Markdown files
         uses: lycheeverse/lychee-action@v2
         with:
@@ -34,17 +39,99 @@ jobs:
             --timeout 30
             --max-retries 2
             --max-concurrency 5
-            './docs/**/*.md'
+            './**/*.md'
           fail: false
           failIfEmpty: true
+          jobSummary: false
           format: markdown
           output: dead-links-report.md
+
+      - name: Create HTML report
+        run: |
+          python -m pip install Markdown
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          import markdown
+
+          source = Path("dead-links-report.md")
+          report = source.read_text(encoding="utf-8")
+
+          match = re.search(
+              r"^#{1,6}\s+Errors in\b",
+              report,
+              flags=re.MULTILINE
+          )
+
+          if match:
+              content = report[match.start():]
+          else:
+              content = "Không có mục link lỗi trong báo cáo."
+
+          body = markdown.markdown(
+              content,
+              extensions=["tables"]
+          )
+
+          page = """<!DOCTYPE html>
+          <html lang="vi">
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport"
+                  content="width=device-width, initial-scale=1">
+            <title>Báo cáo link lỗi</title>
+            <style>
+              body {
+                font-family: Arial, sans-serif;
+                max-width: 1100px;
+                margin: 32px auto;
+                padding: 0 20px;
+                line-height: 1.6;
+                color: #222;
+                background: #fff;
+              }
+              h1 {
+                font-size: 26px;
+                border-bottom: 2px solid #ddd;
+                padding-bottom: 12px;
+              }
+              h2, h3 {
+                margin-top: 28px;
+                font-size: 19px;
+                overflow-wrap: anywhere;
+              }
+              a {
+                color: #0969da;
+                overflow-wrap: anywhere;
+              }
+              li {
+                margin-bottom: 14px;
+              }
+              code {
+                background: #f3f4f6;
+                padding: 2px 5px;
+                border-radius: 4px;
+              }
+            </style>
+          </head>
+          <body>
+            <h1>Báo cáo link lỗi</h1>
+          """ + body + """
+          </body>
+          </html>
+          """
+
+          Path("dead-links.html").write_text(
+              page,
+              encoding="utf-8"
+          )
+          PY
 
       - name: Upload report
         if: always()
         uses: actions/upload-artifact@v7
         with:
           name: dead-links-log
-          path: dead-links-report.md
+          path: dead-links.html
           retention-days: 14
           if-no-files-found: error
