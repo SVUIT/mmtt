@@ -6,7 +6,7 @@ name: Weekly Dead Link Checker
     branches:
       - VietHoang_main
     paths:
-      - '.github/workflows/checklinks.yml'
+      - '.github/workflows/checklink.yml'
       - '**/*.md'
   schedule:
     - cron: '0 0 * * 0'
