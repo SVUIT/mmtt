@@ -4,7 +4,7 @@ name: Weekly Dead Link Checker
 'on':
   push:
     branches:
-      - VietHoang
+      - main
     paths:
       - '.github/workflows/check-links.yml'
       - '**/*.md'
