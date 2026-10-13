@@ -1,0 +1,128 @@
+---
+name: Weekly Dead Link Checker
+
+'on':
+  push:
+    branches:
+      - VietHoang
+    paths:
+      - '.github/workflows/check-links.yml'
+      - '**/*.md'
+  schedule:
+    - cron: '0 0 * * 0'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check-links:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+
+      - name: Check links in Markdown files
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --no-progress
+            --scheme http
+            --scheme https
+            --timeout 30
+            --max-retries 2
+            --max-concurrency 5
+            './**/*.md'
+          fail: false
+          failIfEmpty: true
+          jobSummary: false
+          format: markdown
+          output: dead-links-report.md
+
+      - name: Create HTML report
+        run: |
+          python -m pip install Markdown
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          import markdown
+
+          report = Path("dead-links-report.md").read_text(
+              encoding="utf-8"
+          )
+
+          selected = []
+          heading = ""
+          heading_added = False
+
+          for line in report.splitlines():
+              if re.match(r"^#{1,6}\s+Errors in\b", line):
+                  heading = line
+                  heading_added = False
+                  continue
+
+              if re.match(r"^#{1,6}\s+", line):
+                  heading = ""
+                  continue
+
+              if heading and re.match(
+                  r"^\s*[-*+]\s+\[(?:404|410)\](?:\s|$)",
+                  line
+              ):
+                  if not heading_added:
+                      selected.extend([heading, ""])
+                      heading_added = True
+                  selected.extend([line, ""])
+
+          content = "\n".join(selected)
+          if not content:
+              content = "Không phát hiện link trả về mã 404 hoặc 410."
+
+          body = markdown.markdown(content)
+
+          page = """<!DOCTYPE html>
+          <html lang="vi">
+          <head>
+            <meta charset="utf-8">
+            <title>Báo cáo link lỗi</title>
+            <style>
+              body {
+                font-family: Arial, sans-serif;
+                max-width: 1100px;
+                margin: 32px auto;
+                padding: 0 20px;
+                line-height: 1.6;
+              }
+              a { overflow-wrap: anywhere; }
+              li { margin-bottom: 14px; }
+              h2, h3 { margin-top: 28px; }
+            </style>
+          </head>
+          <body>
+            <h1>Link trả về 404 hoặc 410</h1>
+          """ + body + """
+          </body>
+          </html>
+          """
+
+          Path("dead-links.html").write_text(
+              page,
+              encoding="utf-8"
+          )
+          PY
+
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dead-links-log
+          path: dead-links.html
+          retention-days: 14
+          if-no-files-found: error
