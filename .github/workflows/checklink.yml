@@ -83,7 +83,7 @@ jobs:
 
           content = "\n".join(selected)
           if not content:
-              content = "Không phát hiện link trả về mã 404 hoặc 410."
+              content = "Không phát hiện link"
 
           body = markdown.markdown(content)
 
@@ -106,7 +106,7 @@ jobs:
             </style>
           </head>
           <body>
-            <h1>Link trả về 404 hoặc 410</h1>
+            <h1>Link trả về lỗi</h1>
           """ + body + """
           </body>
           </html>
