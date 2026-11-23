@@ -23,6 +23,7 @@ jobs:
         run: |
           RCLONE_EXIT=0
           rclone sync svuit_main:Docs svuit_backup:Docs \
+            --backup-dir "svuit_backup:Archive/$(date +%Y-%m-%d_%H-%M-%S)" \
             --verbose --stats=1s --log-file=rclone_log.txt || RCLONE_EXIT=$?
 
           if [ ! -s rclone_log.txt ]; then
