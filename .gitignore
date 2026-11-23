@@ -24,3 +24,16 @@ vendor/
 drive_api_key.json
 
 node_modules/
+# --- Credentials / secrets (never commit these) ---
+# Google service-account keys (the kind leaked in the past)
+*service*account*.json
+*service-account*.json
+drive-api-*.json
+gdrive*.json
+# Generic credential/secret material
+credentials*.json
+*secret*.json
+*.pem
+*.key
+.env
+.env.*
